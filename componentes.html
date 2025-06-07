@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Work Study | Componentes</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .component-section {
+            margin-top: 40px;
+        }
+        .component-section h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .component-grid {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .component-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 16px;
+            width: 200px;
+            text-align: center;
+        }
+        .component-card img {
+            max-width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+        .component-card p {
+            margin: 8px 0;
+            font-size: 16px;
+        }
+        .component-card .price {
+            font-weight: 600;
+            color: #ffffff;
+        }
+        .component-card .add-to-cart {
+            background-color: #3498db;
+            color: #ffffff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .component-card .add-to-cart:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo-text">GAME WORK STUDY</div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#pcs">PC</a></li>
+                    <li><a href="index.html#configurador">Configurador</a></li>
+                    <li id="dashboard-link" style="display: none;"><a href="dashboard.html">Dashboard</a></li>
+                    <li class="contato-hover">
+                        <a href="index.html#contato">Contato</a>
+                        <div class="contato-info">
+                            <p><strong>Telefone:</strong> (11) 1234-5678</p>
+                            <p><strong>Email:</strong> suporte@gameworkstudy.com</p>
+                        </div>
+                    </li>
+                    <li id="login-link"><a href="#" class="login" onclick="openLoginModal()"><i class="fas fa-user"></i> Login</a></li>
+                    <li id="logout-link" style="display: none;"><a href="#" class="login" onclick="logoutUser()"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                    <li><a href="carrinho.html" class="cart"><i class="fas fa-shopping-cart"></i> Carrinho (<span id="cart-count">0</span>)</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="configurator" style="margin-top: 80px; padding: 40px 24px;">
+        <div class="container">
+            <h2>Monte o PC dos Seus Sonhos</h2>
+            <p>Escolha os componentes abaixo para personalizar seu PC. Adicione cada item ao carrinho e finalize sua compra!</p>
+
+            <!-- Seção de Placa-Mãe -->
+            <div class="component-section">
+                <h3>Escolha sua Placa-Mãe</h3>
+                <div class="component-grid">
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/placam1.png" alt="ASUS ROG Strix X870E-E Gaming WiFi">
+                            <span class="tooltip">ASUS ROG Strix X870E-E Gaming WiFi.<br>Soquete AM5 (AMD Ryzen 9000/8000/7000).<br>X870E, DDR5 (até 8000MHz+ com OC).<br>2x PCIe 5.0 x16, 4x M.2 (PCIe 5.0/4.0).<br>Wi-Fi 7, 2x USB4, 8x USB 3.2 Gen2, HDMI 2.1.</span>
+                        </div>
+                        <p class="price">R$3.300,00</p>
+                        <button class="add-to-cart" data-name="ASUS ROG Strix X870E-E Gaming WiFi" data-price="3300.00">Adicionar ao Carrinho</button>
+                    </div>
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/placam2.png" alt="MSI MAG B650 Tomahawk WiFi">
+                            <span class="tooltip">MSI MAG B650 Tomahawk WiFi.<br>Soquete AM5 (AMD Ryzen 9000/7000).<br>Chipset B650, DDR5 (até 6600MHz+ com OC).<br>1x PCIe 4.0 x16, 3x M.2 (PCIe 4.0).<br>Wi-Fi 6E, 4x USB 3.2 Gen1, 2x USB 3.2 Gen2, HDMI.</span>
+                        </div>
+                        <p class="price">R$1.600,00</p>
+                        <button class="add-to-cart" data-name="MSI MAG B650 Tomahawk WiFi" data-price="1600.00">Adicionar ao Carrinho</button>
+                    </div>
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/placam3.png" alt="Gigabyte B760M DS3H">
+                            <span class="tooltip">Gigabyte B760M DS3H.<br>Soquete LGA 1700 (Intel 12th/13th/14th Gen).<br>Chipset B760, DDR5/DDR4 (até 5333MHz+ com OC).<br>1x PCIe 4.0 x16, 2x M.2 (PCIe 4.0).<br>4x USB 3.2 Gen1, 2x USB 2.0, HDMI, DisplayPort.</span>
+                        </div>
+                        <p class="price">R$900,00</p>
+                        <button class="add-to-cart" data-name="Gigabyte B760M DS3H" data-price="900.00">Adicionar ao Carrinho</button>
+                    </div>
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/placam4.jpeg" alt="ASRock B450M Steel Legend">
+                            <span class="tooltip">ASRock B450M Steel Legend.<br>Soquete AM4 (AMD Ryzen 3000/5000).<br>Chipset B450, DDR4 (até 3533MHz+ com OC).<br>1x PCIe 3.0 x16, 1x M.2 (PCIe 3.0).<br>2x USB 3.1, 4x USB 2.0, HDMI, DisplayPort.</span>
+                        </div>
+                        <p class="price">R$750,00</p>
+                        <button class="add-to-cart" data-name="ASRock B450M Steel Legend" data-price="750.00">Adicionar ao Carrinho</button>
+                    </div>
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/placam5.png" alt="Brazil PC B550M">
+                            <span class="tooltip">Brazil PC B550M.<br>Soquete AM4 (AMD Ryzen 3000/5000).<br>Chipset B550, DDR4 (até 4400MHz+ com OC).<br>1x PCIe 4.0 x16, 1x M.2 (PCIe 3.0).<br>4x USB 3.2 Gen1, 2x USB 2.0, HDMI, DVI-D.</span>
+                        </div>
+                        <p class="price">R$600,00</p>
+                        <button class="add-to-cart" data-name="Brazil PC B550M" data-price="600.00">Adicionar ao Carrinho</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seção de Processador -->
+            <div class="component-section">
+                <h3>Escolha seu Processador</h3>
+                <div class="component-grid">
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/processador1.png" alt="AMD Ryzen 9 7950X3D">
+                            <span class="tooltip">AMD Ryzen 9 7950X3D.<br>16 núcleos, 32 threads, 4.2 GHz base, 5.7 GHz boost, 144MB cache L3, soquete AM5, 120W TDP, Zen 4 com 3D V-Cache.</span>
+                        </div>
+                        <p class="price">R$4.000,00</p>
+                        <button class="add-to-cart" data-name="AMD Ryzen 9 7950X3D" data-price="4000.00">Adicionar ao Carrinho</button>
+                    </div>
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/processador2.png" alt="Intel Core i9-14900K">
+                            <span class="tooltip">Intel Core i9-14900K.<br>24 núcleos (8P+16E), 32 threads, 3.2 GHz base, 6.0 GHz boost, 36MB cache L3, soquete LGA 1700, 125W TDP, gráficos UHD 770.</span>
+                        </div>
+                        <p class="price">R$3.850,00</p>
+                        <button class="add-to-cart" data-name="Intel Core i9-14900K" data-price="3850.00">Adicionar ao Carrinho</button>
+                    </div>
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/processador3.png" alt="AMD Ryzen 7 9800X3D">
+                            <span class="tooltip">AMD Ryzen 7 9800X3D.<br>8 núcleos, 16 threads, 4.7 GHz base, 5.2 GHz boost, 96MB cache L3, soquete AM5, 120W TDP, Zen 5 com 3D V-Cache.</span>
+                        </div>
+                        <p class="price">R$2.900,00</p>
+                        <button class="add-to-cart" data-name="AMD Ryzen 7 9800X3D" data-price="2900.00">Adicionar ao Carrinho</button>
+                    </div>
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/processador4.png" alt="Intel Core i5-14600K">
+                            <span class="tooltip">Intel Core i5-14600K.<br>14 núcleos (6P+8E), 20 threads, 3.5 GHz base, 5.3 GHz boost, 24MB cache L3, soquete LGA 1700, 125W TDP, gráficos UHD 770.</span>
+                        </div>
+                        <p class="price">R$1.650,00</p>
+                        <button class="add-to-cart" data-name="Intel Core i5-14600K" data-price="1650.00">Adicionar ao Carrinho</button>
+                    </div>
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/processador5.png" alt="Apple M2 Max">
+                            <span class="tooltip">Apple M2 Max.<br>12 núcleos (8P+4E), 38MB cache L2+L3, até 3.7 GHz, integrado com GPU de 38 núcleos, 400GB/s largura de banda de memória, usado em MacBooks.</span>
+                        </div>
+                        <p class="price">R$7.150,00</p>
+                        <button class="add-to-cart" data-name="Apple M2 Max" data-price="7150.00">Adicionar ao Carrinho</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seção de Placa de Vídeo -->
+            <div class="component-section">
+                <h3>Escolha sua Placa de Vídeo</h3>
+                <div class="component-grid">
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/placa1.png" alt="NVIDIA GeForce RTX 5090 (MSI Ventus 3X)">
+                            <span class="tooltip">NVIDIA GeForce RTX 5090 (MSI Ventus 3X).<br>Arquitetura: Blackwell.<br>Memória: 32GB GDDR7 (36 Gbps, 1.4 TB/s).<br>CUDA Cores: 21.760.<br>Interface: PCIe 5.0.<br>Tecnologias: DLSS 4, Ray Tracing 4ª Geração, Multi-Frame Generation.<br>Conectividade: HDMI 2.1, 3x DisplayPort 2.1.</span>
+                        </div>
+                        <p class="price">R$13.750,00</p>
+                        <button class="add-to-cart" data-name="NVIDIA GeForce RTX 5090 (MSI Ventus 3X)" data-price="13750.00">Adicionar ao Carrinho</button>
+                    </div>
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/placa2.png" alt="AMD Radeon RX 9070 XT (Sapphire Nitro+)">
+                            <span class="tooltip">AMD Radeon RX 9070 XT (Sapphire Nitro+).<br>Arquitetura: RDNA 4.<br>Memória: 16GB GDDR6 (20 Gbps).<br>Compute Units: 56.<br>Interface: PCIe 4.0.<br>Tecnologias: FSR 4 (previsto), Ray Tracing aprimorado, AI Performance 4x.<br>Conectividade: HDMI 2.1, 2x DisplayPort 2.0.</span>
+                        </div>
+                        <p class="price">R$4.400,00</p>
+                        <button class="add-to-cart" data-name="AMD Radeon RX 9070 XT (Sapphire Nitro+)" data-price="4400.00">Adicionar ao Carrinho</button>
+                    </div>
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/placa3.png" alt="Intel Arc B580 (ASRock Challenger)">
+                            <span class="tooltip">Intel Arc B580 (ASRock Challenger).<br>Arquitetura: Battlemage.<br>Memória: 12GB GDDR6.<br>Xe-Cores: 20.<br>Interface: PCIe 4.0.<br>Tecnologias: XeSS, Ray Tracing, DirectX 12 Ultimate.<br>Conectividade: HDMI 2.1, DisplayPort 2.0</span>
+                        </div>
+                        <p class="price">R$1.650,00</p>
+                        <button class="add-to-cart" data-name="Intel Arc B580 (ASRock Challenger)" data-price="1650.00">Adicionar ao Carrinho</button>
+                    </div>
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/placa4.png" alt="ASUS Radeon RX 7900 XTX (TUF Gaming)">
+                            <span class="tooltip">ASUS Radeon RX 7900 XTX (TUF Gaming).<br>Arquitetura: RDNA 3.<br>Memória: 24GB GDDR6 (20 Gbps).<br>Compute Units: 96.<br>Interface: PCIe 4.0.<br>Tecnologias: FSR 3, Ray Tracing, Hyper-RX.<br>Conectividade: HDMI 2.1, 2x DisplayPort 2.0.</span>
+                        </div>
+                        <p class="price">R$6.100,00</p>
+                        <button class="add-to-cart" data-name="ASUS Radeon RX 7900 XTX (TUF Gaming)" data-price="6100.00">Adicionar ao Carrinho</button>
+                    </div>
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/placa5.png" alt="NVIDIA GeForce RTX 4060 Ti (Corsair K60 RGB Pro)">
+                            <span class="tooltip">NVIDIA GeForce RTX 4060 Ti (Corsair K60 RGB Pro).<br>Arquitetura: Ada Lovelace.<br>Memória: 16GB GDDR6 (18 Gbps).<br>CUDA Cores: 4.352.<br>Interface: PCIe 4.0.<br>Tecnologias: DLSS 3, Ray Tracing 3ª Geração.<br>Conectividade: HDMI 2.1, 3x DisplayPort 1.4a.</span>
+                        </div>
+                        <p class="price">R$2.750,00</p>
+                        <button class="add-to-cart" data-name="NVIDIA GeForce RTX 4060 Ti (Corsair K60 RGB Pro)" data-price="2750.00">Adicionar ao Carrinho</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seção de Memória RAM -->
+            <div class="component-section">
+                <h3>Escolha sua Memória RAM</h3>
+                <div class="component-grid">
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/ram1.png" alt="Corsair Vengeance RGB 32GB (2x16GB)">
+                            <span class="tooltip">Corsair Vengeance RGB 32GB.<br>DDR5, 6000MHz, CL36, suporte a Intel XMP 3.0 e AMD EXPO, iluminação RGB personalizável.</span>
+                        </div>
+                        <p class="price">R$1.100,00</p>
+                        <button class="add-to-cart" data-name="Corsair Vengeance RGB 32GB" data-price="1100.00">Adicionar ao Carrinho</button>
+                    </div>
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/ram2.png" alt="G.Skill Trident Z5 Neo RGB 32GB (2x16GB)">
+                            <span class="tooltip">G.Skill Trident Z5 Neo RGB 32GB.<br>DDR5, 6000MHz, CL30, otimizada para AMD EXPO, RGB, dissipador de calor premium.</span>
+                        </div>
+                        <p class="price">R$900,00</p>
+                        <button class="add-to-cart" data-name="G.Skill Trident Z5 Neo RGB 32GB" data-price="900.00">Adicionar ao Carrinho</button>
+                    </div>
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/ram3.png" alt="Kingston Fury Beast RGB 32GB (2x16GB)">
+                            <span class="tooltip">Kingston Fury Beast RGB 32GB.<br>DDR5, 5200MHz, CL40, suporte a XMP 3.0, RGB, design compacto.</span>
+                        </div>
+                        <p class="price">R$800,00</p>
+                        <button class="add-to-cart" data-name="Kingston Fury Beast RGB 32GB" data-price="800.00">Adicionar ao Carrinho</button>
+                    </div>
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/ram4.png" alt="Crucial Pro 16GB (2x8GB)">
+                            <span class="tooltip">Crucial Pro 16GB.<br>DDR5, 5600MHz, CL46, sem RGB, foco em desempenho básico, suporte a XMP-EXPO.</span>
+                        </div>
+                        <p class="price">R$450,00</p>
+                        <button class="add-to-cart" data-name="Crucial Pro 16GB" data-price="450.00">Adicionar ao Carrinho</button>
+                    </div>
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/ram5.png" alt="Patriot Viper Xtreme 5 RGB DDR5 32GB (2x16GB)">
+                            <span class="tooltip">Patriot Viper Xtreme 5 RGB DDR5 32GB.<br>DDR5 UDIMM.<br>32GB (2 x 16GB)<br>5600 MHz (PC5-44800).</span>
+                        </div>
+                        <p class="price">R$700,00</p>
+                        <button class="add-to-cart" data-name="Patriot Viper Xtreme 5 RGB DDR5 32GB" data-price="700.00">Adicionar ao Carrinho</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seção de Armazenamento -->
+            <div class="component-section">
+                <h3>Escolha seu Armazenamento</h3>
+                <div class="component-grid">
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/disco1.png" alt="Samsung 990 PRO 2TB NVMe SSD">
+                            <span class="tooltip">Samsung 990 PRO 2TB NVMe SSD.<br>Tipo: SSD NVMe M.2, PCIe 4.0.<br>Capacidade: 2TB<br>Leitura: até 7.450 MB/s, Escrita: até 6.900 MB/s.<br>Cache: 2GB LPDDR4.<br>Garantia: 5 anos.</span>
+                        </div>
+                        <p class="price">R$1.100,00</p>
+                        <button class="add-to-cart" data-name="Samsung 990 PRO 2TB NVMe SSD" data-price="1100.00">Adicionar ao Carrinho</button>
+                    </div>
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/disco2.png" alt="Western Digital Red Pro 10TB HDD">
+                            <span class="tooltip">Western Digital Red Pro 10TB HDD.<br>Tipo: HDD 3.5\", SATA III, 7200 RPM.<br>Capacidade: 10TB.<br>Cache: 256MB.<br>Otimizado para NAS, CMR (gravação magnética convencional).<br>Garantia: 5 anos.</span>
+                        </div>
+                        <p class="price">R$2.420,00</p>
+                        <button class="add-to-cart" data-name="Western Digital Red Pro 10TB HDD" data-price="2420.00">Adicionar ao Carrinho</button>
+                    </div>
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/disco3.png" alt="Seagate FireCuda 2TB SSHD">
+                            <span class="tooltip">Seagate FireCuda 2TB SSHD.<br>Tipo: Híbrido (SSHD) 3.5\", SATA III, 7200 RPM.<br>Capacidade: 2TB (com 8GB NAND cache).<br>Leitura/Escrita: até 190 MB/s (melhorado pelo cache SSD).<br>Garantia: 5 anos.</span>
+                        </div>
+                        <p class="price">R$550,00</p>
+                        <button class="add-to-cart" data-name="Seagate FireCuda 2TB SSHD" data-price="550.00">Adicionar ao Carrinho</button>
+                    </div>
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/disco4.png" alt="Toshiba MG08ACA 18TB HDD">
+                            <span class="tooltip">Toshiba MG08ACA 18TB HDD.<br>Tipo: HDD 3.5\", SATA III, 7200 RPM.<br>Capacidade: 18TB.<br>Cache: 512MB.<br>Design helium-sealed, otimizado para data centers.<br>Garantia: 5 anos.</span>
+                        </div>
+                        <p class="price">R$1.400,00</p>
+                        <button class="add-to-cart" data-name="Toshiba MG08ACA 18TB HDD" data-price="1400.00">Adicionar ao Carrinho</button>
+                    </div>
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/disco5.png" alt="Crucial T500 1TB NVMe SSD">
+                            <span class="tooltip">Crucial T500 1TB NVMe SSD.<br>Tipo: SSD NVMe M.2, PCIe 4.0.<br>Capacidade: 1TB.<br>Leitura: até 7.300 MB/s, Escrita: até 6.800 MB/s.<br>Inclui 1 mês de Adobe CC.<br>Garantia: 5 anos.</span>
+                        </div>
+                        <p class="price">R$360,00</p>
+                        <button class="add-to-cart" data-name="Crucial T500 1TB NVMe SSD" data-price="360.00">Adicionar ao Carrinho</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seção de Gabinetes -->
+            <div class="component-section">
+                <h3>Escolha seu Gabinete</h3>
+                <div class="component-grid">
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/gabi1.png" alt="Montech X3 Glass">
+                            <span class="tooltip">Montech X3 Glass.<br>Tipo: Mid Tower<br>Dimensões: 44,5 x 21 x 37 cm<br>Suporte: 3x HDD 3,5” ou 2x SSD 2,5”, até 7 slots de expansão<br>Refrigeração: Suporta até 6 ventoinhas de 120mm (inclusas) ou radiador de 240mm frontal<br>Conexões: 1x USB 3.0, 2x USB 2.0, áudio HD.</span>
+                        </div>
+                        <p class="price">R$200,00</p>
+                        <button class="add-to-cart" data-name="Montech X3 Glass" data-price="200.00">Adicionar ao Carrinho</button>
+                    </div>
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/gabi2.png" alt="Fortrek Cruiser RGB">
+                            <span class="tooltip">Fortrek Cruiser RGB.<br>Tipo: Mid Tower.<br>Dimensões: 37,5 x 21,5 x 43,9 cm.<br>Suporte: 2x HDD 3,5”, 2x SSD 2,5”, 7 slots de expansão.<br>Refrigeração: Suporta até 4 ventoinhas (3 inclusas) ou radiador de 240mm.<br>Conexões: 1x USB 3.0, 1x USB 2.0, áudio HD, botão reset.</span>
+                        </div>
+                        <p class="price">R$310,00</p>
+                        <button class="add-to-cart" data-name="Fortrek Cruiser RGB" data-price="310.00">Adicionar ao Carrinho</button>
+                    </div>
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/gabi3.png" alt="Corsair 5000D Airflow">
+                            <span class="tooltip">Corsair 5000D Airflow.<br>Tipo: Mid Tower.<br>Dimensões: 52 x 24,5 x 52 cm.<br>Suporte: 4x SSD 2,5”, 2x HDD 3,5”, 7 slots de expansão.<br>Refrigeração: Suporta até 6 ventoinhas ou radiadores de 360mm.<br>Conexões: 2x USB 3.0, 1x USB-C, áudio HD.</span>
+                        </div>
+                        <p class="price">R$1.100,00</p>
+                        <button class="add-to-cart" data-name="Corsair 5000D Airflow" data-price="1100.00">Adicionar ao Carrinho</button>
+                    </div>
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/gabi4.png" alt="NZXT H7 Elite">
+                            <span class="tooltip">NZXT H7 Elite.<br>Tipo: Mid Tower.<br>Dimensões: 50,5 x 23 x 48 cm.<br>Suporte: 2x HDD 3,5”, 4x SSD 2,5”, 7 slots de expansão.<br>Refrigeração: Suporta até 7 ventoinhas ou radiador de 360mm.<br>Conexões: 2x USB 3.0, 1x USB-C, áudio HD.</span>
+                        </div>
+                        <p class="price">R$1.350,00</p>
+                        <button class="add-to-cart" data-name="NZXT H7 Elite" data-price="1350.00">Adicionar ao Carrinho</button>
+                    </div>
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/gabi5.png" alt="Lian Li PC-O11 Dynamic XL">
+                            <span class="tooltip">Lian Li PC-O11 Dynamic XL.<br>Tipo: Full Tower.<br>Dimensões: 47,1 x 28,5 x 51,3 cm.<br>Suporte: 4x SSD 2,5”, 3x HDD 3,5”, 8 slots de expansão.<br>Refrigeração: Suporta até 9 ventoinhas ou 3 radiadores de 360mm.<br>Conexões: 4x USB 3.0, 1x USB-C, áudio HD.</span>
+                        </div>
+                        <p class="price">R$1.650,00</p>
+                        <button class="add-to-cart" data-name="Lian Li PC-O11 Dynamic XL" data-price="1650.00">Adicionar ao Carrinho</button>
+                    </div>
+                </div>
+            </div>
+
+            <a href="carrinho.html" class="cta-button" style="margin-top: 40px; display: inline-block;">Ir para o Carrinho</a>
+        </div>
+    </section>
+
+    <!-- Modal de Login/Cadastro -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeLoginModal()">×</span>
+            <h2 id="modal-title">Faça seu Login</h2>
+            <div id="form-toggle">
+                <button id="show-login" class="toggle-button active" onclick="showLoginForm()">Entrar</button>
+                <button id="show-register" class="toggle-button" onclick="showRegisterForm()">Cadastrar</button>
+            </div>
+            <!-- Formulário de Login -->
+            <div id="login-form-container">
+                <form id="login-form">
+                    <input type="email" id="login-gmail" placeholder="Email" required>
+                    <input type="password" id="login-password" placeholder="Senha" required>
+                    <button type="submit" class="modal-button">Entrar</button>
+                </form>
+                <p id="login-error" style="color: red; display: none; margin-top: 10px;">Email ou senha inválidos.</p>
+            </div>
+            <!-- Formulário de Cadastro -->
+            <div id="register-form-container" style="display: none;">
+                <form id="register-form">
+                    <input type="text" id="register-nome" placeholder="Nome" required>
+                    <input type="email" id="register-gmail" placeholder="Email" required>
+                    <input type="password" id="register-password" placeholder="Senha" required>
+                    <input type="text" id="register-cpf" placeholder="CPF" required>
+                    <input type="number" id="register-idade" placeholder="Idade" required>
+                    <input type="text" id="register-cep" placeholder="CEP" required>
+                    <button type="submit" class="modal-button">Cadastrar</button>
+                </form>
+                <p id="register-error" style="color: red; display: none; margin-top: 10px;">Email já cadastrado ou campos inválidos.</p>
+            </div>
+            <!-- Dados do Usuário Logado -->
+            <div id="dados-salvos" style="display: none; margin-top: 20px;">
+                <h3>Bem-vindo(a), <span id="saved-nome"></span>!</h3>
+                <p><strong>Email:</strong> <span id="saved-gmail"></span></p>
+                <p><strong>CPF:</strong> <span id="saved-cpf"></span></p>
+                <p><strong>Idade:</strong> <span id="saved-idade"></span></p>
+                <p><strong>CEP:</strong> <span id="saved-cep"></span></p>
+                <a href="dashboard.html" class="modal-button">Ir para o Dashboard</a>
+                <button onclick="logoutUser()" class="modal-button" style="margin-top: 10px; background-color: #e74c3c;">Sair</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 Game Work Study. Todos os direitos reservados.</p>
+            <ul>
+                <li class="privacy">
+                    <a href="#" class="privacy-link">Política de Privacidade</a>
+                    <span class="privacy-tooltip">Nós respeitamos sua privacidade e protegemos seus dados conforme a LGPD.</span>
+                </li>
+                <li><a href="mailto:suporte@gameworkstudy.com">Suporte</a></li>
+                <li><a href="https://instagram.com/gameworkstudy">Instagram</a></li>
+                <li><a href="https://twitter.com/gameworkstudy">Twitter</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script>
+        function openLoginModal() {
+            document.getElementById('login-modal').style.display = 'block';
+            document.getElementById('show-login').click();
+        }
+
+        function closeLoginModal() {
+            document.getElementById('login-modal').style.display = 'none';
+            document.getElementById('login-error').style.display = 'none';
+            document.getElementById('register-error').style.display = 'none';
+        }
+
+        function showLoginForm() {
+            document.getElementById('login-form-container').style.display = 'block';
+            document.getElementById('register-form-container').style.display = 'none';
+            document.getElementById('show-login').classList.add('active');
+            document.getElementById('show-register').classList.remove('active');
+            document.getElementById('modal-title').textContent = 'Faça seu Login';
+        }
+
+        function showRegisterForm() {
+            document.getElementById('login-form-container').style.display = 'none';
+            document.getElementById('register-form-container').style.display = 'block';
+            document.getElementById('show-login').classList.remove('active');
+            document.getElementById('show-register').classList.add('active');
+            document.getElementById('modal-title').textContent = 'Faça seu Cadastro';
+        }
+
+        function registerUser(event) {
+            event.preventDefault();
+            const nome = document.getElementById('register-nome').value.trim();
+            const email = document.getElementById('register-gmail').value.trim();
+            const password = document.getElementById('register-password').value.trim();
+            const cpf = document.getElementById('register-cpf').value.trim();
+            const idade = document.getElementById('register-idade').value.trim();
+            const cep = document.getElementById('register-cep').value.trim();
+
+            if (!nome || !email || !password || !cpf || !idade || !cep) {
+                document.getElementById('register-error').style.display = 'block';
+                document.getElementById('register-error').textContent = 'Por favor, preencha todos os campos.';
+                return;
+            }
+
+            const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
+            if (existingUsers.some(user => user.email === email)) {
+                document.getElementById('register-error').style.display = 'block';
+                document.getElementById('register-error').textContent = 'Email já cadastrado.';
+                return;
+            }
+
+            const user = { nome, email, password, cpf, idade, cep };
+            existingUsers.push(user);
+            localStorage.setItem('users', JSON.stringify(existingUsers));
+            localStorage.setItem('currentUser', JSON.stringify(user));
+
+            alert('Registro realizado com sucesso!');
+            loadUserData();
+            showLoggedInUI();
+        }
+
+        function loginUser(event) {
+            event.preventDefault();
+            const email = document.getElementById('login-gmail').value.trim();
+            const password = document.getElementById('login-password').value.trim();
+
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const userData = users.find(user => user.email === email && user.password === password);
+
+            if (!userData) {
+                document.getElementById('login-error').style.display = 'block';
+                return;
+            }
+
+            localStorage.setItem('currentUser', JSON.stringify(userData));
+            alert('Login realizado com sucesso!');
+            loadUserData();
+            showLoggedInUI();
+        }
+
+        function logoutUser() {
+            localStorage.removeItem('currentUser');
+            alert('Logout realizado.');
+            document.getElementById('dados-salvos').style.display = 'none';
+            document.getElementById('login-form-container').style.display = 'block';
+            document.getElementById('register-form-container').style.display = 'none';
+            document.getElementById('login-link').style.display = 'inline';
+            document.getElementById('logout-link').style.display = 'none';
+            document.getElementById('dashboard-link').style.display = 'none';
+            document.getElementById('login-modal').style.display = 'none';
+            document.getElementById('show-login').click();
+        }
+
+        function loadUserData() {
+            const userData = JSON.parse(localStorage.getItem('currentUser'));
+            if (userData) {
+                document.getElementById('saved-nome').textContent = userData.nome;
+                document.getElementById('saved-gmail').textContent = userData.email;
+                document.getElementById('saved-cpf').textContent = userData.cpf;
+                document.getElementById('saved-idade').textContent = userData.idade;
+                document.getElementById('saved-cep').textContent = userData.cep;
+                document.getElementById('login-link').style.display = 'none';
+                document.getElementById('logout-link').style.display = 'inline';
+                document.getElementById('dashboard-link').style.display = 'inline';
+            }
+        }
+
+        function showLoggedInUI() {
+            document.getElementById('dados-salvos').style.display = 'block';
+            document.getElementById('login-form-container').style.display = 'none';
+            document.getElementById('register-form-container').style.display = 'none';
+            document.getElementById('login-modal').style.display = 'none';
+        }
+
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartCountElement = document.getElementById('cart-count');
+            if (cartCountElement) {
+                cartCountElement.textContent = cart.length;
+            }
+        }
+
+        function updateNavBar() {
+            const userData = JSON.parse(localStorage.getItem('currentUser'));
+            if (userData) {
+                showLoggedInUI();
+                loadUserData();
+            } else {
+                document.getElementById('dados-salvos').style.display = 'none';
+                document.getElementById('login-form-container').style.display = 'block';
+                document.getElementById('register-form-container').style.display = 'none';
+                document.getElementById('login-link').style.display = 'inline';
+                document.getElementById('logout-link').style.display = 'none';
+                document.getElementById('dashboard-link').style.display = 'none';
+            }
+        }
+
+        function addToCart(name, price) {
+            if (isNaN(price) || price <= 0) {
+                console.error('Preço inválido:', price);
+                alert('Erro: Preço inválido!');
+                return;
+            }
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            if (cart.some(item => item.name === name)) {
+                alert(`${name} já está no carrinho!`);
+                return;
+            }
+            cart.push({ name, price });
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert(`${name} foi adicionado ao carrinho!`);
+            updateCartCount();
+        }
+
+        window.addEventListener('load', function () {
+            updateNavBar();
+            updateCartCount();
+
+            document.querySelectorAll('.add-to-cart').forEach(button => {
+                button.addEventListener('click', function () {
+                    const name = this.getAttribute('data-name');
+                    const price = parseFloat(this.getAttribute('data-price'));
+                    console.log(`Botão clicado: ${name}, Preço: ${price}`);
+                    addToCart(name, price);
+                });
+            });
+
+            const loginForm = document.getElementById('login-form');
+            if (loginForm) loginForm.addEventListener('submit', loginUser);
+
+            const registerForm = document.getElementById('register-form');
+            if (registerForm) registerForm.addEventListener('submit', registerUser);
+        });
+    </script>
+</body>
+</html>

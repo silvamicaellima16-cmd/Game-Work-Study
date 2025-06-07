@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Work Study | Configurador</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .component-section {
+            margin-top: 40px;
+        }
+        .component-section h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .component-grid {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .component-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 16px;
+            width: 200px;
+            text-align: center;
+        }
+        .component-card img {
+            max-width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+        .component-card p {
+            margin: 8px 0;
+            font-size: 16px;
+        }
+        .component-card .price {
+            font-weight: 600;
+            color: #ffffff;
+        }
+        .component-card .add-to-cart {
+            background-color: #3498db;
+            color: #ffffff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .component-card .add-to-cart:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo-text">GAME WORK STUDY</div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#pcs">PC</a></li>
+                    <li><a href="index.html#configurador">Configurador</a></li>
+                    <li id="dashboard-link" style="display: none;"><a href="dashboard.html">Dashboard</a></li>
+                    <li class="contato-hover">
+                        <a href="index.html#contato">Contato</a>
+                        <div class="contato-info">
+                            <p><strong>Telefone:</strong> (11) 1234-5678</p>
+                            <p><strong>Email:</strong> suporte@gameworkstudy.com</p>
+                        </div>
+                    </li>
+                    <li id="login-link"><a href="#" class="login" onclick="openLoginModal()"><i class="fas fa-user"></i> Login</a></li>
+                    <li id="logout-link" style="display: none;"><a href="#" class="login" onclick="logoutUser()"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                    <li><a href="carrinho.html" class="cart"><i class="fas fa-shopping-cart"></i> Carrinho (<span id="cart-count">0</span>)</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="configurator" style="margin-top: 80px; padding: 40px 24px;">
+        <div class="container">
+            <h2>Monte o PC dos Seus Sonhos</h2>
+            <p>Escolha os componentes abaixo para personalizar seu PC. Adicione cada item ao carrinho e finalize sua compra!</p>
+
+            <!-- Seção de Mouses -->
+<div class="component-section">
+    <h3>Escolha seu Mouse</h3>
+    <div class="component-grid">
+        <div class="component-card">
+            <div class="image-container">
+                <img src="imagens/mouse1.png" alt="Logitech MX Master 3S">
+                <span class="tooltip">Logitech MX Master 3S.<br>Conexão: Sem fio (Bluetooth ou receptor USB Logi Bolt).<br>Sensor: Darkfield.<br>DPI: Até 8.000.<br>Botoes: 7 programáveis.</span>
+            </div>
+            <p class="price">R$700,00</p>
+            <button class="add-to-cart" data-name="Logitech MX Master 3S" data-price="700.00">Adicionar ao Carrinho</button>
+        </div>
+        <div class="component-card">
+            <div class="image-container">
+                <img src="imagens/mouse2.png" alt="Razer DeathAdder V3 HyperSpeed">
+                <span class="tooltip">Razer DeathAdder V3 HyperSpeed.<br>Conexão: Sem fio (HyperSpeed Wireless).<br>Sensor: Focus Pro 30K.<br>DPI: Até 30.000.<br>Botoes: 6 programáveis.</span>
+            </div>
+            <p class="price">R$900,00</p>
+            <button class="add-to-cart" data-name="Razer DeathAdder V3 HyperSpeed" data-price="900.00">Adicionar ao Carrinho</button>
+        </div>
+        <div class="component-card">
+            <div class="image-container">
+                <img src="imagens/mouse3.png" alt="SteelSeries Aerox 3 Wireless">
+                <span class="tooltip">SteelSeries Aerox 3 Wireless.<br>Conexão: Sem fio (2.4GHz ou Bluetooth).<br>Sensor: TrueMove Air.<br>DPI: Até 18.000.<br>Peso: 68g.</span>
+            </div>
+            <p class="price">R$550,00</p>
+            <button class="add-to-cart" data-name="SteelSeries Aerox 3 Wireless" data-price="550.00">Adicionar ao Carrinho</button>
+        </div>
+        <div class="component-card">
+            <div class="image-container">
+                <img src="imagens/mouse4.png" alt="Mouse sem Fio HP Z3700">
+                <span class="tooltip">Mouse sem Fio HP Z3700.<br>Conexão: Sem fio (USB).<br>Sensor: Óptico.<br>DPI: Até 1.600.<br>Botoes: 3.</span>
+            </div>
+            <p class="price">R$210,00</p>
+            <button class="add-to-cart" data-name="Mouse sem Fio HP Z3700" data-price="210.00">Adicionar ao Carrinho</button>
+        </div>
+        <div class="component-card">
+            <div class="image-container">
+                <img src="imagens/mouse5.png" alt="Corsair Scimitar Elite RGB">
+                <span class="tooltip">Corsair Scimitar Elite RGB.<br>Conexão: Com fio (USB).<br>Sensor: PixArt PMW3391.<br>DPI: Até 18.000.<br>Botoes: 12 programáveis.</span>
+            </div>
+            <p class="price">R$550,00</p>
+            <button class="add-to-cart" data-name="Corsair Scimitar Elite RGB" data-price="550.00">Adicionar ao Carrinho</button>
+        </div>
+    </div>
+</div>
+                  <!-- Seção de Headsets -->
+<div class="component-section">
+    <h3>Escolha seu Headset</h3>
+    <div class="component-grid">
+        <div class="component-card">
+            <div class="image-container">
+                <img src="imagens/fone1.png" alt="HyperX Cloud Alpha">
+                <span class="tooltip">HyperX Cloud Alpha.<br>Conexão: Com fio (3.5mm).<br>Drivers: 50mm.<br>Impedância: 60 Ohms.<br>Microfone: Desmontável.</span>
+            </div>
+            <p class="price">R$1.200,00</p>
+            <button class="add-to-cart" data-name="HyperX Cloud Alpha" data-price="1200.00">Adicionar ao Carrinho</button>
+        </div>
+        <div class="component-card">
+            <div class="image-container">
+                <img src="imagens/fone2.png" alt="Razer BlackShark V2">
+                <span class="tooltip">Razer BlackShark V2.<br>Conexão: Com fio (USB).<br>Drivers: 50mm.<br>Impedância: 32 Ohms.<br>Microfone: Hi-Fi.</span>
+            </div>
+            <p class="price">R$900,00</p>
+            <button class="add-to-cart" data-name="Razer BlackShark V2" data-price="900.00">Adicionar ao Carrinho</button>
+        </div>
+        <div class="component-card">
+            <div class="image-container">
+                <img src="imagens/fone3.png" alt="SteelSeries Arctis Nova 5">
+                <span class="tooltip">SteelSeries Arctis Nova 5.<br>Conexão: Sem fio (2.4GHz).<br>Drivers: 40mm.<br>Impedância: 36 Ohms.<br>Microfone: Retrátil.</span>
+            </div>
+            <p class="price">R$1.600,00</p>
+            <button class="add-to-cart" data-name="SteelSeries Arctis Nova 5" data-price="1600.00">Adicionar ao Carrinho</button>
+        </div>
+        <div class="component-card">
+            <div class="image-container">
+                <img src="imagens/fone4.png" alt="Logitech G Pro X">
+                <span class="tooltip">Logitech G Pro X.<br>Conexão: Com fio (3.5mm).<br>Drivers: 50mm.<br>Impedância: 35 Ohms.<br>Microfone: Desmontável.</span>
+            </div>
+            <p class="price">R$1.100,00</p>
+            <button class="add-to-cart" data-name="Logitech G Pro X" data-price="1100.00">Adicionar ao Carrinho</button>
+        </div>
+        <div class="component-card">
+            <div class="image-container">
+                <img src="imagens/fone5.png" alt="JBL Quantum 100">
+                <span class="tooltip">JBL Quantum 100.<br>Conexão: Com fio (3.5mm).<br>Drivers: 40mm.<br>Impedância: 32 Ohms.<br>Microfone: Integrado.</span>
+            </div>
+            <p class="price">R$300,00</p>
+            <button class="add-to-cart" data-name="JBL Quantum 100" data-price="300.00">Adicionar ao Carrinho</button>
+        </div>
+    </div>
+</div>
+
+<!-- Seção de Teclados -->
+<div class="component-section">
+    <h3>Escolha seu Teclado</h3>
+    <div class="component-grid">
+        <div class="component-card">
+            <div class="image-container">
+                <img src="imagens/teclado1.png" alt="Logitech MX Keys S">
+                <span class="tooltip">Logitech MX Keys S.<br>Tipo: Membrana.<br>Conexão: Sem fio (Bluetooth/USB Logi Bolt).<br>Iluminação: Não.<br>Teclas: 108.</span>
+            </div>
+            <p class="price">R$700,00</p>
+            <button class="add-to-cart" data-name="Logitech MX Keys S" data-price="700.00">Adicionar ao Carrinho</button>
+        </div>
+        <div class="component-card">
+            <div class="image-container">
+                <img src="imagens/teclado2.png" alt="Razer BlackWidow V4 Pro">
+                <span class="tooltip">Razer BlackWidow V4 Pro.<br>Tipo: Mecânico.<br>Conexão: Com fio (USB-C).<br>Iluminação: RGB.<br>Teclas: 104.</span>
+            </div>
+            <p class="price">R$2.300,00</p>
+            <button class="add-to-cart" data-name="Razer BlackWidow V4 Pro" data-price="2300.00">Adicionar ao Carrinho</button>
+        </div>
+        <div class="component-card">
+            <div class="image-container">
+                <img src="imagens/teclado3.png" alt="Redragon Dark Avenger K568">
+                <span class="tooltip">Redragon Dark Avenger K568.<br>Tipo: Mecânico.<br>Conexão: Com fio (USB).<br>Iluminação: RGB.<br>Teclas: 104.</span>
+            </div>
+            <p class="price">R$400,00</p>
+            <button class="add-to-cart" data-name="Redragon Dark Avenger K568" data-price="400.00">Adicionar ao Carrinho</button>
+        </div>
+        <div class="component-card">
+            <div class="image-container">
+                <img src="imagens/teclado4.png" alt="HyperX Alloy Origins Core">
+                <span class="tooltip">HyperX Alloy Origins Core.<br>Tipo: Mecânico.<br>Conexão: Com fio (USB-C removível).<br>Iluminação: RGB.<br>Teclas: 87.</span>
+            </div>
+            <p class="price">R$600,00</p>
+            <button class="add-to-cart" data-name="HyperX Alloy Origins Core" data-price="600.00">Adicionar ao Carrinho</button>
+        </div>
+        <div class="component-card">
+            <div class="image-container">
+                <img src="imagens/teclado5.png" alt="Corsair K60 RGB Pro">
+                <span class="tooltip">Corsair K60 RGB Pro.<br>Tipo: Mecânico.<br>Conexão: Com fio (USB).<br>Iluminação: RGB.<br>Teclas: 104.</span>
+            </div>
+            <p class="price">R$500,00</p>
+            <button class="add-to-cart" data-name="Corsair K60 RGB Pro" data-price="500.00">Adicionar ao Carrinho</button>
+        </div>
+    </div>
+</div>
+
+<!-- Seção de Monitores -->
+<div class="component-section">
+    <h3>Escolha seu Monitor</h3>
+    <div class="component-grid">
+        <div class="component-card">
+            <div class="image-container">
+                <img src="imagens/monitor1.png" alt="Samsung Smart Monitor M8">
+                <span class="tooltip">Samsung Smart Monitor M8.<br>Tamanho: 32 polegadas.<br>Resolução: 4K.<br>Taxa: 60Hz.<br>Conexões: HDMI, USB-C.</span>
+            </div>
+            <p class="price">R$4.000,00</p>
+            <button class="add-to-cart" data-name="Samsung Smart Monitor M8" data-price="4000.00">Adicionar ao Carrinho</button>
+        </div>
+        <div class="component-card">
+            <div class="image-container">
+                <img src="imagens/monitor2.png" alt="LG UltraGear OLED 27GR95QE-B">
+                <span class="tooltip">LG UltraGear OLED 27GR95QE-B.<br>Tamanho: 27 polegadas.<br>Resolução: QHD.<br>Taxa: 240Hz.<br>Conexões: HDMI, DisplayPort.</span>
+            </div>
+            <p class="price">R$5.500,00</p>
+            <button class="add-to-cart" data-name="LG UltraGear OLED 27GR95QE-B" data-price="5500.00">Adicionar ao Carrinho</button>
+        </div>
+        <div class="component-card">
+            <div class="image-container">
+                <img src="imagens/monitor3.png" alt="Dell Alienware AW2523HF">
+                <span class="tooltip">Dell Alienware AW2523HF.<br>Tamanho: 25 polegadas.<br>Resolução: Full HD.<br>Taxa: 360Hz.<br>Conexões: HDMI, DisplayPort.</span>
+            </div>
+            <p class="price">R$3.800,00</p>
+            <button class="add-to-cart" data-name="Dell Alienware AW2523HF" data-price="3800.00">Adicionar ao Carrinho</button>
+        </div>
+        <div class="component-card">
+            <div class="image-container">
+                <img src="imagens/monitor4.png" alt="BenQ PD2705U">
+                <span class="tooltip">BenQ PD2705U.<br>Tamanho: 27 polegadas.<br>Resolução: 4K.<br>Taxa: 60Hz.<br>Conexões: HDMI, USB-C.</span>
+            </div>
+            <p class="price">R$3.200,00</p>
+            <button class="add-to-cart" data-name="BenQ PD2705U" data-price="3200.00">Adicionar ao Carrinho</button>
+        </div>
+        <div class="component-card">
+            <div class="image-container">
+                <img src="imagens/monitor5.png" alt="AOC 22B35HM2">
+                <span class="tooltip">AOC 22B35HM2.<br>Tamanho: 22 polegadas.<br>Resolução: Full HD.<br>Taxa: 75Hz.<br>Conexões: VGA, HDMI.</span>
+            </div>
+            <p class="price">R$700,00</p>
+            <button class="add-to-cart" data-name="AOC 22B35HM2" data-price="700.00">Adicionar ao Carrinho</button>
+        </div>
+    </div>
+</div>
+
+<!-- Seção de CPU -->
+<div class="component-section">
+    <h3>Escolha seu CPU Torre</h3>
+    <div class="component-grid">
+        <div class="component-card">
+            <div class="image-container">
+                <img src="imagens/cpu1.png" alt="Mancer PC Gamer Ryzen 5 5600G">
+                <span class="tooltip">Mancer PC Gamer Ryzen 5 5600G.<br>Processador: AMD Ryzen 5 5600G.<br>RAM: 16GB DDR4.<br>Armazenamento: SSD 480GB.<br>Placa de Vídeo: Integrada Radeon Vega 7.</span>
+            </div>
+            <p class="price">R$4.000,00</p>
+            <button class="add-to-cart" data-name="Mancer PC Gamer Ryzen 5 5600G" data-price="4000.00">Adicionar ao Carrinho</button>
+        </div>
+        <div class="component-card">
+            <div class="image-container">
+                <img src="imagens/cpu2.webp" alt="Acer Predator Orion 500">
+                <span class="tooltip">Acer Predator Orion 500.<br>Processador: Intel Core i7-11700.<br>RAM: 16GB DDR4.<br>Armazenamento: SSD 1TB.<br>Placa de Vídeo: NVIDIA RTX 3070.</span>
+            </div>
+            <p class="price">R$9.500,00</p>
+            <button class="add-to-cart" data-name="Acer Predator Orion 500" data-price="9500.00">Adicionar ao Carrinho</button>
+        </div>
+        <div class="component-card">
+            <div class="image-container">
+                <img src="imagens/cpu3.avif" alt="Dell Inspiron Small 3710">
+                <span class="tooltip">Dell Inspiron Small 3710.<br>Processador: Intel Core i5-12400.<br>RAM: 8GB DDR4.<br>Armazenamento: SSD 256GB.<br>Placa de Vídeo: Integrada Intel UHD.</span>
+            </div>
+            <p class="price">R$3.800,00</p>
+            <button class="add-to-cart" data-name="Dell Inspiron Small 3710" data-price="3800.00">Adicionar ao Carrinho</button>
+        </div>
+        <div class="component-card">
+            <div class="image-container">
+                <img src="imagens/cpu4.avif" alt="HP OMEN 40L Gaming">
+                <span class="tooltip">HP OMEN 40L Gaming.<br>Processador: AMD Ryzen 7 7700.<br>RAM: 16GB DDR.<br>Armazenamento: 1TB SSD NVMe.<br>Placa de Vídeo: NVIDIA RTX 4070.</span>
+            </div>
+            <p class="price">R$12.200,00</p>
+            <button class="add-to-cart" data-name="HP OMEN 40L Gaming" data-price="12200.00">Adicionar ao Carrinho</button>
+        </div>
+        <div class="component-card">
+            <div class="image-container">
+                <img src="imagens/cpu5.png" alt="AOC 22B35HM2">
+                <span class="tooltip">AOC 22B35HM2.<br>Processador: AMD Ryzen 5 9600X.<br>RAM: 32GB DDR5.<br>Armazenamento: SSD M.2 1TB + SSD 1TB.<br>Placa de Vídeo: NVIDIA RTX 5080.</span>
+            </div>
+            <p class="price">R$19,000,00</p>
+            <button class="add-to-cart" data-name="AOC 22B35HM2" data-price="19000.00">Adicionar ao Carrinho</button>
+        </div>
+    </div>
+</div>
+
+<!-- Seção de Webcams -->
+<div class="component-section">
+    <h3>Escolha sua Webcam</h3>
+    <div class="component-grid">
+        <div class="component-card">
+            <div class="image-container">
+                <img src="imagens/cam1.png" alt="Logitech Brio 505">
+                <span class="tooltip">Logitech Brio 505.<br>Resolução: 1080p.<br>FPS: 30.<br>Conexão: USB.<br>Campo de Visão: 78°.</span>
+            </div>
+            <p class="price">R$740,00</p>
+            <button class="add-to-cart" data-name="Logitech Brio 505" data-price="740.00">Adicionar ao Carrinho</button>
+        </div>
+        <div class="component-card">
+            <div class="image-container">
+                <img src="imagens/cam2.png" alt="Razer Kiyo Pro">
+                <span class="tooltip">Razer Kiyo Pro.<br>Resolução: 1080p.<br>FPS: 60.<br>Conexão: USB.<br>Campo de Visão: 80°-103°.</span>
+            </div>
+            <p class="price">R$680,00</p>
+            <button class="add-to-cart" data-name="Razer Kiyo Pro" data-price="680.00">Adicionar ao Carrinho</button>
+        </div>
+        <div class="component-card">
+            <div class="image-container">
+                <img src="imagens/cam3.png" alt="Obsbot Tiny 2">
+                <span class="tooltip">Obsbot Tiny 2.<br>Resolução: 4K.<br>FPS: 30.<br>Conexão: USB-C.<br>Campo de Visão: 90°.</span>
+            </div>
+            <p class="price">R$1.700,00</p>
+            <button class="add-to-cart" data-name="Obsbot Tiny 2" data-price="1700.00">Adicionar ao Carrinho</button>
+        </div>
+        <div class="component-card">
+            <div class="image-container">
+                <img src="imagens/cam4.png" alt="HyperX Vision S">
+                <span class="tooltip">HyperX Vision S.<br>Resolução: 4K.<br>FPS: 30.<br>Conexão: USB.<br>Campo de Visão: 85°.</span>
+            </div>
+            <p class="price">R$1.135,00</p>
+            <button class="add-to-cart" data-name="HyperX Vision S" data-price="1135.00">Adicionar ao Carrinho</button>
+        </div>
+        <div class="component-card">
+            <div class="image-container">
+                <img src="imagens/cam5.png" alt="Razer Kiyo Pro Ultra">
+                <span class="tooltip">Razer Kiyo Pro Ultra.<br>Resolução: 4K.<br>FPS: 60.<br>Conexão: USB-C.<br>Campo de Visão: 80°-103°.</span>
+            </div>
+            <p class="price">R$1.710,00</p>
+            <button class="add-to-cart" data-name="Razer Kiyo Pro Ultra" data-price="1710.00">Adicionar ao Carrinho</button>
+        </div>
+    </div>
+</div>
+           
+            <a href="carrinho.html" class="cta-button" style="margin-top: 40px; display: inline-block;">Ir para o Carrinho</a>
+        </div>
+    </section>
+
+    <!-- Modal de Login/Cadastro -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeLoginModal()">×</span>
+            <h2 id="modal-title">Faça seu Login</h2>
+            <div id="form-toggle">
+                <button id="show-login" class="toggle-button active" onclick="showLoginForm()">Entrar</button>
+                <button id="show-register" class="toggle-button" onclick="showRegisterForm()">Cadastrar</button>
+            </div>
+            <!-- Formulário de Login -->
+            <div id="login-form-container">
+                <form id="login-form">
+                    <input type="email" id="login-gmail" placeholder="Email" required>
+                    <input type="password" id="login-password" placeholder="Senha" required>
+                    <button type="submit" class="modal-button">Entrar</button>
+                </form>
+                <p id="login-error" style="color: red; display: none; margin-top: 10px;">Email ou senha inválidos.</p>
+            </div>
+            <!-- Formulário de Cadastro -->
+            <div id="register-form-container" style="display: none;">
+                <form id="register-form">
+                    <input type="text" id="register-nome" placeholder="Nome" required>
+                    <input type="email" id="register-gmail" placeholder="Email" required>
+                    <input type="password" id="register-password" placeholder="Senha" required>
+                    <input type="text" id="register-cpf" placeholder="CPF" required>
+                    <input type="number" id="register-idade" placeholder="Idade" required>
+                    <input type="text" id="register-cep" placeholder="CEP" required>
+                    <button type="submit" class="modal-button">Cadastrar</button>
+                </form>
+                <p id="register-error" style="color: red; display: none; margin-top: 10px;">Email já cadastrado ou campos inválidos.</p>
+            </div>
+            <!-- Dados do Usuário Logado -->
+            <div id="dados-salvos" style="display: none; margin-top: 20px;">
+                <h3>Bem-vindo(a), <span id="saved-nome"></span>!</h3>
+                <p><strong>Email:</strong> <span id="saved-gmail"></span></p>
+                <p><strong>CPF:</strong> <span id="saved-cpf"></span></p>
+                <p><strong>Idade:</strong> <span id="saved-idade"></span></p>
+                <p><strong>CEP:</strong> <span id="saved-cep"></span></p>
+                <a href="dashboard.html" class="modal-button">Ir para o Dashboard</a>
+                <button onclick="logoutUser()" class="modal-button" style="margin-top: 10px; background-color: #e74c3c;">Sair</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 Game Work Study. Todos os direitos reservados.</p>
+            <ul>
+                <li class="privacy">
+                    <a href="#" class="privacy-link">Política de Privacidade</a>
+                    <span class="privacy-tooltip">Nós respeitamos sua privacidade e protegemos seus dados conforme a LGPD.</span>
+                </li>
+                <li><a href="mailto:suporte@gameworkstudy.com">Suporte</a></li>
+                <li><a href="https://instagram.com/gameworkstudy">Instagram</a></li>
+                <li><a href="https://twitter.com/gameworkstudy">Twitter</a></li>
+            </ul>
+        </div>
+    </footer>
+    <script>
+    function openLoginModal() {
+        document.getElementById('login-modal').style.display = 'block';
+        document.getElementById('show-login').click();
+    }
+
+    function closeLoginModal() {
+        document.getElementById('login-modal').style.display = 'none';
+        document.getElementById('login-error').style.display = 'none';
+        document.getElementById('register-error').style.display = 'none';
+    }
+
+    function showLoginForm() {
+        document.getElementById('login-form-container').style.display = 'block';
+        document.getElementById('register-form-container').style.display = 'none';
+        document.getElementById('show-login').classList.add('active');
+        document.getElementById('show-register').classList.remove('active');
+        document.getElementById('modal-title').textContent = 'Faça seu Login';
+    }
+
+    function showRegisterForm() {
+        document.getElementById('login-form-container').style.display = 'none';
+        document.getElementById('register-form-container').style.display = 'block';
+        document.getElementById('show-login').classList.remove('active');
+        document.getElementById('show-register').classList.add('active');
+        document.getElementById('modal-title').textContent = 'Faça seu Cadastro';
+    }
+
+    function registerUser(event) {
+        event.preventDefault();
+        const nome = document.getElementById('register-nome').value.trim();
+        const email = document.getElementById('register-gmail').value.trim();
+        const password = document.getElementById('register-password').value.trim();
+        const cpf = document.getElementById('register-cpf').value.trim();
+        const idade = document.getElementById('register-idade').value.trim();
+        const cep = document.getElementById('register-cep').value.trim();
+
+        if (!nome || !email || !password || !cpf || !idade || !cep) {
+            document.getElementById('register-error').style.display = 'block';
+            document.getElementById('register-error').textContent = 'Por favor, preencha todos os campos.';
+            return;
+        }
+
+        const existingUsers = JSON.parse(localStorage.getItem('users') || '[]');
+        if (existingUsers.some(user => user.email === email)) {
+            document.getElementById('register-error').style.display = 'block';
+            document.getElementById('register-error').textContent = 'Email já cadastrado.';
+            return;
+        }
+
+        const user = { nome, email, password, cpf, idade, cep };
+        existingUsers.push(user);
+        localStorage.setItem('users', JSON.stringify(existingUsers));
+        localStorage.setItem('currentUser', JSON.stringify(user));
+
+        alert('Registro realizado com sucesso!');
+        loadUserData();
+        showLoggedInUI();
+    }
+
+    function loginUser(event) {
+        event.preventDefault();
+        const email = document.getElementById('login-gmail').value.trim();
+        const password = document.getElementById('login-password').value.trim();
+
+        const users = JSON.parse(localStorage.getItem('users') || '[]');
+        const userData = users.find(user => user.email === email && user.password === password);
+
+        if (!userData) {
+            document.getElementById('login-error').style.display = 'block';
+            return;
+        }
+
+        localStorage.setItem('currentUser', JSON.stringify(userData));
+        alert('Login realizado com sucesso!');
+        loadUserData();
+        showLoggedInUI();
+    }
+
+    function logoutUser() {
+        localStorage.removeItem('currentUser');
+        alert('Logout realizado.');
+        document.getElementById('dados-salvos').style.display = 'none';
+        document.getElementById('login-form-container').style.display = 'block';
+        document.getElementById('register-form-container').style.display = 'none';
+        document.getElementById('login-link').style.display = 'inline';
+        document.getElementById('logout-link').style.display = 'none';
+        document.getElementById('dashboard-link').style.display = 'none';
+        document.getElementById('login-modal').style.display = 'none';
+        document.getElementById('show-login').click();
+    }
+
+    function loadUserData() {
+        const userData = JSON.parse(localStorage.getItem('currentUser'));
+        if (userData) {
+            document.getElementById('saved-nome').textContent = userData.nome;
+            document.getElementById('saved-gmail').textContent = userData.email;
+            document.getElementById('saved-cpf').textContent = userData.cpf;
+            document.getElementById('saved-idade').textContent = userData.idade;
+            document.getElementById('saved-cep').textContent = userData.cep;
+            document.getElementById('login-link').style.display = 'none';
+            document.getElementById('logout-link').style.display = 'inline';
+            document.getElementById('dashboard-link').style.display = 'inline';
+        }
+    }
+
+    function showLoggedInUI() {
+        document.getElementById('dados-salvos').style.display = 'block';
+        document.getElementById('login-form-container').style.display = 'none';
+        document.getElementById('register-form-container').style.display = 'none';
+        document.getElementById('login-modal').style.display = 'none';
+    }
+
+    function updateCartCount() {
+        const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+        const cartCountElement = document.getElementById('cart-count');
+        if (cartCountElement) {
+            cartCountElement.textContent = cart.length;
+        }
+    }
+
+    function updateNavBar() {
+        const userData = JSON.parse(localStorage.getItem('currentUser'));
+        if (userData) {
+            showLoggedInUI();
+            loadUserData();
+        } else {
+            document.getElementById('dados-salvos').style.display = 'none';
+            document.getElementById('login-form-container').style.display = 'block';
+            document.getElementById('register-form-container').style.display = 'none';
+            document.getElementById('login-link').style.display = 'inline';
+            document.getElementById('logout-link').style.display = 'none';
+            document.getElementById('dashboard-link').style.display = 'none';
+        }
+    }
+
+    function addToCart(name, price) {
+        console.log('Tentando adicionar ao carrinho:', { name, price });
+
+        // Validar entrada
+        if (!name || typeof name !== 'string' || name.trim() === '') {
+            console.error('Nome do produto inválido:', name);
+            alert('Erro: Nome do produto inválido!');
+            return;
+        }
+
+        const parsedPrice = Number(price);
+        if (isNaN(parsedPrice) || parsedPrice <= 0) {
+            console.error('Preço inválido:', price);
+            alert('Erro: Preço inválido!');
+            return;
+        }
+
+        try {
+            // Carregar o carrinho atual
+            let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+
+            // Verificar se o item já está no carrinho
+            if (cart.some(item => item.name === name)) {
+                console.log(`Item ${name} já está no carrinho`);
+                alert(`${name} já está no carrinho!`);
+                return;
+            }
+
+            // Adicionar o item ao carrinho
+            cart.push({ name, price: parsedPrice });
+            localStorage.setItem('cart', JSON.stringify(cart));
+            console.log('Carrinho atualizado:', cart);
+
+            // Atualizar contagem do carrinho e exibir mensagem
+            updateCartCount();
+            alert(`${name} foi adicionado ao carrinho com sucesso!`);
+        } catch (error) {
+            console.error('Erro ao adicionar ao carrinho:', error.message);
+            alert('Ocorreu um erro ao adicionar o produto ao carrinho. Tente novamente.');
+        }
+    }
+
+    window.addEventListener('load', function () {
+        updateNavBar();
+        updateCartCount();
+
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', function () {
+                const name = this.getAttribute('data-name');
+                const price = parseFloat(this.getAttribute('data-price'));
+
+                console.log(`Botão clicado: nome=${name}, preço=${price}`);
+
+                // Validar atributos do botão
+                if (!name || isNaN(price)) {
+                    console.error('Atributos inválidos no botão:', { name, price });
+                    alert('Erro: Produto ou preço inválido no botão!');
+                    return;
+                }
+
+                addToCart(name, price);
+            });
+        });
+
+        const loginForm = document.getElementById('login-form');
+        if (loginForm) loginForm.addEventListener('submit', loginUser);
+
+        const registerForm = document.getElementById('register-form');
+        if (registerForm) registerForm.addEventListener('submit', registerUser);
+    });
+    </script>
+</body>
+</html>

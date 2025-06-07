@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Work Study | Administração</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="index.html" href="index.html"
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Estilos específicos para a página de administração */
+        .admin-section {
+            margin-top: 80px;
+            padding: 40px 24px;
+        }
+        .admin-section h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+        .admin-section h3 {
+            font-size: 24px;
+            margin: 20px 0 10px;
+        }
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        .admin-table th, .admin-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        .admin-table th {
+            background-color: #3498db;
+            color: #ffffff;
+        }
+        .admin-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .admin-button {
+            background-color: #e74c3c;
+            color: #ffffff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .admin-button:hover {
+            background-color: #c0392b;
+        }
+        .no-data {
+            font-style: italic;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo-text">GAME WORK STUDY</div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#pcs">PC</a></li>
+                    <li><a href="index.html#configurador">Configurador</a></li>
+                    <li id="dashboard-link" style="display: none;"><a href="dashboard.html">Dashboard</a></li>
+                    <li id="admin-link" style="display: none;"><a href="admin.html">Administração</a></li>
+                    <li class="contato-hover">
+                        <a href="index.html#contato">Contato</a>
+                        <div class="contato-info">
+                            <p><strong>Telefone:</strong> (11) 1234-5678</p>
+                            <p><strong>Email:</strong> suporte@gameworkstudy.com</p>
+                        </div>
+                    </li>
+                    <li id="login-link"><a href="#" class="login" onclick="openLoginModal()"><i class="fas fa-user"></i> Login</a></li>
+                    <li id="logout-link" style="display: none;"><a href="#" class="login" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                    <li><a href="carrinho.html" class="cart"><i class="fas fa-shopping-cart"></i> Carrinho</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Modal de Login -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeLoginModal()">×</span>
+            <h2>Faça seu Cadastro</h2>
+            <form id="login-form">
+                <input type="text" id="nome" placeholder="Nome" required>
+                <input type="email" id="gmail" placeholder="Gmail" required>
+                <input type="text" id="cpf" placeholder="CPF" required>
+                <input type="number" id="idade" placeholder="Idade" required>
+                <input type="text" id="cep" placeholder="CEP" required>
+                <button type="submit" class="modal-button">Cadastrar</button>
+            </form>
+            <div id="dados-salvos" style="display: none; margin-top: 20px;">
+                <h3>Dados Salvos:</h3>
+                <p><strong>Nome:</strong> <span id="saved-nome"></span></p>
+                <p><strong>Gmail:</strong> <span id="saved-gmail"></span></p>
+                <p><strong>CPF:</strong> <span id="saved-cpf"></span></p>
+                <p><strong>Idade:</strong> <span id="saved-idade"></span></p>
+                <p><strong>CEP:</strong> <span id="saved-cep"></span></p>
+                <button onclick="logout()" class="modal-button" style="margin-top: 10px; background-color: #e74c3c;">Sair do Cadastro</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Administração Section -->
+    <section class="admin-section">
+        <div class="container">
+            <h2>Painel de Administração</h2>
+            <p>Gerencie avaliações e usuários cadastrados.</p>
+
+            <!-- Avaliações -->
+            <h3>Avaliações dos Usuários</h3>
+            <table class="admin-table" id="reviews-table">
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Avaliação</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <button class="admin-button" onclick="clearReviews()">Limpar Avaliações</button>
+
+            <!-- Usuários -->
+            <h3>Usuários Cadastrados</h3>
+            <table class="admin-table" id="users-table">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>CPF</th>
+                        <th>Idade</th>
+                        <th>CEP</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <button class="admin-button" onclick="clearUsers()">Limpar Usuários</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>© 2025 Game Work Study. Todos os direitos reservados.</p>
+            <ul>
+                <li class="privacy">
+                    <a href="#" class="privacy-link">Política de Privacidade</a>
+                    <span class="privacy-tooltip">Nós respeitamos sua privacidade e protegemos seus dados conforme a LGPD.</span>
+                </li>
+                <li><a href="mailto:suporte@gameworkstudy.com">Suporte</a></li>
+                <li><a href="https://instagram.com/gameworkstudy">Instagram</a></li>
+                <li><a href="https://twitter.com/gameworkstudy">Twitter</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script>
+        // Funções para abrir e fechar o modal
+        function openLoginModal() {
+            document.getElementById('login-modal').style.display = 'flex';
+        }
+
+        function closeLoginModal() {
+            document.getElementById('login-modal').style.display = 'none';
+        }
+
+        // Função para logout
+        function logout() {
+            localStorage.clear();
+            updateNavBar();
+            document.getElementById('dados-salvos').style.display = 'none';
+            document.getElementById('login-form').reset();
+            alert('Você foi deslogado com sucesso!');
+            updateCartCount();
+            loadAdminData();
+        }
+
+        // Função para atualizar a barra de navegação
+        function updateNavBar() {
+            const isLoggedIn = localStorage.getItem('nome');
+            document.getElementById('dashboard-link').style.display = isLoggedIn ? 'block' : 'none';
+            document.getElementById('login-link').style.display = isLoggedIn ? 'none' : 'block';
+            document.getElementById('logout-link').style.display = isLoggedIn ? 'block' : 'none';
+        }
+
+        // Função para atualizar o contador de itens no carrinho
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartLink = document.querySelector('.cart');
+            cartLink.dataset.count = cart.length;
+            cartLink.style.setProperty('--cart-count', `"${cart.length}"`);
+        }
+
+        // Função para carregar avaliações e usuários
+        function loadAdminData() {
+            // Carregar avaliações
+            const reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+            const reviewsTableBody = document.querySelector('#reviews-table tbody');
+            reviewsTableBody.innerHTML = '';
+            if (reviews.length === 0) {
+                reviewsTableBody.innerHTML = '<tr><td colspan="2" class="no-data">Nenhuma avaliação encontrada.</td></tr>';
+            } else {
+                reviews.forEach(review => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${review.date}</td>
+                        <td>${review.text}</td>
+                    `;
+                    reviewsTableBody.appendChild(row);
+                });
+            }
+
+            // Carregar usuários
+            const usersTableBody = document.querySelector('#users-table tbody');
+            usersTableBody.innerHTML = '';
+            const nome = localStorage.getItem('nome');
+            if (!nome) {
+                usersTableBody.innerHTML = '<tr><td colspan="5" class="no-data">Nenhum usuário cadastrado.</td></tr>';
+            } else {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${nome}</td>
+                    <td>${localStorage.getItem('gmail') || '-'}</td>
+                    <td>${localStorage.getItem('cpf') || '-'}</td>
+                    <td>${localStorage.getItem('idade') || '-'}</td>
+                    <td>${localStorage.getItem('cep') || '-'}</td>
+                `;
+                usersTableBody.appendChild(row);
+            }
+        }
+
+        // Função para limpar avaliações
+        function clearReviews() {
+            if (confirm('Tem certeza que deseja limpar todas as avaliações?')) {
+                localStorage.removeItem('reviews');
+                loadAdminData();
+                alert('Avaliações limpas com sucesso!');
+            }
+        }
+
+        // Função para limpar usuários
+        function clearUsers() {
+            if (confirm('Tem certeza que deseja limpar todos os dados de usuários? Isso também fará logout!')) {
+                localStorage.clear();
+                updateNavBar();
+                loadAdminData();
+                document.getElementById('dados-salvos').style.display = 'none';
+                document.getElementById('login-form').reset();
+                alert('Dados de usuários limpos com sucesso!');
+            }
+        }
+
+        // Salvamento dos dados do formulário
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            console.log('Formulário de login submetido!');
+
+            try {
+                const nome = document.getElementById('nome').value;
+                const gmail = document.getElementById('gmail').value;
+                const cpf = document.getElementById('cpf').value;
+                const idade = document.getElementById('idade').value;
+                const cep = document.getElementById('cep').value;
+
+                localStorage.setItem('nome', nome);
+                localStorage.setItem('gmail', gmail);
+                localStorage.setItem('cpf', cpf);
+                localStorage.setItem('idade', idade);
+                localStorage.setItem('cep', cep);
+
+                document.getElementById('saved-nome').textContent = nome;
+                document.getElementById('saved-gmail').textContent = gmail;
+                document.getElementById('saved-cpf').textContent = cpf;
+                document.getElementById('saved-idade').textContent = idade;
+                document.getElementById('saved-cep').textContent = cep;
+
+                document.getElementById('dados-salvos').style.display = 'block';
+
+                closeLoginModal();
+                updateNavBar();
+                loadAdminData();
+            } catch (error) {
+                console.error('Erro ao processar o formulário:', error);
+            }
+        });
+
+        // Carrega os dados salvos ao abrir a página
+        window.onload = function() {
+            if (localStorage.getItem('nome')) {
+                document.getElementById('saved-nome').textContent = localStorage.getItem('nome');
+                document.getElementById('saved-gmail').textContent = localStorage.getItem('gmail');
+                document.getElementById('saved-cpf').textContent = localStorage.getItem('cpf');
+                document.getElementById('saved-idade').textContent = localStorage.getItem('idade');
+                document.getElementById('saved-cep').textContent = localStorage.getItem('cep');
+                document.getElementById('dados-salvos').style.display = 'block';
+            }
+            updateNavBar();
+            updateCartCount();
+            loadAdminData();
+        };
+    </script>
+</body>
+</html>

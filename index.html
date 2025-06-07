@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Work Study | PC Gamer</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo-text">GAME WORK STUDY</div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#pcs">PC</a></li>
+                    <li id="dashboard-link" style="display: none;"><a href="dashboard.html">Dashboard</a></li>
+                    <li id="login-link"><a href="#" class="login" onclick="openLoginModal()"><i class="fas fa-user"></i> Login</a></li>
+                    <li id="logout-link" style="display: none;"><a href="#" class="login" onclick="logoutUser()"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                    <li><a href="carrinho.html" class="cart"><i class="fas fa-shopping-cart"></i> Carrinho</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Modal de Login/Cadastro -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeLoginModal()">×</span>
+            <h2 id="modal-title">Faça seu Login</h2>
+            <div id="form-toggle">
+                <button id="show-login" class="toggle-button active" onclick="showLoginForm()">Entrar</button>
+                <button id="show-register" class="toggle-button" onclick="showRegisterForm()">Cadastrar</button>
+            </div>
+            <!-- Formulário de Login -->
+            <div id="login-form-container">
+                <form id="login-form">
+                    <input type="email" id="login-gmail" placeholder="Email (Gmail)" required>
+                    <input type="password" id="login-password" placeholder="Senha" required>
+                    <button type="submit" class="modal-button">Entrar</button>
+                </form>
+                <p id="login-error" style="color: red; display: none; margin-top: 10px;">Email ou senha inválidos.</p>
+            </div>
+            <!-- Formulário de Cadastro -->
+            <div id="register-form-container" style="display: none;">
+                <form id="register-form">
+                    <input type="text" id="register-nome" placeholder="Nome" required>
+                    <input type="email" id="register-gmail" placeholder="Email (Gmail)" required>
+                    <input type="password" id="register-password" placeholder="Senha" required>
+                    <input type="text" id="register-cpf" placeholder="CPF" required>
+                    <input type="number" id="register-idade" placeholder="Idade" min="18" required>
+                    <input type="text" id="register-cep" placeholder="CEP" required>
+                    <button type="submit" class="modal-button">Cadastrar</button>
+                </form>
+                <p id="register-error" style="color: red; display: none; margin-top: 10px;">Erro no cadastro.</p>
+            </div>
+            <!-- Dados do Usuário Logado -->
+            <div id="dados-salvos" style="display: none; margin-top: 20px;">
+                <h3>Bem-vindo(a), <span id="saved-nome"></span>!</h3>
+                <p><strong>Email:</strong> <span id="saved-gmail"></span></p>
+                <p><strong>CPF:</strong> <span id="saved-cpf"></span></p>
+                <p><strong>Idade:</strong> <span id="saved-idade"></span></p>
+                <p><strong>CEP:</strong> <span id="saved-cep"></span></p>
+                <a href="dashboard.html" class="modal-button">Ir para o Dashboard</a>
+                <button onclick="logoutUser()" class="modal-button" style="margin-top: 10px; background-color: #e74c3c;">Sair</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Full-Screen Logo Section -->
+    <section class="full-logo" id="home">
+        <div class="logo-container">
+            <img src="imagens/principal.webp" alt="Logo Game Work Study" class="logo-image">
+        </div>
+    </section>
+
+    <!-- PCs Section -->
+    <section id="pcs" class="pcs">
+        <div class="container">
+            <div class="pc-grid">
+                <!-- PC Zeus -->
+                <div class="pc-card">
+                    <div class="pc-image-container">
+                        <img src="imagens/Zeus.webp" alt="PC Gamer Zeus" class="pc-image">
+                    </div>
+                    <div class="pc-info">
+                        <h3>Zeus</h3>
+                        <p>Intel Core i9 14ª Geração, GeForce RTX 4090, 32GB DDR5, SSD NVMe 1TB. Ideal para jogos 4K.</p>
+                        <p class="price">A partir de R$ 35.000,00</p>
+                        <a href="zeus.html" class="card-button">Configurar Agora</a>
+                        <button class="add-to-cart" data-name="Zeus" data-price="35000.00">Adicionar ao Carrinho</button>
+                    </div>
+                </div>
+                <!-- PC Hércules -->
+                <div class="pc-card">
+                    <div class="pc-image-container">
+                        <img src="imagens/Hércules.webp" alt="PC Gamer Hércules" class="pc-image">
+                    </div>
+                    <div class="pc-info">
+                        <h3>Hércules</h3>
+                        <p>Intel Core i7 14ª Geração, GeForce RTX 4070, 16GB DDR5, SSD NVMe 512GB. Perfeito para streaming.</p>
+                        <p class="price">A partir de R$ 20.000,00</p>
+                        <a href="hercules.html" class="card-button">Configurar Agora</a>
+                        <button class="add-to-cart" data-name="Hércules" data-price="20000.00">Adicionar ao Carrinho</button>
+                    </div>
+                </div>
+                <!-- PC Prometheus -->
+                <div class="pc-card">
+                    <div class="pc-image-container">
+                        <img src="imagens/Prometheus.webp" alt="PC Gamer Prometheus" class="pc-image">
+                    </div>
+                    <div class="pc-info">
+                        <h3>Prometheus</h3>
+                        <p>Intel Core i5 14ª Geração, GeForce RTX 4060, 16GB DDR4, SSD 512GB. Ótimo custo-benefício.</p>
+                        <p class="price">A partir de R$ 10.000,00</p>
+                        <a href="prometheus.html" class="card-button">Configurar Agora</a>
+                        <button class="add-to-cart" data-name="Prometheus" data-price="10000.00">Adicionar ao Carrinho</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Configurator Section -->
+    <section id="configurador" class="configurator">
+        <div class="container">
+            <h2>Monte o PC dos Seus Sonhos</h2>
+            <p>Personalize cada componente com compatibilidade garantida e entrega rápida.</p>
+            <a href="configurador.html" class="cta-button">Comece a Montar</a>
+            <a href="componentes.html" class="cta-button">Ver Componentes</a>
+        </div>
+
+        <!-- Seção de Avaliação -->
+        <section class="avaliacao">
+            <h3>O que achou do nosso site?</h3>
+            <div class="estrelas">
+                <span class="estrela" data-valor="1">★</span>
+                <span class="estrela" data-valor="2">★</span>
+                <span class="estrela" data-valor="3">★</span>
+                <span class="estrela" data-valor="4">★</span>
+                <span class="estrela" data-valor="5">★</span>
+            </div>
+            <input type="hidden" id="avaliacao-estrelas" value="0">
+            <textarea id="avaliacao-comentario" placeholder="Deixe sua opinião..."></textarea>
+            <button class="cta-button enviar-avaliacao" onclick="enviarAvaliacao()">Enviar</button>
+            <p id="mensagem-avaliacao" style="display: none; color: green; margin-top: 10px;">
+                GWS agradece pela sua avaliação, espero que esteja gostando do nosso site!
+            </p>
+            <p id="avaliacao-error" style="color: red; display: none; margin-top: 10px;"></p>
+        </section>
+
+        <section class="sobre-gws">
+            <div class="container">
+                <h2>Sobre a GWS</h2>
+                <p>A Game Work Study (GWS) é uma empresa dedicada a oferecer os melhores computadores gamers do mercado, com desempenho de ponta e personalização completa. Fundada por apaixonados por games e tecnologia, nosso objetivo é entregar qualidade, performance e estilo para cada jogador.</p>
+            </div>
+        </section>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>© 2025 Game Work Study. Todos os direitos reservados.</p>
+            <ul>
+                <li class="privacy">
+                    <a href="#" class="privacy-link">Política de Privacidade</a>
+                    <span class="privacy-tooltip">Nós respeitamos sua privacidade e protegemos seus dados conforme a LGPD.</span>
+                </li>
+                <li><a href="mailto:suporte@gameworkstudy.com">Suporte</a></li>
+                  <li class="privacy">
+                    <a href="#" class="privacy-link">Contato</a>
+                    <span class="privacy-tooltip">Telefone<p>(61) 98154-2743</p><br>Gmail<p>suporte@gameworkstudy.com</p></span>
+                </li>
+                <li><a href="https://instagram.com/gameworkstudy">Instagram</a></li>
+                <li><a href="https://twitter.com/gameworkstudy">Twitter</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script>
+        // Funções para o modal de login/cadastro
+        function openLoginModal() {
+            document.getElementById('login-modal').style.display = 'block';
+            document.getElementById('show-login').click();
+        }
+
+        function closeLoginModal() {
+            document.getElementById('login-modal').style.display = 'none';
+            document.getElementById('login-error').style.display = 'none';
+            document.getElementById('register-error').style.display = 'none';
+            document.getElementById('avaliacao-error').style.display = 'none';
+        }
+
+        function showLoginForm() {
+            document.getElementById('login-form-container').style.display = 'block';
+            document.getElementById('register-form-container').style.display = 'none';
+            document.getElementById('dados-salvos').style.display = 'none';
+            document.getElementById('show-login').classList.add('active');
+            document.getElementById('show-register').classList.remove('active');
+            document.getElementById('modal-title').textContent = 'Faça seu Login';
+        }
+
+        function showRegisterForm() {
+            document.getElementById('login-form-container').style.display = 'none';
+            document.getElementById('register-form-container').style.display = 'block';
+            document.getElementById('dados-salvos').style.display = 'none';
+            document.getElementById('show-login').classList.remove('active');
+            document.getElementById('show-register').classList.add('active');
+            document.getElementById('modal-title').textContent = 'Faça seu Cadastro';
+        }
+
+        // Função para registrar usuário
+        function registerUser(event) {
+            event.preventDefault();
+            const nome = document.getElementById('register-nome').value.trim();
+            const email = document.getElementById('register-gmail').value.trim().toLowerCase();
+            const password = document.getElementById('register-password').value.trim();
+            const cpf = document.getElementById('register-cpf').value.trim();
+            const idade = parseInt(document.getElementById('register-idade').value.trim());
+            const cep = document.getElementById('register-cep').value.trim();
+            const errorElement = document.getElementById('register-error');
+
+            errorElement.style.display = 'none';
+
+            if (!nome || !email || !password || !cpf || !idade || !cep) {
+                errorElement.textContent = 'Digite todos os campos.';
+                errorElement.style.display = 'block';
+                return;
+            }
+
+            if (!email.endsWith('@gmail.com')) {
+                errorElement.textContent = 'Use um email Gmail.';
+                errorElement.style.display = 'block';
+                return;
+            }
+
+            if (idade < 18) {
+                errorElement.textContent = 'Você deve ter pelo menos 18 anos.';
+                errorElement.style.display = 'block';
+                return;
+            }
+
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            if (users.find(user => user.email === email)) {
+                errorElement.textContent = 'Email já cadastrado.';
+                errorElement.style.display = 'block';
+                return;
+            }
+
+            const user = { nome, email, password, cpf, idade, cep };
+            users.push(user);
+            localStorage.setItem('users', JSON.stringify(users));
+            localStorage.setItem('currentUser', JSON.stringify(user));
+
+            alert('Registro realizado com sucesso!');
+            loadUserData();
+            showLoggedInUI();
+        }
+
+        // Função para login do usuário
+        function loginUser(event) {
+            event.preventDefault();
+            const email = document.getElementById('login-gmail').value.trim().toLowerCase();
+            const password = document.getElementById('login-password').value.trim();
+            const errorElement = document.getElementById('login-error');
+
+            errorElement.style.display = 'none';
+
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            const userData = users.find(user => user.email === email && user.password === password);
+
+            if (!userData) {
+                errorElement.textContent = 'Email ou senha inválidos.';
+                errorElement.style.display = 'block';
+                return;
+            }
+
+            if (!email.endsWith('@gmail.com')) {
+                errorElement.textContent = 'Use um email Gmail.';
+                errorElement.style.display = 'block';
+                return;
+            }
+
+            localStorage.setItem('currentUser', JSON.stringify(userData));
+            alert('Login realizado com sucesso!');
+            loadUserData();
+            showLoggedInUI();
+        }
+
+        // Função para logout do usuário
+        function logoutUser() {
+            localStorage.removeItem('currentUser');
+            alert('Logout realizado.');
+            document.getElementById('dados-salvos').style.display = 'none';
+            document.getElementById('login-form-container').style.display = 'block';
+            document.getElementById('register-form-container').style.display = 'none';
+            document.getElementById('login-link').style.display = 'inline';
+            document.getElementById('logout-link').style.display = 'none';
+            document.getElementById('dashboard-link').style.display = 'none';
+            document.getElementById('login-modal').style.display = 'none';
+            showLoginForm();
+        }
+
+        // Função para carregar dados do usuário logado
+        function loadUserData() {
+            const userData = JSON.parse(localStorage.getItem('currentUser') || '{}');
+            if (userData.email) {
+                document.getElementById('saved-nome').textContent = userData.nome || 'N/A';
+                document.getElementById('saved-gmail').textContent = userData.email;
+                document.getElementById('saved-cpf').textContent = userData.cpf || 'N/A';
+                document.getElementById('saved-idade').textContent = userData.idade || 'N/A';
+                document.getElementById('saved-cep').textContent = userData.cep || 'N/A';
+                document.getElementById('login-link').style.display = 'none';
+                document.getElementById('logout-link').style.display = 'inline';
+                document.getElementById('dashboard-link').style.display = 'inline';
+            }
+        }
+
+        // Mostrar elementos da interface para usuário logado
+        function showLoggedInUI() {
+            document.getElementById('dados-salvos').style.display = 'block';
+            document.getElementById('login-form-container').style.display = 'none';
+            document.getElementById('register-form-container').style.display = 'none';
+            document.getElementById('login-modal').style.display = 'none';
+        }
+
+        // Atualiza o contador de itens no carrinho
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            const cartCountElement = document.getElementById('cart-count');
+            if (cartCountElement) {
+                cartCountElement.textContent = cart.length;
+            }
+        }
+
+        // Atualiza a navbar conforme estado de login
+        function updateNavBar() {
+            const userData = JSON.parse(localStorage.getItem('currentUser') || '{}');
+            if (userData.email) {
+                showLoggedInUI();
+                loadUserData();
+            } else {
+                document.getElementById('dados-salvos').style.display = 'none';
+                document.getElementById('login-form-container').style.display = 'block';
+                document.getElementById('register-form-container').style.display = 'none';
+                document.getElementById('login-link').style.display = 'inline';
+                document.getElementById('logout-link').style.display = 'none';
+                document.getElementById('dashboard-link').style.display = 'none';
+            }
+        }
+
+        // Função para adicionar produto ao carrinho
+        function addToCart(name, price) {
+            if (isNaN(price) || price <= 0) {
+                console.error('Preço inválido:', price);
+                alert('Erro: Preço inválido!');
+                return;
+            }
+            let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            if (cart.some(item => item.name === name)) {
+                alert(`${name} já está no carrinho!`);
+                return;
+            }
+            cart.push({ name, price });
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert(`${name} foi adicionado ao carrinho!`);
+            updateCartCount();
+        }
+
+        // Função para limpar avaliações inválidas
+        function limparAvaliacoesInvalidas() {
+            let avaliacoes = JSON.parse(localStorage.getItem('avaliacoes') || '[]');
+            avaliacoes = avaliacoes.filter(avaliacao => avaliacao.email && avaliacao.email.endsWith('@gmail.com'));
+            localStorage.setItem('avaliacoes', JSON.stringify(avaliacoes));
+            console.log('Avaliações inválidas removidas:', avaliacoes);
+        }
+
+        // Função para lidar com a seleção de estrelas
+        document.querySelectorAll('.estrela').forEach(estrela => {
+            estrela.addEventListener('click', function () {
+                const valor = this.getAttribute('data-valor');
+                document.getElementById('avaliacao-estrelas').value = valor;
+                document.querySelectorAll('.estrela').forEach(e => {
+                    e.classList.remove('selecionada');
+                    if (e.getAttribute('data-valor') <= valor) {
+                        e.classList.add('selecionada');
+                    }
+                });
+            });
+        });
+
+        // Função para enviar a avaliação
+        function enviarAvaliacao() {
+            console.log('Enviando avaliação');
+            const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+            const estrelas = document.getElementById('avaliacao-estrelas').value;
+            const comentario = document.getElementById('avaliacao-comentario').value.trim();
+            const errorElement = document.getElementById('avaliacao-error');
+            const successElement = document.getElementById('mensagem-avaliacao');
+
+            errorElement.style.display = 'none';
+            successElement.style.display = 'none';
+
+            if (!currentUser.email) {
+                errorElement.textContent = 'Você precisa estar logado para enviar uma avaliação.';
+                errorElement.style.display = 'block';
+                console.log('Erro: Usuário não logado');
+                return;
+            }
+
+            if (!currentUser.email.toLowerCase().endsWith('@gmail.com')) {
+                errorElement.textContent = 'Apenas emails Gmail podem enviar avaliações.';
+                errorElement.style.display = 'block';
+                console.log('Erro: Email não é Gmail');
+                return;
+            }
+
+            if (estrelas === "0" || !comentario) {
+                errorElement.textContent = 'Selecione uma nota e escreva um comentário.';
+                errorElement.style.display = 'block';
+                console.log('Erro: Campos incompletos');
+                return;
+            }
+
+            let avaliacoes = [];
+            try {
+                avaliacoes = JSON.parse(localStorage.getItem('avaliacoes') || '[]');
+            } catch (e) {
+                console.error('Erro ao parsear avaliações:', e.message);
+                avaliacoes = [];
+            }
+
+            // Remove avaliações duplicadas para o mesmo email
+            avaliacoes = avaliacoes.filter(avaliacao => 
+                !avaliacao.email || avaliacao.email.toLowerCase() !== currentUser.email.toLowerCase()
+            );
+
+            if (avaliacoes.some(avaliacao => avaliacao.email === currentUser.email)) {
+                errorElement.textContent = 'Você já enviou uma avaliação.';
+                errorElement.style.display = 'block';
+                console.log('Erro: Avaliação duplicada para', currentUser.email);
+                return;
+            }
+
+            const now = new Date();
+            const data = now.toLocaleDateString('pt-BR');
+            const hora = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+            const dataHora = `${data}, ${hora}`;
+
+            const novaAvaliacao = {
+                email: currentUser.email.toLowerCase(),
+                estrelas,
+                comentario,
+                data: dataHora
+            };
+            avaliacoes.push(novaAvaliacao);
+            localStorage.setItem('avaliacoes', JSON.stringify(avaliacoes));
+            console.log('Avaliação salva:', novaAvaliacao);
+
+            document.getElementById('avaliacao-estrelas').value = "0";
+            document.getElementById('avaliacao-comentario').value = "";
+            document.querySelectorAll('.estrela').forEach(e => e.classList.remove('selecionada'));
+
+            successElement.style.display = 'block';
+            setTimeout(() => {
+                successElement.style.display = 'none';
+            }, 5000);
+        }
+
+        // Evento para quando a página carregar
+        window.addEventListener('load', function () {
+            limparAvaliacoesInvalidas();
+            updateNavBar();
+            updateCartCount();
+            document.querySelectorAll('.add-to-cart').forEach(button => {
+                button.addEventListener('click', function () {
+                    const name = this.getAttribute('data-name');
+                    const price = parseFloat(this.getAttribute('data-price'));
+                    console.log(`Botão clicado: ${name}, Preço: ${price}`);
+                    addToCart(name, price);
+                });
+            });
+            const loginForm = document.getElementById('login-form');
+            if (loginForm) loginForm.addEventListener('submit', loginUser);
+            const registerForm = document.getElementById('register-form');
+            if (registerForm) registerForm.addEventListener('submit', registerUser);
+        });
+    </script>
+</body>
+</html>

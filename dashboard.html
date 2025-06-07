@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dashboard | Game Work Study</title>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #2d3748;
+      margin: 0; padding: 0;
+    }
+    header {
+      background-color: #222;
+      color: #ffffff;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h1 {
+      font-weight: 700;
+      font-size: 1.5rem;
+      margin: 0;
+    }
+    header button {
+      background: #2d3748;
+      border: none;
+      padding: 8px 16px;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    main {
+      max-width: 900px;
+      margin: 40px auto;
+      background: #9ca3af;
+      padding: 30px 40px;
+      border-radius: 8px;
+      box-shadow: 0 8px 16px rgb(0 0 0 / 0.1);
+    }
+    section {
+      margin-bottom: 30px;
+    }
+    h2 {
+      border-bottom: 2px solid #062d47;
+      padding-bottom: 8px;
+      margin-bottom: 20px;
+      color: #062d47;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    table thead {
+      background-color: #2d3748;
+      color: white;
+    }
+    table th, table td {
+      padding: 12px 15px;
+      border: 1px solid #2d3748;
+      text-align: left;
+    }
+    table tbody tr:nth-child(even) {
+      background-color: #9ca3af;
+    }
+    .stats {
+      font-size: 1.1rem;
+      margin-top: 10px;
+    }
+    .no-data {
+      color: #888;
+      font-style: italic;
+    }
+    .clear-button {
+      background-color: #2d3748;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .clear-button:hover {
+      background-color: #2d3748;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Dashboard - Game Work Study</h1>
+  <button onclick="logoutUser()">Sair</button>
+</header>
+
+<main>
+  <section id="user-info">
+    <h2>Seus Dados</h2>
+    <p><strong>Nome:</strong> <span id="nome-user">Carregando...</span></p>
+    <p><strong>Email:</strong> <span id="email-user">Carregando...</span></p>
+    <p><strong>CPF:</strong> <span id="cpf-user">Carregando...</span></p>
+    <p><strong>Idade:</strong> <span id="idade-user">Carregando...</span></p>
+    <p><strong>CEP:</strong> <span id="cep-user">Carregando...</span></p>
+  </section>
+
+  <section id="cart-info">
+    <h2>Itens no Carrinho</h2>
+    <table id="cart-table">
+      <thead>
+        <tr>
+          <th>PC</th>
+          <th>Preço (R$)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Linhas vão ser inseridas via JS -->
+      </tbody>
+    </table>
+    <p class="no-data" id="no-items" style="display:none;">Nenhum item no carrinho.</p>
+    <p class="stats" id="cart-stats"></p>
+  </section>
+
+  <section id="avaliacoes-info">
+    <h2>Sua Avaliação</h2>
+    <table id="avaliacoes-table">
+      <thead>
+        <tr>
+          <th>Estrelas</th>
+          <th>Comentário</th>
+          <th>Data</th>
+          <th>Hora</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Linhas vão ser inseridas via JS -->
+      </tbody>
+    </table>
+    <p class="no-data" id="no-avaliacoes" style="display:none;">Nenhuma avaliação registrada</p>
+    <button class="clear-button" onclick="limparAvaliacoes()">Limpar Avaliações</button>
+  </section>
+</main>
+
+<script>
+  // Função para limpar avaliações inválidas
+  function limparAvaliacoesInvalidas() {
+    let avaliacoes = [];
+    try {
+      avaliacoes = JSON.parse(localStorage.getItem('avaliacoes') || '[]');
+    } catch (e) {
+      console.error('Erro ao parsear avaliações:', e.message);
+    }
+    avaliacoes = avaliacoes.filter(avaliacao => 
+      avaliacao.email && 
+      avaliacao.email.endsWith('@gmail.com') && 
+      avaliacao.estrelas && 
+      avaliacao.comentario
+    );
+    localStorage.setItem('avaliacoes', JSON.stringify(avaliacoes));
+    console.log('Avaliações inválidas removidas:', avaliacoes);
+  }
+
+  // Função para carregar dados do usuário, carrinho e avaliações
+  function loadDashboard() {
+    console.log('Iniciando loadDashboard');
+    const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    console.log('currentUser:', currentUser);
+
+    if (!currentUser || !currentUser.email) {
+      console.log('Nenhum usuário logado, redirecionando...');
+      alert('Você não está logado! Será redirecionado para a página inicial.');
+      window.location.href = 'index.html';
+      return;
+    }
+
+    // Preenche os dados do usuário
+    document.getElementById('nome-user').textContent = currentUser.nome || 'N/A';
+    document.getElementById('email-user').textContent = currentUser.email || 'N/A';
+    document.getElementById('cpf-user').textContent = currentUser.cpf || 'N/A';
+    document.getElementById('idade-user').textContent = currentUser.idade || 'N/A';
+    document.getElementById('cep-user').textContent = currentUser.cep || 'N/A';
+
+    // Carrega carrinho
+    let cart = [];
+    try {
+      cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    } catch (e) {
+      console.error('Erro ao parsear carrinho:', e.message);
+    }
+    console.log('Carrinho:', cart);
+    const tbodyCart = document.querySelector('#cart-table tbody');
+    tbodyCart.innerHTML = '';
+
+    if (!cart || cart.length === 0) {
+      document.getElementById('no-items').style.display = 'block';
+      document.getElementById('cart-stats').textContent = '';
+    } else {
+      document.getElementById('no-items').style.display = 'none';
+      cart.forEach(item => {
+        const tr = document.createElement('tr');
+        const tdName = document.createElement('td');
+        tdName.textContent = item.name || item.nome || 'Item Desconhecido';
+        const tdPrice = document.createElement('td');
+        tdPrice.textContent = (item.price || item.preco || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+        tr.appendChild(tdName);
+        tr.appendChild(tdPrice);
+        tbodyCart.appendChild(tr);
+      });
+      const totalPrice = cart.reduce((acc, item) => acc + (item.price || item.preco || 0), 0);
+      document.getElementById('cart-stats').textContent = `Total de itens: ${cart.length} | Valor total: R$ ${totalPrice.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+    }
+
+    // Limpa avaliações inválidas
+    limparAvaliacoesInvalidas();
+
+    // Carrega avaliação do usuário atual
+    let avaliacoes = [];
+    try {
+      avaliacoes = JSON.parse(localStorage.getItem('avaliacoes') || '[]');
+    } catch (e) {
+      console.error('Erro ao parsear avaliações:', e.message);
+      avaliacoes = [];
+    }
+    console.log('Avaliações:', avaliacoes);
+    const tbodyAvaliacoes = document.querySelector('#avaliacoes-table tbody');
+    tbodyAvaliacoes.innerHTML = '';
+
+    // Filtra estritamente pelo email do usuário logado
+    const userEmail = currentUser.email.toLowerCase();
+    const avaliacaoUsuario = avaliacoes.filter(avaliacao => 
+      avaliacao.email && avaliacao.email.toLowerCase() === userEmail
+    );
+    console.log('Avaliação do usuário:', avaliacaoUsuario);
+
+    if (!avaliacaoUsuario || avaliacaoUsuario.length === 0) {
+      document.getElementById('no-avaliacoes').style.display = 'block';
+      console.log('Nenhuma avaliação encontrada para', userEmail);
+    } else {
+      document.getElementById('no-avaliacoes').style.display = 'none';
+      avaliacaoUsuario.forEach(avaliacao => {
+        console.log('Renderizando:', avaliacao);
+        const tr = document.createElement('tr');
+        const tdEstrelas = document.createElement('td');
+        tdEstrelas.textContent = avaliacao.estrelas && avaliacao.estrelas !== "0" 
+          ? "★".repeat(parseInt(avaliacao.estrelas)) 
+          : "N/A";
+        const tdComentario = document.createElement('td');
+        tdComentario.textContent = avaliacao.comentario || "N/A";
+        const tdData = document.createElement('td');
+        const tdHora = document.createElement('td');
+
+        // Extrai data e hora
+        if (avaliacao.data) {
+          const [data, hora] = avaliacao.data.split(', ');
+          tdData.textContent = data || 'N/A';
+          tdHora.textContent = hora || 'N/A';
+        } else {
+          tdData.textContent = 'N/A';
+          tdHora.textContent = 'N/A';
+        }
+
+        tr.appendChild(tdEstrelas);
+        tr.appendChild(tdComentario);
+        tr.appendChild(tdData);
+        tr.appendChild(tdHora);
+        tbodyAvaliacoes.appendChild(tr);
+      });
+    }
+  }
+
+  // Função para limpar todas as avaliações
+  function limparAvaliacoes() {
+    console.log('Limpando avaliações');
+    if (confirm('Tem certeza que deseja limpar todas as avaliações? Esta ação não pode ser desfeita.')) {
+      localStorage.removeItem('avaliacoes');
+      alert('Todas as avaliações foram removidas.');
+      loadDashboard();
+    }
+  }
+
+  // Função logout
+  function logoutUser() {
+    console.log('Fazendo logout');
+    localStorage.removeItem('currentUser');
+    alert('Você saiu da conta.');
+    window.location.href = 'index.html';
+  }
+
+  // Executa ao carregar a página
+  window.onload = loadDashboard;
+</script>
+
+</body>
+</html>

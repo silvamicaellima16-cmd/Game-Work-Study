@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Work Study | PC Zeus</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo-text">GAME WORK STUDY</div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#pcs">PC</a></li>
+                    <li><a href="index.html#configurador">Configurador</a></li>
+                    <li class="contato-hover">
+                        <a href="index.html#contato">Contato</a>
+                        <div class="contato-info">
+                            <p><strong>Telefone:</strong> (11) 1234-5678</p>
+                            <p><strong>Email:</strong> suporte@gameworkstudy.com</p>
+                        </div>
+                    </li>
+                    <li><a href="login.html" class="login"><i class="fas fa-user"></i> Login</a></li>
+                    <li><a href="carrinho.html" class="cart"><i class="fas fa-shopping-cart"></i> Carrinho</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="pc-details" style="margin-top: 80px; padding: 40px 24px;">
+        <div class="container">
+            <h2>PC Gamer Zeus</h2>
+            <div class="pc-details-content">
+                <img src="imagens/Zeus.webp" alt="PC Gamer Zeus" class="pc-details-image">
+                <div class="pc-details-info">
+                    <h3>Especificações Técnicas</h3>
+                    <ul>
+                        <li><strong>Processador:</strong> Intel Core i9 14ª Geração - Desempenho extremo para jogos e multitarefa.</li>
+                        <li><strong>Placa de Vídeo:</strong> GeForce RTX 4090 - Gráficos de ponta para jogos em 4K com ray tracing.</li>
+                        <li><strong>Memória RAM:</strong> 32GB DDR5 - Ideal para jogos pesados e edição de vídeo.</li>
+                        <li><strong>Armazenamento:</strong> SSD NVMe 1TB - Carregamento ultrarrápido de jogos e aplicativos.</li>
+                        <li><strong>Resfriamento:</strong> Sistema de resfriamento líquido - Mantém o desempenho mesmo em longas sessões.</li>
+                        <li><strong>Fonte:</strong> 850W 80 Plus Gold - Energia eficiente para componentes de alta performance.</li>
+                        <li><strong>Gabinete:</strong> RGB com painel de vidro temperado - Estilo e visibilidade para os componentes.</li>
+                    </ul>
+                    <p class="price">Preço: R$35.000</p>
+                    <button class="add-to-cart" data-name="Zeus" data-price="35000">Adicionar ao Carrinho</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', function() {
+                const name = this.getAttribute('data-name');
+                const price = parseFloat(this.getAttribute('data-price'));
+                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+                const itemExists = cart.some(item => item.name === name);
+                if (itemExists) {
+                    alert(`${name} já está no carrinho!`);
+                    return;
+                }
+
+                cart.push({ name, price });
+                localStorage.setItem('cart', JSON.stringify(cart));
+                alert(`${name} foi adicionado ao carrinho!`);
+            });
+        });
+    </script>
+</body>
+</html>

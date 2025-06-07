@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Work Study | PC Prometheus</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo-text">GAME WORK STUDY</div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#pcs">PC</a></li>
+                    <li><a href="index.html#configurador">Configurador</a></li>
+                    <li class="contato-hover">
+                        <a href="index.html#contato">Contato</a>
+                        <div class="contato-info">
+                            <p><strong>Telefone:</strong> (11) 1234-5678</p>
+                            <p><strong>Email:</strong> suporte@gameworkstudy.com</p>
+                        </div>
+                    </li>
+                    <li><a href="login.html" class="login"><i class="fas fa-user"></i> Login</a></li>
+                    <li><a href="carrinho.html" class="cart"><i class="fas fa-shopping-cart"></i> Carrinho</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="pc-details" style="margin-top: 80px; padding: 40px 24px;">
+        <div class="container">
+            <h2>PC Gamer Prometheus</h2>
+            <div class="pc-details-content">
+                <img src="imagens/Prometheus.webp" alt="PC Gamer Prometheus" class="pc-details-image">
+                <div class="pc-details-info">
+                    <h3>Especificações Técnicas</h3>
+                    <ul>
+                        <li><strong>Processador:</strong> Intel Core i5 14ª Geração - Bom desempenho para jogos leves e médios.</li>
+                        <li><strong>Placa de Vídeo:</strong> GeForce RTX 4060 - Gráficos de qualidade para 1080p e 1440p.</li>
+                        <li><strong>Memória RAM:</strong> 16GB DDR4 - Suficiente para a maioria dos jogos atuais.</li>
+                        <li><strong>Armazenamento:</strong> SSD 512GB - Carregamento rápido de jogos.</li>
+                        <li><strong>Resfriamento:</strong> Cooler de ar padrão - Resfriamento eficiente para uso diário.</li>
+                        <li><strong>Fonte:</strong> 650W 80 Plus Bronze - Energia confiável para o sistema.</li>
+                    </ul>
+                    <p class="price">Preço: R$10.000</p>
+                    <button class="add-to-cart" data-name="Prometheus" data-price="10000">Adicionar ao Carrinho</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', function() {
+                const name = this.getAttribute('data-name');
+                const price = parseFloat(this.getAttribute('data-price'));
+                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                cart.push({ name, price });
+                localStorage.setItem('cart', JSON.stringify(cart));
+                alert(`${name} foi adicionado ao carrinho!`);
+            });
+        });
+    </script>
+</body>
+</html>
