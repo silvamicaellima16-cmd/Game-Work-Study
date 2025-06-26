@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Work Study | Configurador</title>
+    <title data-text="page_title">Game Work Study | Configurator</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -53,587 +53,1119 @@
         .component-card .add-to-cart:hover {
             background-color: #2980b9;
         }
+        .tooltip {
+            position: absolute;
+            background-color: #333;
+            color: #fff;
+            padding: 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            width: 200px;
+            text-align: left;
+            z-index: 100;
+            display: none;
+        }
+        .image-container:hover .tooltip {
+            display: block;
+        }
+        .language-selector {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 8px;
+            margin-left: 20px;
+            flex-wrap: nowrap;
+            z-index: 1000;
+        }
+        .lang-option {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #2d3748;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 700;
+            transition: background-color 0.3s, border-color 0.3s, transform 0.1s;
+            border: 2px solid #4b5563;
+            z-index: 1000;
+            pointer-events: auto;
+        }
+        .lang-option.active {
+            background-color: #062d47;
+            border-color: #0a4b78;
+        }
+        .lang-option:hover {
+            background-color: #4b5563;
+            border-color: #6b7280;
+        }
+        .lang-option:active {
+            transform: scale(0.95);
+            background-color: #0a4b78;
+        }
     </style>
 </head>
 <body>
     <header>
         <div class="container">
-            <div class="logo-text">GAME WORK STUDY</div>
+            <div class="logo-text" data-text="site_name">Game Work Study</div>
             <nav>
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="index.html#pcs">PC</a></li>
-                    <li><a href="index.html#configurador">Configurador</a></li>
-                    <li id="dashboard-link" style="display: none;"><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="index.html" data-text="home">Home</a></li>
+                    <li><a href="index.html#pcs" data-text="pc">PC</a></li>
+                    <li><a href="index.html#configurador" data-text="configurator">Configurator</a></li>
+                    <li id="dashboard-link" style="display: none;"><a href="dashboard.html" data-text="dashboard">Dashboard</a></li>
                     <li class="contato-hover">
-                        <a href="index.html#contato">Contato</a>
+                        <a href="index.html#contato" data-text="contact">Contact</a>
                         <div class="contato-info">
-                            <p><strong>Telefone:</strong> (11) 1234-5678</p>
-                            <p><strong>Email:</strong> suporte@gameworkstudy.com</p>
+                            <p><strong data-text="phone_label">Phone:</strong> <span data-text="phone_value">(11) 1234-5678</span></p>
+                            <p><strong data-text="email_label">Email:</strong> <span data-text="email_value">support@gameworkstudy.com</span></p>
                         </div>
                     </li>
-                    <li id="login-link"><a href="#" class="login" onclick="openLoginModal()"><i class="fas fa-user"></i> Login</a></li>
-                    <li id="logout-link" style="display: none;"><a href="#" class="login" onclick="logoutUser()"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
-                    <li><a href="carrinho.html" class="cart"><i class="fas fa-shopping-cart"></i> Carrinho (<span id="cart-count">0</span>)</a></li>
+                    <li id="login-link"><a href="#" class="login" onclick="openLoginModal()"><i class="fas fa-user"></i> <span data-text="login">Login</span></a></li>
+                    <li id="logout-link" style="display: none;"><a href="#" class="login" onclick="logoutUser()"><i class="fas fa-sign-out-alt"></i> <span data-text="logout">Log out</span></a></li>
+                    <li><a href="carrinho.html" class="cart"><i class="fas fa-shopping-cart"></i> <span data-text="cart">Cart</span> (<span id="cart-count">0</span>)</a></li>
                 </ul>
+                <div class="language-selector">
+                    <span class="lang-option" data-lang="pt-BR" data-text="lang_pt" title="Português">PT</span>
+                    <span class="lang-option active" data-lang="en" data-text="lang_en" title="English">EN</span>
+                </div>
             </nav>
         </div>
     </header>
 
     <section class="configurator" style="margin-top: 80px; padding: 40px 24px;">
         <div class="container">
-            <h2>Monte o PC dos Seus Sonhos</h2>
-            <p>Escolha os componentes abaixo para personalizar seu PC. Adicione cada item ao carrinho e finalize sua compra!</p>
+            <h2 data-text="configurator_title">Build Your Dream PC</h2>
+            <p data-text="configurator_description">Choose the components below to customize your PC. Add each item to the cart and complete your purchase!</p>
 
-            <!-- Seção de Mouses -->
-<div class="component-section">
-    <h3>Escolha seu Mouse</h3>
-    <div class="component-grid">
-        <div class="component-card">
-            <div class="image-container">
-                <img src="imagens/mouse1.png" alt="Logitech MX Master 3S">
-                <span class="tooltip">Logitech MX Master 3S.<br>Conexão: Sem fio (Bluetooth ou receptor USB Logi Bolt).<br>Sensor: Darkfield.<br>DPI: Até 8.000.<br>Botoes: 7 programáveis.</span>
+            <!-- Mouse Section -->
+            <div class="component-section">
+                <h3 data-text="choose_mouse">Choose Your Mouse</h3>
+                <div class="component-grid">
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/mouse1.png" alt="Logitech MX Master 3S">
+                            <span class="tooltip" data-text="mouse1_tooltip">Logitech MX Master 3S.<br>Connection: Wireless (Bluetooth or USB Logi Bolt).<br>Sensor: Darkfield.<br>DPI: Up to 8,000.<br>Buttons: 7 programmable.</span>
+                        </div>
+                        <p class="price" data-price="700.00">$700.00</p>
+                        <button class="add-to-cart" data-name="Logitech MX Master 3S" data-price="700.00" data-text="add_to_cart">Add to Cart</button>
+                    </div>
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/mouse2.png" alt="Razer DeathAdder V3 HyperSpeed">
+                            <span class="tooltip" data-text="mouse2_tooltip">Razer DeathAdder V3 HyperSpeed.<br>Connection: Wireless (HyperSpeed Wireless).<br>Sensor: Focus Pro 30K.<br>DPI: Up to 30,000.<br>Buttons: 6 programmable.</span>
+                        </div>
+                        <p class="price" data-price="900.00">$900.00</p>
+                        <button class="add-to-cart" data-name="Razer DeathAdder V3 HyperSpeed" data-price="900.00" data-text="add_to_cart">Add to Cart</button>
+                    </div>
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/mouse3.png" alt="SteelSeries Aerox 3 Wireless">
+                            <span class="tooltip" data-text="mouse3_tooltip">SteelSeries Aerox 3 Wireless.<br>Connection: Wireless (2.4GHz or Bluetooth).<br>Sensor: TrueMove Air.<br>DPI: Up to 18,000.<br>Weight: 68g.</span>
+                        </div>
+                        <p class="price" data-price="550.00">$550.00</p>
+                        <button class="add-to-cart" data-name="SteelSeries Aerox 3 Wireless" data-price="550.00" data-text="add_to_cart">Add to Cart</button>
+                    </div>
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/mouse4.png" alt="HP Z3700 Wireless Mouse">
+                            <span class="tooltip" data-text="mouse4_tooltip">HP Z3700 Wireless Mouse.<br>Connection: Wireless (USB).<br>Sensor: Optical.<br>DPI: Up to 1,600.<br>Buttons: 3.</span>
+                        </div>
+                        <p class="price" data-price="210.00">$210.00</p>
+                        <button class="add-to-cart" data-name="HP Z3700 Wireless Mouse" data-price="210.00" data-text="add_to_cart">Add to Cart</button>
+                    </div>
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/mouse5.png" alt="Corsair Scimitar Elite RGB">
+                            <span class="tooltip" data-text="mouse5_tooltip">Corsair Scimitar Elite RGB.<br>Connection: Wired (USB).<br>Sensor: PixArt PMW3391.<br>DPI: Up to 18,000.<br>Buttons: 12 programmable.</span>
+                        </div>
+                        <p class="price" data-price="550.00">$550.00</p>
+                        <button class="add-to-cart" data-name="Corsair Scimitar Elite RGB" data-price="550.00" data-text="add_to_cart">Add to Cart</button>
+                    </div>
+                </div>
             </div>
-            <p class="price">R$700,00</p>
-            <button class="add-to-cart" data-name="Logitech MX Master 3S" data-price="700.00">Adicionar ao Carrinho</button>
-        </div>
-        <div class="component-card">
-            <div class="image-container">
-                <img src="imagens/mouse2.png" alt="Razer DeathAdder V3 HyperSpeed">
-                <span class="tooltip">Razer DeathAdder V3 HyperSpeed.<br>Conexão: Sem fio (HyperSpeed Wireless).<br>Sensor: Focus Pro 30K.<br>DPI: Até 30.000.<br>Botoes: 6 programáveis.</span>
-            </div>
-            <p class="price">R$900,00</p>
-            <button class="add-to-cart" data-name="Razer DeathAdder V3 HyperSpeed" data-price="900.00">Adicionar ao Carrinho</button>
-        </div>
-        <div class="component-card">
-            <div class="image-container">
-                <img src="imagens/mouse3.png" alt="SteelSeries Aerox 3 Wireless">
-                <span class="tooltip">SteelSeries Aerox 3 Wireless.<br>Conexão: Sem fio (2.4GHz ou Bluetooth).<br>Sensor: TrueMove Air.<br>DPI: Até 18.000.<br>Peso: 68g.</span>
-            </div>
-            <p class="price">R$550,00</p>
-            <button class="add-to-cart" data-name="SteelSeries Aerox 3 Wireless" data-price="550.00">Adicionar ao Carrinho</button>
-        </div>
-        <div class="component-card">
-            <div class="image-container">
-                <img src="imagens/mouse4.png" alt="Mouse sem Fio HP Z3700">
-                <span class="tooltip">Mouse sem Fio HP Z3700.<br>Conexão: Sem fio (USB).<br>Sensor: Óptico.<br>DPI: Até 1.600.<br>Botoes: 3.</span>
-            </div>
-            <p class="price">R$210,00</p>
-            <button class="add-to-cart" data-name="Mouse sem Fio HP Z3700" data-price="210.00">Adicionar ao Carrinho</button>
-        </div>
-        <div class="component-card">
-            <div class="image-container">
-                <img src="imagens/mouse5.png" alt="Corsair Scimitar Elite RGB">
-                <span class="tooltip">Corsair Scimitar Elite RGB.<br>Conexão: Com fio (USB).<br>Sensor: PixArt PMW3391.<br>DPI: Até 18.000.<br>Botoes: 12 programáveis.</span>
-            </div>
-            <p class="price">R$550,00</p>
-            <button class="add-to-cart" data-name="Corsair Scimitar Elite RGB" data-price="550.00">Adicionar ao Carrinho</button>
-        </div>
-    </div>
-</div>
-                  <!-- Seção de Headsets -->
-<div class="component-section">
-    <h3>Escolha seu Headset</h3>
-    <div class="component-grid">
-        <div class="component-card">
-            <div class="image-container">
-                <img src="imagens/fone1.png" alt="HyperX Cloud Alpha">
-                <span class="tooltip">HyperX Cloud Alpha.<br>Conexão: Com fio (3.5mm).<br>Drivers: 50mm.<br>Impedância: 60 Ohms.<br>Microfone: Desmontável.</span>
-            </div>
-            <p class="price">R$1.200,00</p>
-            <button class="add-to-cart" data-name="HyperX Cloud Alpha" data-price="1200.00">Adicionar ao Carrinho</button>
-        </div>
-        <div class="component-card">
-            <div class="image-container">
-                <img src="imagens/fone2.png" alt="Razer BlackShark V2">
-                <span class="tooltip">Razer BlackShark V2.<br>Conexão: Com fio (USB).<br>Drivers: 50mm.<br>Impedância: 32 Ohms.<br>Microfone: Hi-Fi.</span>
-            </div>
-            <p class="price">R$900,00</p>
-            <button class="add-to-cart" data-name="Razer BlackShark V2" data-price="900.00">Adicionar ao Carrinho</button>
-        </div>
-        <div class="component-card">
-            <div class="image-container">
-                <img src="imagens/fone3.png" alt="SteelSeries Arctis Nova 5">
-                <span class="tooltip">SteelSeries Arctis Nova 5.<br>Conexão: Sem fio (2.4GHz).<br>Drivers: 40mm.<br>Impedância: 36 Ohms.<br>Microfone: Retrátil.</span>
-            </div>
-            <p class="price">R$1.600,00</p>
-            <button class="add-to-cart" data-name="SteelSeries Arctis Nova 5" data-price="1600.00">Adicionar ao Carrinho</button>
-        </div>
-        <div class="component-card">
-            <div class="image-container">
-                <img src="imagens/fone4.png" alt="Logitech G Pro X">
-                <span class="tooltip">Logitech G Pro X.<br>Conexão: Com fio (3.5mm).<br>Drivers: 50mm.<br>Impedância: 35 Ohms.<br>Microfone: Desmontável.</span>
-            </div>
-            <p class="price">R$1.100,00</p>
-            <button class="add-to-cart" data-name="Logitech G Pro X" data-price="1100.00">Adicionar ao Carrinho</button>
-        </div>
-        <div class="component-card">
-            <div class="image-container">
-                <img src="imagens/fone5.png" alt="JBL Quantum 100">
-                <span class="tooltip">JBL Quantum 100.<br>Conexão: Com fio (3.5mm).<br>Drivers: 40mm.<br>Impedância: 32 Ohms.<br>Microfone: Integrado.</span>
-            </div>
-            <p class="price">R$300,00</p>
-            <button class="add-to-cart" data-name="JBL Quantum 100" data-price="300.00">Adicionar ao Carrinho</button>
-        </div>
-    </div>
-</div>
 
-<!-- Seção de Teclados -->
-<div class="component-section">
-    <h3>Escolha seu Teclado</h3>
-    <div class="component-grid">
-        <div class="component-card">
-            <div class="image-container">
-                <img src="imagens/teclado1.png" alt="Logitech MX Keys S">
-                <span class="tooltip">Logitech MX Keys S.<br>Tipo: Membrana.<br>Conexão: Sem fio (Bluetooth/USB Logi Bolt).<br>Iluminação: Não.<br>Teclas: 108.</span>
+            <!-- Headset Section -->
+            <div class="component-section">
+                <h3 data-text="choose_headset">Choose Your Headset</h3>
+                <div class="component-grid">
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/fone1.png" alt="HyperX Cloud Alpha">
+                            <span class="tooltip" data-text="headset1_tooltip">HyperX Cloud Alpha.<br>Connection: Wired (3.5mm).<br>Drivers: 50mm.<br>Impedance: 60 Ohms.<br>Microphone: Detachable.</span>
+                        </div>
+                        <p class="price" data-price="1200.00">$1,200.00</p>
+                        <button class="add-to-cart" data-name="HyperX Cloud Alpha" data-price="1200.00" data-text="add_to_cart">Add to Cart</button>
+                    </div>
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/fone2.png" alt="Razer BlackShark V2">
+                            <span class="tooltip" data-text="headset2_tooltip">Razer BlackShark V2.<br>Connection: Wired (USB).<br>Drivers: 50mm.<br>Impedance: 32 Ohms.<br>Microphone: Hi-Fi.</span>
+                        </div>
+                        <p class="price" data-price="900.00">$900.00</p>
+                        <button class="add-to-cart" data-name="Razer BlackShark V2" data-price="900.00" data-text="add_to_cart">Add to Cart</button>
+                    </div>
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/fone3.png" alt="SteelSeries Arctis Nova 5">
+                            <span class="tooltip" data-text="headset3_tooltip">SteelSeries Arctis Nova 5.<br>Connection: Wireless (2.4GHz).<br>Drivers: 40mm.<br>Impedance: 36 Ohms.<br>Microphone: Retractable.</span>
+                        </div>
+                        <p class="price" data-price="1600.00">$1,600.00</p>
+                        <button class="add-to-cart" data-name="SteelSeries Arctis Nova 5" data-price="1600.00" data-text="add_to_cart">Add to Cart</button>
+                    </div>
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/fone4.png" alt="Logitech G Pro X">
+                            <span class="tooltip" data-text="headset4_tooltip">Logitech G Pro X.<br>Connection: Wired (3.5mm).<br>Drivers: 50mm.<br>Impedance: 35 Ohms.<br>Microphone: Detachable.</span>
+                        </div>
+                        <p class="price" data-price="1100.00">$1,100.00</p>
+                        <button class="add-to-cart" data-name="Logitech G Pro X" data-price="1100.00" data-text="add_to_cart">Add to Cart</button>
+                    </div>
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/fone5.png" alt="JBL Quantum 100">
+                            <span class="tooltip" data-text="headset5_tooltip">JBL Quantum 100.<br>Connection: Wired (3.5mm).<br>Drivers: 40mm.<br>Impedance: 32 Ohms.<br>Microphone: Integrated.</span>
+                        </div>
+                        <p class="price" data-price="300.00">$300.00</p>
+                        <button class="add-to-cart" data-name="JBL Quantum 100" data-price="300.00" data-text="add_to_cart">Add to Cart</button>
+                    </div>
+                </div>
             </div>
-            <p class="price">R$700,00</p>
-            <button class="add-to-cart" data-name="Logitech MX Keys S" data-price="700.00">Adicionar ao Carrinho</button>
-        </div>
-        <div class="component-card">
-            <div class="image-container">
-                <img src="imagens/teclado2.png" alt="Razer BlackWidow V4 Pro">
-                <span class="tooltip">Razer BlackWidow V4 Pro.<br>Tipo: Mecânico.<br>Conexão: Com fio (USB-C).<br>Iluminação: RGB.<br>Teclas: 104.</span>
-            </div>
-            <p class="price">R$2.300,00</p>
-            <button class="add-to-cart" data-name="Razer BlackWidow V4 Pro" data-price="2300.00">Adicionar ao Carrinho</button>
-        </div>
-        <div class="component-card">
-            <div class="image-container">
-                <img src="imagens/teclado3.png" alt="Redragon Dark Avenger K568">
-                <span class="tooltip">Redragon Dark Avenger K568.<br>Tipo: Mecânico.<br>Conexão: Com fio (USB).<br>Iluminação: RGB.<br>Teclas: 104.</span>
-            </div>
-            <p class="price">R$400,00</p>
-            <button class="add-to-cart" data-name="Redragon Dark Avenger K568" data-price="400.00">Adicionar ao Carrinho</button>
-        </div>
-        <div class="component-card">
-            <div class="image-container">
-                <img src="imagens/teclado4.png" alt="HyperX Alloy Origins Core">
-                <span class="tooltip">HyperX Alloy Origins Core.<br>Tipo: Mecânico.<br>Conexão: Com fio (USB-C removível).<br>Iluminação: RGB.<br>Teclas: 87.</span>
-            </div>
-            <p class="price">R$600,00</p>
-            <button class="add-to-cart" data-name="HyperX Alloy Origins Core" data-price="600.00">Adicionar ao Carrinho</button>
-        </div>
-        <div class="component-card">
-            <div class="image-container">
-                <img src="imagens/teclado5.png" alt="Corsair K60 RGB Pro">
-                <span class="tooltip">Corsair K60 RGB Pro.<br>Tipo: Mecânico.<br>Conexão: Com fio (USB).<br>Iluminação: RGB.<br>Teclas: 104.</span>
-            </div>
-            <p class="price">R$500,00</p>
-            <button class="add-to-cart" data-name="Corsair K60 RGB Pro" data-price="500.00">Adicionar ao Carrinho</button>
-        </div>
-    </div>
-</div>
 
-<!-- Seção de Monitores -->
-<div class="component-section">
-    <h3>Escolha seu Monitor</h3>
-    <div class="component-grid">
-        <div class="component-card">
-            <div class="image-container">
-                <img src="imagens/monitor1.png" alt="Samsung Smart Monitor M8">
-                <span class="tooltip">Samsung Smart Monitor M8.<br>Tamanho: 32 polegadas.<br>Resolução: 4K.<br>Taxa: 60Hz.<br>Conexões: HDMI, USB-C.</span>
+            <!-- Keyboard Section -->
+            <div class="component-section">
+                <h3 data-text="choose_keyboard">Choose Your Keyboard</h3>
+                <div class="component-grid">
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/teclado1.png" alt="Logitech MX Keys S">
+                            <span class="tooltip" data-text="keyboard1_tooltip">Logitech MX Keys S.<br>Type: Membrane.<br>Connection: Wireless (Bluetooth/USB Logi Bolt).<br>Illumination: None.<br>Keys: 108.</span>
+                        </div>
+                        <p class="price" data-price="700.00">$700.00</p>
+                        <button class="add-to-cart" data-name="Logitech MX Keys S" data-price="700.00" data-text="add_to_cart">Add to Cart</button>
+                    </div>
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/teclado2.png" alt="Razer BlackWidow V4 Pro">
+                            <span class="tooltip" data-text="keyboard2_tooltip">Razer BlackWidow V4 Pro.<br>Type: Mechanical.<br>Connection: Wired (USB-C).<br>Illumination: RGB.<br>Keys: 104.</span>
+                        </div>
+                        <p class="price" data-price="2300.00">$2,300.00</p>
+                        <button class="add-to-cart" data-name="Razer BlackWidow V4 Pro" data-price="2300.00" data-text="add_to_cart">Add to Cart</button>
+                    </div>
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/teclado3.png" alt="Redragon Dark Avenger K568">
+                            <span class="tooltip" data-text="keyboard3_tooltip">Redragon Dark Avenger K568.<br>Type: Mechanical.<br>Connection: Wired (USB).<br>Illumination: RGB.<br>Keys: 104.</span>
+                        </div>
+                        <p class="price" data-price="400.00">$400.00</p>
+                        <button class="add-to-cart" data-name="Redragon Dark Avenger K568" data-price="400.00" data-text="add_to_cart">Add to Cart</button>
+                    </div>
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/teclado4.png" alt="HyperX Alloy Origins Core">
+                            <span class="tooltip" data-text="keyboard4_tooltip">HyperX Alloy Origins Core.<br>Type: Mechanical.<br>Connection: Wired (USB-C detachable).<br>Illumination: RGB.<br>Keys: 87.</span>
+                        </div>
+                        <p class="price" data-price="600.00">$600.00</p>
+                        <button class="add-to-cart" data-name="HyperX Alloy Origins Core" data-price="600.00" data-text="add_to_cart">Add to Cart</button>
+                    </div>
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/teclado5.png" alt="Corsair K60 RGB Pro">
+                            <span class="tooltip" data-text="keyboard5_tooltip">Corsair K60 RGB Pro.<br>Type: Mechanical.<br>Connection: Wired (USB).<br>Illumination: RGB.<br>Keys: 104.</span>
+                        </div>
+                        <p class="price" data-price="500.00">$500.00</p>
+                        <button class="add-to-cart" data-name="Corsair K60 RGB Pro" data-price="500.00" data-text="add_to_cart">Add to Cart</button>
+                    </div>
+                </div>
             </div>
-            <p class="price">R$4.000,00</p>
-            <button class="add-to-cart" data-name="Samsung Smart Monitor M8" data-price="4000.00">Adicionar ao Carrinho</button>
-        </div>
-        <div class="component-card">
-            <div class="image-container">
-                <img src="imagens/monitor2.png" alt="LG UltraGear OLED 27GR95QE-B">
-                <span class="tooltip">LG UltraGear OLED 27GR95QE-B.<br>Tamanho: 27 polegadas.<br>Resolução: QHD.<br>Taxa: 240Hz.<br>Conexões: HDMI, DisplayPort.</span>
-            </div>
-            <p class="price">R$5.500,00</p>
-            <button class="add-to-cart" data-name="LG UltraGear OLED 27GR95QE-B" data-price="5500.00">Adicionar ao Carrinho</button>
-        </div>
-        <div class="component-card">
-            <div class="image-container">
-                <img src="imagens/monitor3.png" alt="Dell Alienware AW2523HF">
-                <span class="tooltip">Dell Alienware AW2523HF.<br>Tamanho: 25 polegadas.<br>Resolução: Full HD.<br>Taxa: 360Hz.<br>Conexões: HDMI, DisplayPort.</span>
-            </div>
-            <p class="price">R$3.800,00</p>
-            <button class="add-to-cart" data-name="Dell Alienware AW2523HF" data-price="3800.00">Adicionar ao Carrinho</button>
-        </div>
-        <div class="component-card">
-            <div class="image-container">
-                <img src="imagens/monitor4.png" alt="BenQ PD2705U">
-                <span class="tooltip">BenQ PD2705U.<br>Tamanho: 27 polegadas.<br>Resolução: 4K.<br>Taxa: 60Hz.<br>Conexões: HDMI, USB-C.</span>
-            </div>
-            <p class="price">R$3.200,00</p>
-            <button class="add-to-cart" data-name="BenQ PD2705U" data-price="3200.00">Adicionar ao Carrinho</button>
-        </div>
-        <div class="component-card">
-            <div class="image-container">
-                <img src="imagens/monitor5.png" alt="AOC 22B35HM2">
-                <span class="tooltip">AOC 22B35HM2.<br>Tamanho: 22 polegadas.<br>Resolução: Full HD.<br>Taxa: 75Hz.<br>Conexões: VGA, HDMI.</span>
-            </div>
-            <p class="price">R$700,00</p>
-            <button class="add-to-cart" data-name="AOC 22B35HM2" data-price="700.00">Adicionar ao Carrinho</button>
-        </div>
-    </div>
-</div>
 
-<!-- Seção de CPU -->
-<div class="component-section">
-    <h3>Escolha seu CPU Torre</h3>
-    <div class="component-grid">
-        <div class="component-card">
-            <div class="image-container">
-                <img src="imagens/cpu1.png" alt="Mancer PC Gamer Ryzen 5 5600G">
-                <span class="tooltip">Mancer PC Gamer Ryzen 5 5600G.<br>Processador: AMD Ryzen 5 5600G.<br>RAM: 16GB DDR4.<br>Armazenamento: SSD 480GB.<br>Placa de Vídeo: Integrada Radeon Vega 7.</span>
+            <!-- Monitor Section -->
+            <div class="component-section">
+                <h3 data-text="choose_monitor">Choose Your Monitor</h3>
+                <div class="component-grid">
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/monitor1.png" alt="Samsung Smart Monitor M8">
+                            <span class="tooltip" data-text="monitor1_tooltip">Samsung Smart Monitor M8.<br>Size: 32 inches.<br>Resolution: 4K.<br>Refresh Rate: 60Hz.<br>Connections: HDMI, USB-C.</span>
+                        </div>
+                        <p class="price" data-price="4000.00">$4,000.00</p>
+                        <button class="add-to-cart" data-name="Samsung Smart Monitor M8" data-price="4000.00" data-text="add_to_cart">Add to Cart</button>
+                    </div>
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/monitor2.png" alt="LG UltraGear OLED 27GR95QE-B">
+                            <span class="tooltip" data-text="monitor2_tooltip">LG UltraGear OLED 27GR95QE-B.<br>Size: 27 inches.<br>Resolution: QHD.<br>Refresh Rate: 240Hz.<br>Connections: HDMI, DisplayPort.</span>
+                        </div>
+                        <p class="price" data-price="5500.00">$5,500.00</p>
+                        <button class="add-to-cart" data-name="LG UltraGear OLED 27GR95QE-B" data-price="5500.00" data-text="add_to_cart">Add to Cart</button>
+                    </div>
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/monitor3.png" alt="Dell Alienware AW2523HF">
+                            <span class="tooltip" data-text="monitor3_tooltip">Dell Alienware AW2523HF.<br>Size: 25 inches.<br>Resolution: Full HD.<br>Refresh Rate: 360Hz.<br>Connections: HDMI, DisplayPort.</span>
+                        </div>
+                        <p class="price" data-price="3800.00">$3,800.00</p>
+                        <button class="add-to-cart" data-name="Dell Alienware AW2523HF" data-price="3800.00" data-text="add_to_cart">Add to Cart</button>
+                    </div>
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/monitor4.png" alt="BenQ PD2705U">
+                            <span class="tooltip" data-text="monitor4_tooltip">BenQ PD2705U.<br>Size: 27 inches.<br>Resolution: 4K.<br>Refresh Rate: 60Hz.<br>Connections: HDMI, USB-C.</span>
+                        </div>
+                        <p class="price" data-price="3200.00">$3,200.00</p>
+                        <button class="add-to-cart" data-name="BenQ PD2705U" data-price="3200.00" data-text="add_to_cart">Add to Cart</button>
+                    </div>
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/monitor5.png" alt="AOC 22B35HM2">
+                            <span class="tooltip" data-text="monitor5_tooltip">AOC 22B35HM2.<br>Size: 22 inches.<br>Resolution: Full HD.<br>Refresh Rate: 75Hz.<br>Connections: VGA, HDMI.</span>
+                        </div>
+                        <p class="price" data-price="700.00">$700.00</p>
+                        <button class="add-to-cart" data-name="AOC 22B35HM2" data-price="700.00" data-text="add_to_cart">Add to Cart</button>
+                    </div>
+                </div>
             </div>
-            <p class="price">R$4.000,00</p>
-            <button class="add-to-cart" data-name="Mancer PC Gamer Ryzen 5 5600G" data-price="4000.00">Adicionar ao Carrinho</button>
-        </div>
-        <div class="component-card">
-            <div class="image-container">
-                <img src="imagens/cpu2.webp" alt="Acer Predator Orion 500">
-                <span class="tooltip">Acer Predator Orion 500.<br>Processador: Intel Core i7-11700.<br>RAM: 16GB DDR4.<br>Armazenamento: SSD 1TB.<br>Placa de Vídeo: NVIDIA RTX 3070.</span>
-            </div>
-            <p class="price">R$9.500,00</p>
-            <button class="add-to-cart" data-name="Acer Predator Orion 500" data-price="9500.00">Adicionar ao Carrinho</button>
-        </div>
-        <div class="component-card">
-            <div class="image-container">
-                <img src="imagens/cpu3.avif" alt="Dell Inspiron Small 3710">
-                <span class="tooltip">Dell Inspiron Small 3710.<br>Processador: Intel Core i5-12400.<br>RAM: 8GB DDR4.<br>Armazenamento: SSD 256GB.<br>Placa de Vídeo: Integrada Intel UHD.</span>
-            </div>
-            <p class="price">R$3.800,00</p>
-            <button class="add-to-cart" data-name="Dell Inspiron Small 3710" data-price="3800.00">Adicionar ao Carrinho</button>
-        </div>
-        <div class="component-card">
-            <div class="image-container">
-                <img src="imagens/cpu4.avif" alt="HP OMEN 40L Gaming">
-                <span class="tooltip">HP OMEN 40L Gaming.<br>Processador: AMD Ryzen 7 7700.<br>RAM: 16GB DDR.<br>Armazenamento: 1TB SSD NVMe.<br>Placa de Vídeo: NVIDIA RTX 4070.</span>
-            </div>
-            <p class="price">R$12.200,00</p>
-            <button class="add-to-cart" data-name="HP OMEN 40L Gaming" data-price="12200.00">Adicionar ao Carrinho</button>
-        </div>
-        <div class="component-card">
-            <div class="image-container">
-                <img src="imagens/cpu5.png" alt="AOC 22B35HM2">
-                <span class="tooltip">AOC 22B35HM2.<br>Processador: AMD Ryzen 5 9600X.<br>RAM: 32GB DDR5.<br>Armazenamento: SSD M.2 1TB + SSD 1TB.<br>Placa de Vídeo: NVIDIA RTX 5080.</span>
-            </div>
-            <p class="price">R$19,000,00</p>
-            <button class="add-to-cart" data-name="AOC 22B35HM2" data-price="19000.00">Adicionar ao Carrinho</button>
-        </div>
-    </div>
-</div>
 
-<!-- Seção de Webcams -->
-<div class="component-section">
-    <h3>Escolha sua Webcam</h3>
-    <div class="component-grid">
-        <div class="component-card">
-            <div class="image-container">
-                <img src="imagens/cam1.png" alt="Logitech Brio 505">
-                <span class="tooltip">Logitech Brio 505.<br>Resolução: 1080p.<br>FPS: 30.<br>Conexão: USB.<br>Campo de Visão: 78°.</span>
+            <!-- CPU Section -->
+            <div class="component-section">
+                <h3 data-text="choose_cpu">Choose Your CPU Tower</h3>
+                <div class="component-grid">
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/cpu1.png" alt="Mancer PC Gamer Ryzen 5 5600G">
+                            <span class="tooltip" data-text="cpu1_tooltip">Mancer PC Gamer Ryzen 5 5600G.<br>Processor: AMD Ryzen 5 5600G.<br>RAM: 16GB DDR4.<br>Storage: 480GB SSD.<br>Graphics: Integrated Radeon Vega 7.</span>
+                        </div>
+                        <p class="price" data-price="4000.00">$4,000.00</p>
+                        <button class="add-to-cart" data-name="Mancer PC Gamer Ryzen 5 5600G" data-price="4000.00" data-text="add_to_cart">Add to Cart</button>
+                    </div>
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/cpu2.webp" alt="Acer Predator Orion 500">
+                            <span class="tooltip" data-text="cpu2_tooltip">Acer Predator Orion 500.<br>Processor: Intel Core i7-11700.<br>RAM: 16GB DDR4.<br>Storage: 1TB SSD.<br>Graphics: NVIDIA RTX 3070.</span>
+                        </div>
+                        <p class="price" data-price="9500.00">$9,500.00</p>
+                        <button class="add-to-cart" data-name="Acer Predator Orion 500" data-price="9500.00" data-text="add_to_cart">Add to Cart</button>
+                    </div>
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/cpu3.avif" alt="Dell Inspiron Small 3710">
+                            <span class="tooltip" data-text="cpu3_tooltip">Dell Inspiron Small 3710.<br>Processor: Intel Core i5-12400.<br>RAM: 8GB DDR4.<br>Storage: 256GB SSD.<br>Graphics: Integrated Intel UHD.</span>
+                        </div>
+                        <p class="price" data-price="3800.00">$3,800.00</p>
+                        <button class="add-to-cart" data-name="Dell Inspiron Small 3710" data-price="3800.00" data-text="add_to_cart">Add to Cart</button>
+                    </div>
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/cpu4.avif" alt="HP OMEN 40L Gaming">
+                            <span class="tooltip" data-text="cpu4_tooltip">HP OMEN 40L Gaming.<br>Processor: AMD Ryzen 7 7700.<br>RAM: 16GB DDR.<br>Storage: 1TB SSD NVMe.<br>Graphics: NVIDIA RTX 4070.</span>
+                        </div>
+                        <p class="price" data-price="12200.00">$12,200.00</p>
+                        <button class="add-to-cart" data-name="HP OMEN 40L Gaming" data-price="12200.00" data-text="add_to_cart">Add to Cart</button>
+                    </div>
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/cpu5.png" alt="AOC Elite Gamer">
+                            <span class="tooltip" data-text="cpu5_tooltip">AOC Elite Gamer.<br>Processor: AMD Ryzen 5 9600X.<br>RAM: 32GB DDR5.<br>Storage: 1TB M.2 SSD + 1TB SSD.<br>Graphics: NVIDIA RTX 5080.</span>
+                        </div>
+                        <p class="price" data-price="19000.00">$19,000.00</p>
+                        <button class="add-to-cart" data-name="AOC Elite Gamer" data-price="19000.00" data-text="add_to_cart">Add to Cart</button>
+                    </div>
+                </div>
             </div>
-            <p class="price">R$740,00</p>
-            <button class="add-to-cart" data-name="Logitech Brio 505" data-price="740.00">Adicionar ao Carrinho</button>
-        </div>
-        <div class="component-card">
-            <div class="image-container">
-                <img src="imagens/cam2.png" alt="Razer Kiyo Pro">
-                <span class="tooltip">Razer Kiyo Pro.<br>Resolução: 1080p.<br>FPS: 60.<br>Conexão: USB.<br>Campo de Visão: 80°-103°.</span>
+
+            <!-- Webcam Section -->
+            <div class="component-section">
+                <h3 data-text="choose_webcam">Choose Your Webcam</h3>
+                <div class="component-grid">
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/cam1.png" alt="Logitech Brio 505">
+                            <span class="tooltip" data-text="webcam1_tooltip">Logitech Brio 505.<br>Resolution: 1080p.<br>FPS: 30.<br>Connection: USB.<br>Field of View: 78°.</span>
+                        </div>
+                        <p class="price" data-price="740.00">$740.00</p>
+                        <button class="add-to-cart" data-name="Logitech Brio 505" data-price="740.00" data-text="add_to_cart">Add to Cart</button>
+                    </div>
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/cam2.png" alt="Razer Kiyo Pro">
+                            <span class="tooltip" data-text="webcam2_tooltip">Razer Kiyo Pro.<br>Resolution: 1080p.<br>FPS: 60.<br>Connection: USB.<br>Field of View: 80°-103°.</span>
+                        </div>
+                        <p class="price" data-price="680.00">$680.00</p>
+                        <button class="add-to-cart" data-name="Razer Kiyo Pro" data-price="680.00" data-text="add_to_cart">Add to Cart</button>
+                    </div>
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/cam3.png" alt="Obsbot Tiny 2">
+                            <span class="tooltip" data-text="webcam3_tooltip">Obsbot Tiny 2.<br>Resolution: 4K.<br>FPS: 30.<br>Connection: USB-C.<br>Field of View: 90°.</span>
+                        </div>
+                        <p class="price" data-price="1700.00">$1,700.00</p>
+                        <button class="add-to-cart" data-name="Obsbot Tiny 2" data-price="1700.00" data-text="add_to_cart">Add to Cart</button>
+                    </div>
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/cam4.png" alt="HyperX Vision S">
+                            <span class="tooltip" data-text="webcam4_tooltip">HyperX Vision S.<br>Resolution: 4K.<br>FPS: 30.<br>Connection: USB.<br>Field of View: 85°.</span>
+                        </div>
+                        <p class="price" data-price="1135.00">$1,135.00</p>
+                        <button class="add-to-cart" data-name="HyperX Vision S" data-price="1135.00" data-text="add_to_cart">Add to Cart</button>
+                    </div>
+                    <div class="component-card">
+                        <div class="image-container">
+                            <img src="imagens/cam5.png" alt="Razer Kiyo Pro Ultra">
+                            <span class="tooltip" data-text="webcam5_tooltip">Razer Kiyo Pro Ultra.<br>Resolution: 4K.<br>FPS: 60.<br>Connection: USB-C.<br>Field of View: 80°-103°.</span>
+                        </div>
+                        <p class="price" data-price="1710.00">$1,710.00</p>
+                        <button class="add-to-cart" data-name="Razer Kiyo Pro Ultra" data-price="1710.00" data-text="add_to_cart">Add to Cart</button>
+                    </div>
+                </div>
             </div>
-            <p class="price">R$680,00</p>
-            <button class="add-to-cart" data-name="Razer Kiyo Pro" data-price="680.00">Adicionar ao Carrinho</button>
-        </div>
-        <div class="component-card">
-            <div class="image-container">
-                <img src="imagens/cam3.png" alt="Obsbot Tiny 2">
-                <span class="tooltip">Obsbot Tiny 2.<br>Resolução: 4K.<br>FPS: 30.<br>Conexão: USB-C.<br>Campo de Visão: 90°.</span>
-            </div>
-            <p class="price">R$1.700,00</p>
-            <button class="add-to-cart" data-name="Obsbot Tiny 2" data-price="1700.00">Adicionar ao Carrinho</button>
-        </div>
-        <div class="component-card">
-            <div class="image-container">
-                <img src="imagens/cam4.png" alt="HyperX Vision S">
-                <span class="tooltip">HyperX Vision S.<br>Resolução: 4K.<br>FPS: 30.<br>Conexão: USB.<br>Campo de Visão: 85°.</span>
-            </div>
-            <p class="price">R$1.135,00</p>
-            <button class="add-to-cart" data-name="HyperX Vision S" data-price="1135.00">Adicionar ao Carrinho</button>
-        </div>
-        <div class="component-card">
-            <div class="image-container">
-                <img src="imagens/cam5.png" alt="Razer Kiyo Pro Ultra">
-                <span class="tooltip">Razer Kiyo Pro Ultra.<br>Resolução: 4K.<br>FPS: 60.<br>Conexão: USB-C.<br>Campo de Visão: 80°-103°.</span>
-            </div>
-            <p class="price">R$1.710,00</p>
-            <button class="add-to-cart" data-name="Razer Kiyo Pro Ultra" data-price="1710.00">Adicionar ao Carrinho</button>
-        </div>
-    </div>
-</div>
-           
-            <a href="carrinho.html" class="cta-button" style="margin-top: 40px; display: inline-block;">Ir para o Carrinho</a>
+
+            <a href="carrinho.html" class="cta-button" style="margin-top: 40px; display: inline-block;" data-text="go_to_cart">Go to Cart</a>
         </div>
     </section>
 
-    <!-- Modal de Login/Cadastro -->
+    <!-- Login/Registration Modal -->
     <div id="login-modal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeLoginModal()">×</span>
-            <h2 id="modal-title">Faça seu Login</h2>
+            <h2 id="modal-title" data-text="login_title">Log In</h2>
             <div id="form-toggle">
-                <button id="show-login" class="toggle-button active" onclick="showLoginForm()">Entrar</button>
-                <button id="show-register" class="toggle-button" onclick="showRegisterForm()">Cadastrar</button>
+                <button id="show-login" class="toggle-button active" onclick="showLoginForm()" data-text="login_button">Log In</button>
+                <button id="show-register" class="toggle-button" onclick="showRegisterForm()" data-text="register_button">Register</button>
             </div>
-            <!-- Formulário de Login -->
+            <!-- Login Form -->
             <div id="login-form-container">
                 <form id="login-form">
-                    <input type="email" id="login-gmail" placeholder="Email" required>
-                    <input type="password" id="login-password" placeholder="Senha" required>
-                    <button type="submit" class="modal-button">Entrar</button>
+                    <input type="email" id="login-gmail" data-text-placeholder="email_placeholder" placeholder="Email" required>
+                    <input type="password" id="login-password" data-text-placeholder="password_placeholder" placeholder="Password" required>
+                    <button type="submit" class="modal-button" data-text="login_button">Log In</button>
                 </form>
-                <p id="login-error" style="color: red; display: none; margin-top: 10px;">Email ou senha inválidos.</p>
+                <p id="login-error" style="color: red; display: none; margin-top: 10px;" data-text="login_error">Invalid email or password.</p>
             </div>
-            <!-- Formulário de Cadastro -->
+            <!-- Registration Form -->
             <div id="register-form-container" style="display: none;">
                 <form id="register-form">
-                    <input type="text" id="register-nome" placeholder="Nome" required>
-                    <input type="email" id="register-gmail" placeholder="Email" required>
-                    <input type="password" id="register-password" placeholder="Senha" required>
-                    <input type="text" id="register-cpf" placeholder="CPF" required>
-                    <input type="number" id="register-idade" placeholder="Idade" required>
-                    <input type="text" id="register-cep" placeholder="CEP" required>
-                    <button type="submit" class="modal-button">Cadastrar</button>
+                    <input type="text" id="register-nome" data-text-placeholder="name_placeholder" placeholder="Name" required>
+                    <input type="email" id="register-gmail" data-text-placeholder="email_placeholder" placeholder="Email" required>
+                    <input type="password" id="register-password" data-text-placeholder="password_placeholder" placeholder="Password" required>
+                    <input type="text" id="register-cpf" data-text-placeholder="cpf_placeholder" placeholder="CPF" required>
+                    <input type="number" id="register-idade" data-text-placeholder="age_placeholder" placeholder="Age" required>
+                    <input type="text" id="register-cep" data-text-placeholder="cep_placeholder" placeholder="CEP" required>
+                    <button type="submit" class="modal-button" data-text="register_button">Register</button>
                 </form>
-                <p id="register-error" style="color: red; display: none; margin-top: 10px;">Email já cadastrado ou campos inválidos.</p>
+                <p id="register-error" style="color: red; display: none; margin-top: 10px;" data-text="register_error">Email already registered or invalid fields.</p>
             </div>
-            <!-- Dados do Usuário Logado -->
+            <!-- Logged-in User Data -->
             <div id="dados-salvos" style="display: none; margin-top: 20px;">
-                <h3>Bem-vindo(a), <span id="saved-nome"></span>!</h3>
-                <p><strong>Email:</strong> <span id="saved-gmail"></span></p>
-                <p><strong>CPF:</strong> <span id="saved-cpf"></span></p>
-                <p><strong>Idade:</strong> <span id="saved-idade"></span></p>
-                <p><strong>CEP:</strong> <span id="saved-cep"></span></p>
-                <a href="dashboard.html" class="modal-button">Ir para o Dashboard</a>
-                <button onclick="logoutUser()" class="modal-button" style="margin-top: 10px; background-color: #e74c3c;">Sair</button>
+                <h3 data-text="welcome_message">Welcome, <span id="saved-nome"></span>!</h3>
+                <p><strong data-text="email_label">Email:</strong> <span id="saved-gmail"></span></p>
+                <p><strong data-text="cpf_label">CPF:</strong> <span id="saved-cpf"></span></p>
+                <p><strong data-text="age_label">Age:</strong> <span id="saved-idade"></span></p>
+                <p><strong data-text="cep_label">CEP:</strong> <span id="saved-cep"></span></p>
+                <a href="dashboard.html" class="modal-button" data-text="go_to_dashboard">Go to Dashboard</a>
+                <button onclick="logoutUser()" class="modal-button" style="margin-top: 10px; background-color: #e74c3c;" data-text="logout_button">Log Out</button>
             </div>
         </div>
     </div>
 
     <footer>
         <div class="container">
-            <p>© 2025 Game Work Study. Todos os direitos reservados.</p>
+            <p data-text="footer_copyright">© 2025 Game Work Study. All rights reserved.</p>
             <ul>
                 <li class="privacy">
-                    <a href="#" class="privacy-link">Política de Privacidade</a>
-                    <span class="privacy-tooltip">Nós respeitamos sua privacidade e protegemos seus dados conforme a LGPD.</span>
+                    <a href="#" class="privacy-link" data-text="privacy_policy">Privacy Policy</a>
+                    <span class="privacy-tooltip" data-text="privacy_tooltip">We respect your privacy and protect your data in accordance with GDPR.</span>
                 </li>
-                <li><a href="mailto:suporte@gameworkstudy.com">Suporte</a></li>
+                <li><a href="mailto:support@gameworkstudy.com" data-text="support">Support</a></li>
                 <li><a href="https://instagram.com/gameworkstudy">Instagram</a></li>
                 <li><a href="https://twitter.com/gameworkstudy">Twitter</a></li>
             </ul>
         </div>
     </footer>
+
     <script>
-    function openLoginModal() {
-        document.getElementById('login-modal').style.display = 'block';
-        document.getElementById('show-login').click();
-    }
+        // Translations object
+        const translations = {
+            'pt-BR': {
+                page_title: 'Game Work Study | Configurador',
+                site_name: 'Game Work Study',
+                home: 'Início',
+                pc: 'PC',
+                configurator: 'Configurador',
+                dashboard: 'Dashboard',
+                contact: 'Contato',
+                login: 'Login',
+                logout: 'Sair',
+                cart: 'Carrinho',
+                lang_pt: 'PT',
+                lang_en: 'EN',
+                phone_label: 'Telefone:',
+                phone_value: '(11) 1234-5678',
+                email_label: 'Email:',
+                email_value: 'suporte@gameworkstudy.com',
+                configurator_title: 'Monte o PC dos Seus Sonhos',
+                configurator_description: 'Escolha os componentes abaixo para personalizar seu PC. Adicione cada item ao carrinho e finalize sua compra!',
+                choose_mouse: 'Escolha seu Mouse',
+                choose_headset: 'Escolha seu Headset',
+                choose_keyboard: 'Escolha seu Teclado',
+                choose_monitor: 'Escolha seu Monitor',
+                choose_cpu: 'Escolha seu CPU Torre',
+                choose_webcam: 'Escolha sua Webcam',
+                add_to_cart: 'Adicionar ao Carrinho',
+                go_to_cart: 'Ir para o Carrinho',
+                login_title: 'Faça seu Login',
+                login_button: 'Entrar',
+                register_button: 'Cadastrar',
+                email_placeholder: 'Email',
+                password_placeholder: 'Senha',
+                name_placeholder: 'Nome',
+                cpf_placeholder: 'CPF',
+                age_placeholder: 'Idade',
+                cep_placeholder: 'CEP',
+                login_error: 'Email ou senha inválidos.',
+                register_error: 'Email já cadastrado ou campos inválidos.',
+                welcome_message: 'Bem-vindo(a), ',
+                email_label: 'Email:',
+                cpf_label: 'CPF:',
+                age_label: 'Idade:',
+                cep_label: 'CEP:',
+                go_to_dashboard: 'Ir para o Dashboard',
+                logout_button: 'Sair',
+                footer_copyright: '© 2025 Game Work Study. Todos os direitos reservados.',
+                privacy_policy: 'Política de Privacidade',
+                privacy_tooltip: 'Nós respeitamos sua privacidade e protegemos seus dados conforme a LGPD.',
+                support: 'Suporte',
+                cart_item_added: '{name} foi adicionado ao carrinho com sucesso!',
+                cart_item_exists: '{name} já está no carrinho!',
+                cart_item_error: 'Erro ao adicionar o produto ao carrinho. Tente novamente.',
+                cart_invalid_name: 'Erro: Nome do produto inválido!',
+                cart_invalid_price: 'Erro: Preço inválido!',
+                login_success: 'Login realizado com sucesso!',
+                register_success: 'Registro realizado com sucesso!',
+                logout_success: 'Logout realizado.',
+                register_invalid_fields: 'Por favor, preencha todos os campos.',
+                // Tooltips
+                mouse1_tooltip: 'Logitech MX Master 3S.<br>Conexão: Sem fio (Bluetooth ou receptor USB Logi Bolt).<br>Sensor: Darkfield.<br>DPI: Até 8.000.<br>Botões: 7 programáveis.',
+                mouse2_tooltip: 'Razer DeathAdder V3 HyperSpeed.<br>Conexão: Sem fio (HyperSpeed Wireless).<br>Sensor: Focus Pro 30K.<br>DPI: Até 30.000.<br>Botões: 6 programáveis.',
+                mouse3_tooltip: 'SteelSeries Aerox 3 Wireless.<br>Conexão: Sem fio (2.4GHz ou Bluetooth).<br>Sensor: TrueMove Air.<br>DPI: Até 18.000.<br>Peso: 68g.',
+                mouse4_tooltip: 'Mouse sem Fio HP Z3700.<br>Conexão: Sem fio (USB).<br>Sensor: Óptico.<br>DPI: Até 1.600.<br>Botões: 3.',
+                mouse5_tooltip: 'Corsair Scimitar Elite RGB.<br>Conexão: Com fio (USB).<br>Sensor: PixArt PMW3391.<br>DPI: Até 18.000.<br>Botões: 12 programáveis.',
+                headset1_tooltip: 'HyperX Cloud Alpha.<br>Conexão: Com fio (3.5mm).<br>Drivers: 50mm.<br>Impedância: 60 Ohms.<br>Microfone: Desmontável.',
+                headset2_tooltip: 'Razer BlackShark V2.<br>Conexão: Com fio (USB).<br>Drivers: 50mm.<br>Impedância: 32 Ohms.<br>Microfone: Hi-Fi.',
+                headset3_tooltip: 'SteelSeries Arctis Nova 5.<br>Conexão: Sem fio (2.4GHz).<br>Drivers: 40mm.<br>Impedância: 36 Ohms.<br>Microfone: Retrátil.',
+                headset4_tooltip: 'Logitech G Pro X.<br>Conexão: Com fio (3.5mm).<br>Drivers: 50mm.<br>Impedância: 35 Ohms.<br>Microfone: Desmontável.',
+                headset5_tooltip: 'JBL Quantum 100.<br>Conexão: Com fio (3.5mm).<br>Drivers: 40mm.<br>Impedância: 32 Ohms.<br>Microfone: Integrado.',
+                keyboard1_tooltip: 'Logitech MX Keys S.<br>Tipo: Membrana.<br>Conexão: Sem fio (Bluetooth/USB Logi Bolt).<br>Iluminação: Não.<br>Teclas: 108.',
+                keyboard2_tooltip: 'Razer BlackWidow V4 Pro.<br>Tipo: Mecânico.<br>Conexão: Com fio (USB-C).<br>Iluminação: RGB.<br>Teclas: 104.',
+                keyboard3_tooltip: 'Redragon Dark Avenger K568.<br>Tipo: Mecânico.<br>Conexão: Com fio (USB).<br>Iluminação: RGB.<br>Teclas: 104.',
+                keyboard4_tooltip: 'HyperX Alloy Origins Core.<br>Tipo: Mecânico.<br>Conexão: Com fio (USB-C removível).<br>Iluminação: RGB.<br>Teclas: 87.',
+                keyboard5_tooltip: 'Corsair K60 RGB Pro.<br>Tipo: Mecânico.<br>Conexão: Com fio (USB).<br>Iluminação: RGB.<br>Teclas: 104.',
+                monitor1_tooltip: 'Samsung Smart Monitor M8.<br>Tamanho: 32 polegadas.<br>Resolução: 4K.<br>Taxa: 60Hz.<br>Conexões: HDMI, USB-C.',
+                monitor2_tooltip: 'LG UltraGear OLED 27GR95QE-B.<br>Tamanho: 27 polegadas.<br>Resolução: QHD.<br>Taxa: 240Hz.<br>Conexões: HDMI, DisplayPort.',
+                monitor3_tooltip: 'Dell Alienware AW2523HF.<br>Tamanho: 25 polegadas.<br>Resolução: Full HD.<br>Taxa: 360Hz.<br>Conexões: HDMI, DisplayPort.',
+                monitor4_tooltip: 'BenQ PD2705U.<br>Tamanho: 27 polegadas.<br>Resolução: 4K.<br>Taxa: 60Hz.<br>Conexões: HDMI, USB-C.',
+                monitor5_tooltip: 'AOC 22B35HM2.<br>Tamanho: 22 polegadas.<br>Resolução: Full HD.<br>Taxa: 75Hz.<br>Conexões: VGA, HDMI.',
+                cpu1_tooltip: 'Mancer PC Gamer Ryzen 5 5600G.<br>Processador: AMD Ryzen 5 5600G.<br>RAM: 16GB DDR4.<br>Armazenamento: SSD 480GB.<br>Placa de Vídeo: Integrada Radeon Vega 7.',
+                cpu2_tooltip: 'Acer Predator Orion 500.<br>Processador: Intel Core i7-11700.<br>RAM: 16GB DDR4.<br>Armazenamento: SSD 1TB.<br>Placa de Vídeo: NVIDIA RTX 3070.',
+                cpu3_tooltip: 'Dell Inspiron Small 3710.<br>Processador: Intel Core i5-12400.<br>RAM: 8GB DDR4.<br>Armazenamento: SSD 256GB.<br>Placa de Vídeo: Integrada Intel UHD.',
+                cpu4_tooltip: 'HP OMEN 40L Gaming.<br>Processador: AMD Ryzen 7 7700.<br>RAM: 16GB DDR.<br>Armazenamento: 1TB SSD NVMe.<br>Placa de Vídeo: NVIDIA RTX 4070.',
+                cpu5_tooltip: 'AOC Elite Gamer.<br>Processador: AMD Ryzen 5 9600X.<br>RAM: 32GB DDR5.<br>Armazenamento: SSD M.2 1TB + SSD 1TB.<br>Placa de Vídeo: NVIDIA RTX 5080.',
+                webcam1_tooltip: 'Logitech Brio 505.<br>Resolução: 1080p.<br>FPS: 30.<br>Conexão: USB.<br>Campo de Visão: 78°.',
+                webcam2_tooltip: 'Razer Kiyo Pro.<br>Resolução: 1080p.<br>FPS: 60.<br>Conexão: USB.<br>Campo de Visão: 80°-103°.',
+                webcam3_tooltip: 'Obsbot Tiny 2.<br>Resolução: 4K.<br>FPS: 30.<br>Conexão: USB-C.<br>Campo de Visão: 90°.',
+                webcam4_tooltip: 'HyperX Vision S.<br>Resolução: 4K.<br>FPS: 30.<br>Conexão: USB.<br>Campo de Visão: 85°.',
+                webcam5_tooltip: 'Razer Kiyo Pro Ultra.<br>Resolução: 4K.<br>FPS: 60.<br>Conexão: USB-C.<br>Campo de Visão: 80°-103°.'
+            },
+            'en': {
+                page_title: 'Game Work Study | Configurator',
+                site_name: 'Game Work Study',
+                home: 'Home',
+                pc: 'PC',
+                configurator: 'Configurator',
+                dashboard: 'Dashboard',
+                contact: 'Contact',
+                login: 'Login',
+                logout: 'Log out',
+                cart: 'Cart',
+                lang_pt: 'PT',
+                lang_en: 'EN',
+                phone_label: 'Phone:',
+                phone_value: '(11) 1234-5678',
+                email_label: 'Email:',
+                email_value: 'support@gameworkstudy.com',
+                configurator_title: 'Build Your Dream PC',
+                configurator_description: 'Choose the components below to customize your PC. Add each item to the cart and complete your purchase!',
+                choose_mouse: 'Choose Your Mouse',
+                choose_headset: 'Choose Your Headset',
+                choose_keyboard: 'Choose Your Keyboard',
+                choose_monitor: 'Choose Your Monitor',
+                choose_cpu: 'Choose Your CPU Tower',
+                choose_webcam: 'Choose Your Webcam',
+                add_to_cart: 'Add to Cart',
+                go_to_cart: 'Go to Cart',
+                login_title: 'Log In',
+                login_button: 'Log In',
+                register_button: 'Register',
+                email_placeholder: 'Email',
+                password_placeholder: 'Password',
+                name_placeholder: 'Name',
+                cpf_placeholder: 'CPF',
+                age_placeholder: 'Age',
+                cep_placeholder: 'CEP',
+                login_error: 'Invalid email or password.',
+                register_error: 'Email already registered or invalid fields.',
+                welcome_message: 'Welcome, ',
+                email_label: 'Email:',
+                cpf_label: 'CPF:',
+                age_label: 'Age:',
+                cep_label: 'CEP:',
+                go_to_dashboard: 'Go to Dashboard',
+                logout_button: 'Log Out',
+                footer_copyright: '© 2025 Game Work Study. All rights reserved.',
+                privacy_policy: 'Privacy Policy',
+                privacy_tooltip: 'We respect your privacy and protect your data in accordance with GDPR.',
+                support: 'Support',
+                cart_item_added: '{name} was added to the cart successfully!',
+                cart_item_exists: '{name} is already in the cart!',
+                cart_item_error: 'Error adding product to the cart. Try again.',
+                cart_invalid_name: 'Error: Invalid product name!',
+                cart_invalid_price: 'Error: Invalid price!',
+                login_success: 'Login successful!',
+                register_success: 'Registration successful!',
+                logout_success: 'Logged out successfully.',
+                register_invalid_fields: 'Please fill in all fields.',
+                // Tooltips
+                mouse1_tooltip: 'Logitech MX Master 3S.<br>Connection: Wireless (Bluetooth or USB Logi Bolt).<br>Sensor: Darkfield.<br>DPI: Up to 8,000.<br>Buttons: 7 programmable.',
+                mouse2_tooltip: 'Razer DeathAdder V3 HyperSpeed.<br>Connection: Wireless (HyperSpeed Wireless).<br>Sensor: Focus Pro 30K.<br>DPI: Up to 30,000.<br>Buttons: 6 programmable.',
+                mouse3_tooltip: 'SteelSeries Aerox 3 Wireless.<br>Connection: Wireless (2.4GHz or Bluetooth).<br>Sensor: TrueMove Air.<br>DPI: Up to 18,000.<br>Weight: 68g.',
+                mouse4_tooltip: 'HP Z3700 Wireless Mouse.<br>Connection: Wireless (USB).<br>Sensor: Optical.<br>DPI: Up to 1,600.<br>Buttons: 3.',
+                mouse5_tooltip: 'Corsair Scimitar Elite RGB.<br>Connection: Wired (USB).<br>Sensor: PixArt PMW3391.<br>DPI: Up to 18,000.<br>Buttons: 12 programmable.',
+                headset1_tooltip: 'HyperX Cloud Alpha.<br>Connection: Wired (3.5mm).<br>Drivers: 50mm.<br>Impedance: 60 Ohms.<br>Microphone: Detachable.',
+                headset2_tooltip: 'Razer BlackShark V2.<br>Connection: Wired (USB).<br>Drivers: 50mm.<br>Impedance: 32 Ohms.<br>Microphone: Hi-Fi.',
+                headset3_tooltip: 'SteelSeries Arctis Nova 5.<br>Connection: Wireless (2.4GHz).<br>Drivers: 40mm.<br>Impedance: 36 Ohms.<br>Microphone: Retractable.',
+                headset4_tooltip: 'Logitech G Pro X.<br>Connection: Wired (3.5mm).<br>Drivers: 50mm.<br>Impedance: 35 Ohms.<br>Microphone: Detachable.',
+                headset5_tooltip: 'JBL Quantum 100.<br>Connection: Wired (3.5mm).<br>Drivers: 40mm.<br>Impedance: 32 Ohms.<br>Microphone: Integrated.',
+                keyboard1_tooltip: 'Logitech MX Keys S.<br>Type: Membrane.<br>Connection: Wireless (Bluetooth/USB Logi Bolt).<br>Illumination: None.<br>Keys: 108.',
+                keyboard2_tooltip: 'Razer BlackWidow V4 Pro.<br>Type: Mechanical.<br>Connection: Wired (USB-C).<br>Illumination: RGB.<br>Keys: 104.',
+                keyboard3_tooltip: 'Redragon Dark Avenger K568.<br>Type: Mechanical.<br>Connection: Wired (USB).<br>Illumination: RGB.<br>Keys: 104.',
+                keyboard4_tooltip: 'HyperX Alloy Origins Core.<br>Type: Mechanical.<br>Connection: Wired (USB-C detachable).<br>Illumination: RGB.<br>Keys: 87.',
+                keyboard5_tooltip: 'Corsair K60 RGB Pro.<br>Type: Mechanical.<br>Connection: Wired (USB).<br>Illumination: RGB.<br>Keys: 104.',
+                monitor1_tooltip: 'Samsung Smart Monitor M8.<br>Size: 32 inches.<br>Resolution: 4K.<br>Refresh Rate: 60Hz.<br>Connections: HDMI, USB-C.',
+                monitor2_tooltip: 'LG UltraGear OLED 27GR95QE-B.<br>Size: 27 inches.<br>Resolution: QHD.<br>Refresh Rate: 240Hz.<br>Connections: HDMI, DisplayPort.',
+                monitor3_tooltip: 'Dell Alienware AW2523HF.<br>Size: 25 inches.<br>Resolution: Full HD.<br>Refresh Rate: 360Hz.<br>Connections: HDMI, DisplayPort.',
+                monitor4_tooltip: 'BenQ PD2705U.<br>Size: 27 inches.<br>Resolution: 4K.<br>Refresh Rate: 60Hz.<br>Connections: HDMI, USB-C.',
+                monitor5_tooltip: 'AOC 22B35HM2.<br>Size: 22 inches.<br>Resolution: Full HD.<br>Refresh Rate: 75Hz.<br>Connections: VGA, HDMI.',
+                cpu1_tooltip: 'Mancer PC Gamer Ryzen 5 5600G.<br>Processor: AMD Ryzen 5 5600G.<br>RAM: 16GB DDR4.<br>Storage: 480GB SSD.<br>Graphics: Integrated Radeon Vega 7.',
+                cpu2_tooltip: 'Acer Predator Orion 500.<br>Processor: Intel Core i7-11700.<br>RAM: 16GB DDR4.<br>Storage: 1TB SSD.<br>Graphics: NVIDIA RTX 3070.',
+                cpu3_tooltip: 'Dell Inspiron Small 3710.<br>Processor: Intel Core i5-12400.<br>RAM: 8GB DDR4.<br>Storage: 256GB SSD.<br>Graphics: Integrated Intel UHD.',
+                cpu4_tooltip: 'HP OMEN 40L Gaming.<br>Processor: AMD Ryzen 7 7700.<br>RAM: 16GB DDR.<br>Storage: 1TB SSD NVMe.<br>Graphics: NVIDIA RTX 4070.',
+                cpu5_tooltip: 'AOC Elite Gamer.<br>Processor: AMD Ryzen 5 9600X.<br>RAM: 32GB DDR5.<br>Storage: 1TB M.2 SSD + 1TB SSD.<br>Graphics: NVIDIA RTX 5080.',
+                webcam1_tooltip: 'Logitech Brio 505.<br>Resolution: 1080p.<br>FPS: 30.<br>Connection: USB.<br>Field of View: 78°.',
+                webcam2_tooltip: 'Razer Kiyo Pro.<br>Resolution: 1080p.<br>FPS: 60.<br>Connection: USB.<br>Field of View: 80°-103°.',
+                webcam3_tooltip: 'Obsbot Tiny 2.<br>Resolution: 4K.<br>FPS: 30.<br>Connection: USB-C.<br>Field of View: 90°.',
+                webcam4_tooltip: 'HyperX Vision S.<br>Resolution: 4K.<br>FPS: 30.<br>Connection: USB.<br>Field of View: 85°.',
+                webcam5_tooltip: 'Razer Kiyo Pro Ultra.<br>Resolution: 4K.<br>FPS: 60.<br>Connection: USB-C.<br>Field of View: 80°-103°.'
+            }
+        };
 
-    function closeLoginModal() {
-        document.getElementById('login-modal').style.display = 'none';
-        document.getElementById('login-error').style.display = 'none';
-        document.getElementById('register-error').style.display = 'none';
-    }
+         // Function to set the language
+        function setLanguage(lang) {
+            try {
+                // Validate language
+                if (!translations[lang]) {
+                    console.error('Unsupported language:', lang);
+                    lang = 'en'; // Default to English
+                }
 
-    function showLoginForm() {
-        document.getElementById('login-form-container').style.display = 'block';
-        document.getElementById('register-form-container').style.display = 'none';
-        document.getElementById('show-login').classList.add('active');
-        document.getElementById('show-register').classList.remove('active');
-        document.getElementById('modal-title').textContent = 'Faça seu Login';
-    }
+                // Update HTML lang attribute
+                document.documentElement.lang = lang;
 
-    function showRegisterForm() {
-        document.getElementById('login-form-container').style.display = 'none';
-        document.getElementById('register-form-container').style.display = 'block';
-        document.getElementById('show-login').classList.remove('active');
-        document.getElementById('show-register').classList.add('active');
-        document.getElementById('modal-title').textContent = 'Faça seu Cadastro';
-    }
+                // Update page title
+                const titleElement = document.querySelector('title');
+                if (titleElement) {
+                    titleElement.textContent = translations[lang].page_title;
+                }
 
-    function registerUser(event) {
-        event.preventDefault();
-        const nome = document.getElementById('register-nome').value.trim();
-        const email = document.getElementById('register-gmail').value.trim();
-        const password = document.getElementById('register-password').value.trim();
-        const cpf = document.getElementById('register-cpf').value.trim();
-        const idade = document.getElementById('register-idade').value.trim();
-        const cep = document.getElementById('register-cep').value.trim();
+                // Update text for elements with data-text attribute
+                document.querySelectorAll('[data-text]').forEach(element => {
+                    const key = element.getAttribute('data-text');
+                    if (translations[lang][key]) {
+                        if (element.classList.contains('login') || element.classList.contains('cart')) {
+                            const icon = element.querySelector('i');
+                            if (icon) {
+                                element.innerHTML = '';
+                                element.appendChild(icon);
+                                element.appendChild(document.createTextNode(` ${translations[lang][key]}`));
+                            }
+                        } else {
+                            element.textContent = translations[lang][key];
+                        }
+                    }
+                });
 
-        if (!nome || !email || !password || !cpf || !idade || !cep) {
-            document.getElementById('register-error').style.display = 'block';
-            document.getElementById('register-error').textContent = 'Por favor, preencha todos os campos.';
-            return;
+                // Update placeholders
+                document.querySelectorAll('[data-text-placeholder]').forEach(input => {
+                    const key = input.getAttribute('data-text-placeholder');
+                    if (translations[lang][key]) {
+                        input.placeholder = translations[lang][key];
+                    }
+                });
+
+                // Update modal title based on active form
+                const modalTitle = document.getElementById('modal-title');
+                if (modalTitle) {
+                    modalTitle.textContent = document.getElementById('show-login').classList.contains('active')
+                        ? translations[lang].modal_title_login
+                        : translations[lang].modal_title_register;
+                }
+
+                // Update price formatting
+                document.querySelectorAll('.price').forEach(priceElement => {
+                    const price = parseFloat(priceElement.getAttribute('data-price'));
+                    if (!isNaN(price)) {
+                        priceElement.textContent = lang === 'pt-BR'
+                            ? `R$${price.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`
+                            : `$${price.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+                    }
+                });
+
+                // Update language selector active state
+                document.querySelectorAll('.lang-option').forEach(option => {
+                    option.classList.toggle('active', option.getAttribute('data-lang') === lang);
+                });
+
+                // Save selected language to localStorage
+                localStorage.setItem('language', lang);
+            } catch (error) {
+                console.error('Error setting language:', error);
+            }
         }
 
-        const existingUsers = JSON.parse(localStorage.getItem('users') || '[]');
-        if (existingUsers.some(user => user.email === email)) {
-            document.getElementById('register-error').style.display = 'block';
-            document.getElementById('register-error').textContent = 'Email já cadastrado.';
-            return;
+        // Modal functions
+        function openLoginModal() {
+            const modal = document.getElementById('login-modal');
+            if (modal) modal.style.display = 'block';
+            const showLoginButton = document.getElementById('show-login');
+            if (showLoginButton) showLoginButton.click();
         }
 
-        const user = { nome, email, password, cpf, idade, cep };
-        existingUsers.push(user);
-        localStorage.setItem('users', JSON.stringify(existingUsers));
-        localStorage.setItem('currentUser', JSON.stringify(user));
-
-        alert('Registro realizado com sucesso!');
-        loadUserData();
-        showLoggedInUI();
-    }
-
-    function loginUser(event) {
-        event.preventDefault();
-        const email = document.getElementById('login-gmail').value.trim();
-        const password = document.getElementById('login-password').value.trim();
-
-        const users = JSON.parse(localStorage.getItem('users') || '[]');
-        const userData = users.find(user => user.email === email && user.password === password);
-
-        if (!userData) {
-            document.getElementById('login-error').style.display = 'block';
-            return;
+        function closeLoginModal() {
+            const modal = document.getElementById('login-modal');
+            if (modal) modal.style.display = 'none';
+            const loginError = document.getElementById('login-error');
+            const registerError = document.getElementById('register-error');
+            const cpfError = document.getElementById('register-cpf-error');
+            if (loginError) loginError.style.display = 'none';
+            if (registerError) registerError.style.display = 'none';
+            if (cpfError) cpfError.style.display = 'none';
         }
 
-        localStorage.setItem('currentUser', JSON.stringify(userData));
-        alert('Login realizado com sucesso!');
-        loadUserData();
-        showLoggedInUI();
-    }
+        function showLoginForm() {
+            const lang = localStorage.getItem('language') || 'en';
+            const loginFormContainer = document.getElementById('login-form-container');
+            const registerFormContainer = document.getElementById('register-form-container');
+            const dadosSalvos = document.getElementById('dados-salvos');
+            const showLoginButton = document.getElementById('show-login');
+            const showRegisterButton = document.getElementById('show-register');
+            const modalTitle = document.getElementById('modal-title');
 
-    function logoutUser() {
-        localStorage.removeItem('currentUser');
-        alert('Logout realizado.');
-        document.getElementById('dados-salvos').style.display = 'none';
-        document.getElementById('login-form-container').style.display = 'block';
-        document.getElementById('register-form-container').style.display = 'none';
-        document.getElementById('login-link').style.display = 'inline';
-        document.getElementById('logout-link').style.display = 'none';
-        document.getElementById('dashboard-link').style.display = 'none';
-        document.getElementById('login-modal').style.display = 'none';
-        document.getElementById('show-login').click();
-    }
-
-    function loadUserData() {
-        const userData = JSON.parse(localStorage.getItem('currentUser'));
-        if (userData) {
-            document.getElementById('saved-nome').textContent = userData.nome;
-            document.getElementById('saved-gmail').textContent = userData.email;
-            document.getElementById('saved-cpf').textContent = userData.cpf;
-            document.getElementById('saved-idade').textContent = userData.idade;
-            document.getElementById('saved-cep').textContent = userData.cep;
-            document.getElementById('login-link').style.display = 'none';
-            document.getElementById('logout-link').style.display = 'inline';
-            document.getElementById('dashboard-link').style.display = 'inline';
-        }
-    }
-
-    function showLoggedInUI() {
-        document.getElementById('dados-salvos').style.display = 'block';
-        document.getElementById('login-form-container').style.display = 'none';
-        document.getElementById('register-form-container').style.display = 'none';
-        document.getElementById('login-modal').style.display = 'none';
-    }
-
-    function updateCartCount() {
-        const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-        const cartCountElement = document.getElementById('cart-count');
-        if (cartCountElement) {
-            cartCountElement.textContent = cart.length;
-        }
-    }
-
-    function updateNavBar() {
-        const userData = JSON.parse(localStorage.getItem('currentUser'));
-        if (userData) {
-            showLoggedInUI();
-            loadUserData();
-        } else {
-            document.getElementById('dados-salvos').style.display = 'none';
-            document.getElementById('login-form-container').style.display = 'block';
-            document.getElementById('register-form-container').style.display = 'none';
-            document.getElementById('login-link').style.display = 'inline';
-            document.getElementById('logout-link').style.display = 'none';
-            document.getElementById('dashboard-link').style.display = 'none';
-        }
-    }
-
-    function addToCart(name, price) {
-        console.log('Tentando adicionar ao carrinho:', { name, price });
-
-        // Validar entrada
-        if (!name || typeof name !== 'string' || name.trim() === '') {
-            console.error('Nome do produto inválido:', name);
-            alert('Erro: Nome do produto inválido!');
-            return;
+            if (loginFormContainer) loginFormContainer.style.display = 'block';
+            if (registerFormContainer) registerFormContainer.style.display = 'none';
+            if (dadosSalvos) dadosSalvos.style.display = 'none';
+            if (showLoginButton) showLoginButton.classList.add('active');
+            if (showRegisterButton) showRegisterButton.classList.remove('active');
+            if (modalTitle) modalTitle.textContent = translations[lang].modal_title_login;
         }
 
-        const parsedPrice = Number(price);
-        if (isNaN(parsedPrice) || parsedPrice <= 0) {
-            console.error('Preço inválido:', price);
-            alert('Erro: Preço inválido!');
-            return;
+        function showRegisterForm() {
+            const lang = localStorage.getItem('language') || 'en';
+            const loginFormContainer = document.getElementById('login-form-container');
+            const registerFormContainer = document.getElementById('register-form-container');
+            const dadosSalvos = document.getElementById('dados-salvos');
+            const showLoginButton = document.getElementById('show-login');
+            const showRegisterButton = document.getElementById('show-register');
+            const modalTitle = document.getElementById('modal-title');
+
+            if (loginFormContainer) loginFormContainer.style.display = 'none';
+            if (registerFormContainer) registerFormContainer.style.display = 'block';
+            if (dadosSalvos) dadosSalvos.style.display = 'none';
+            if (showLoginButton) showLoginButton.classList.remove('active');
+            if (showRegisterButton) showRegisterButton.classList.add('active');
+            if (modalTitle) modalTitle.textContent = translations[lang].modal_title_register;
         }
 
-        try {
-            // Carregar o carrinho atual
-            let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+        // Function to apply CPF mask
+        function applyCpfMask() {
+            const cpfInput = document.getElementById('register-cpf');
+            const cpfErrorElement = document.getElementById('register-cpf-error');
+            if (!cpfInput || !cpfErrorElement) return;
 
-            // Verificar se o item já está no carrinho
-            if (cart.some(item => item.name === name)) {
-                console.log(`Item ${name} já está no carrinho`);
-                alert(`${name} já está no carrinho!`);
+            cpfInput.addEventListener('input', (e) => {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length > 11) value = value.slice(0, 11);
+                if (value.length > 9) {
+                    value = `${value.slice(0, 3)}.${value.slice(3, 6)}.${value.slice(6, 9)}-${value.slice(9)}`;
+                } else if (value.length > 6) {
+                    value = `${value.slice(0, 3)}.${value.slice(3, 6)}.${value.slice(6)}`;
+                } else if (value.length > 3) {
+                    value = `${value.slice(0, 3)}.${value.slice(3)}`;
+                }
+                e.target.value = value.trim();
+
+                const lang = localStorage.getItem('language') || 'en';
+                if (value.replace(/\D/g, '').length === 11) {
+                    if (!validateCpf(value.replace(/\D/g, ''))) {
+                        cpfErrorElement.textContent = translations[lang].invalid_cpf;
+                        cpfErrorElement.style.display = 'block';
+                    } else {
+                        const users = JSON.parse(localStorage.getItem('users') || '[]');
+                        if (users.find(user => user.cpf === value.replace(/\D/g, ''))) {
+                            cpfErrorElement.textContent = translations[lang].cpf_already_registered;
+                            cpfErrorElement.style.display = 'block';
+                        } else {
+                            cpfErrorElement.style.display = 'none';
+                        }
+                    }
+                } else {
+                    cpfErrorElement.style.display = 'none';
+                }
+            });
+            cpfInput.addEventListener('focus', () => {
+                cpfErrorElement.style.display = 'none';
+            });
+        }
+
+        // Function to validate CPF
+        function validateCpf(cpf) {
+            cpf = cpf.replace(/\D/g, '');
+            if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) return false;
+            let sum = 0;
+            let remainder;
+            for (let i = 1; i <= 9; i++) sum += parseInt(cpf.charAt(i - 1)) * (11 - i);
+            remainder = (sum * 10) % 11;
+            if (remainder === 10 || remainder === 11) remainder = 0;
+            if (remainder !== parseInt(cpf.charAt(9))) return false;
+            sum = 0;
+            for (let i = 1; i <= 10; i++) sum += parseInt(cpf.charAt(i - 1)) * (12 - i);
+            remainder = (sum * 10) % 11;
+            if (remainder === 10 || remainder === 11) remainder = 0;
+            if (remainder !== parseInt(cpf.charAt(10))) return false;
+            return true;
+        }
+
+        // Function to format CPF
+        function formatCpf(cpf) {
+            if (!cpf || cpf.length !== 11) return cpf || 'N/A';
+            return `${cpf.slice(0, 3)}.${cpf.slice(3, 6)}.${cpf.slice(6, 9)}-${cpf.slice(9)}`;
+        }
+
+        // Function to register user
+        function registerUser(event) {
+            event.preventDefault();
+            const lang = localStorage.getItem('language') || 'en';
+            const nome = document.getElementById('register-nome')?.value.trim();
+            const email = document.getElementById('register-gmail')?.value.trim().toLowerCase();
+            const password = document.getElementById('register-password')?.value.trim();
+            const cpf = document.getElementById('register-cpf')?.value.trim();
+            const idade = parseInt(document.getElementById('register-idade')?.value.trim());
+            const cep = document.getElementById('register-cep')?.value.trim();
+            const errorElement = document.getElementById('register-error');
+            const cpfErrorElement = document.getElementById('register-cpf-error');
+
+            if (!errorElement || !cpfErrorElement) return;
+
+            errorElement.style.display = 'none';
+            cpfErrorElement.style.display = 'none';
+
+            if (!nome || !email || !password || !cpf || isNaN(idade) || !cep) {
+                errorElement.textContent = translations[lang].error_fill_all_fields;
+                errorElement.style.display = 'block';
                 return;
             }
 
-            // Adicionar o item ao carrinho
-            cart.push({ name, price: parsedPrice });
-            localStorage.setItem('cart', JSON.stringify(cart));
-            console.log('Carrinho atualizado:', cart);
+            if (!email.endsWith('@gmail.com')) {
+                errorElement.textContent = translations[lang].use_gmail_email;
+                errorElement.style.display = 'block';
+                return;
+            }
 
-            // Atualizar contagem do carrinho e exibir mensagem
-            updateCartCount();
-            alert(`${name} foi adicionado ao carrinho com sucesso!`);
-        } catch (error) {
-            console.error('Erro ao adicionar ao carrinho:', error.message);
-            alert('Ocorreu um erro ao adicionar o produto ao carrinho. Tente novamente.');
+            if (idade < 18) {
+                errorElement.textContent = translations[lang].must_be_18;
+                errorElement.style.display = 'block';
+                return;
+            }
+
+            if (!validateCpf(cpf.replace(/\D/g, ''))) {
+                cpfErrorElement.textContent = translations[lang].invalid_cpf;
+                cpfErrorElement.style.display = 'block';
+                return;
+            }
+
+            let users;
+            try {
+                users = JSON.parse(localStorage.getItem('users') || '[]');
+            } catch (error) {
+                console.error('Error parsing users from localStorage:', error);
+                users = [];
+            }
+
+            if (users.find(user => user.email === email)) {
+                errorElement.textContent = translations[lang].error_email_already_registered;
+                errorElement.style.display = 'block';
+                return;
+            }
+
+            if (users.find(user => user.cpf === cpf.replace(/\D/g, ''))) {
+                cpfErrorElement.textContent = translations[lang].cpf_already_registered;
+                cpfErrorElement.style.display = 'block';
+                return;
+            }
+
+            const user = { nome, email, password, cpf: cpf.replace(/\D/g, ''), idade, cep };
+            users.push(user);
+            try {
+                localStorage.setItem('users', JSON.stringify(users));
+                localStorage.setItem('currentUser', JSON.stringify(user));
+            } catch (error) {
+                console.error('Error saving to localStorage:', error);
+                return;
+            }
+
+            alert(translations[lang].welcome_message + '!');
+            loadUserData();
+            showLoggedInUI();
         }
-    }
 
-    window.addEventListener('load', function () {
-        updateNavBar();
-        updateCartCount();
+        // Function to login user
+        function loginUser(event) {
+            event.preventDefault();
+            const lang = localStorage.getItem('language') || 'en';
+            const email = document.getElementById('login-gmail')?.value.trim().toLowerCase();
+            const password = document.getElementById('login-password')?.value.trim();
+            const errorElement = document.getElementById('login-error');
 
-        document.querySelectorAll('.add-to-cart').forEach(button => {
-            button.addEventListener('click', function () {
-                const name = this.getAttribute('data-name');
-                const price = parseFloat(this.getAttribute('data-price'));
+            if (!errorElement) return;
 
-                console.log(`Botão clicado: nome=${name}, preço=${price}`);
+            errorElement.style.display = 'none';
 
-                // Validar atributos do botão
-                if (!name || isNaN(price)) {
-                    console.error('Atributos inválidos no botão:', { name, price });
-                    alert('Erro: Produto ou preço inválido no botão!');
-                    return;
-                }
+            if (!email.endsWith('@gmail.com')) {
+                errorElement.textContent = translations[lang].use_gmail_email;
+                errorElement.style.display = 'block';
+                return;
+            }
 
-                addToCart(name, price);
+            let users;
+            try {
+                users = JSON.parse(localStorage.getItem('users') || '[]');
+            } catch (error) {
+                console.error('Error parsing users from localStorage:', error);
+                users = [];
+            }
+
+            const userData = users.find(user => user.email === email && user.password === password);
+
+            if (!userData) {
+                errorElement.textContent = translations[lang].error_invalid_email_or_password;
+                errorElement.style.display = 'block';
+                return;
+            }
+
+            try {
+                localStorage.setItem('currentUser', JSON.stringify(userData));
+            } catch (error) {
+                console.error('Error saving currentUser to localStorage:', error);
+                return;
+            }
+
+            alert(translations[lang].welcome_message + '!');
+            loadUserData();
+            showLoggedInUI();
+        }
+
+        // Function to logout user
+        function logoutUser() {
+            const lang = localStorage.getItem('language') || 'en';
+            try {
+                localStorage.removeItem('currentUser');
+            } catch (error) {
+                console.error('Error removing currentUser from localStorage:', error);
+            }
+
+            alert(translations[lang].logout + ' ' + translations[lang].welcome_message.toLowerCase() + '.');
+            const dadosSalvos = document.getElementById('dados-salvos');
+            const loginFormContainer = document.getElementById('login-form-container');
+            const registerFormContainer = document.getElementById('register-form-container');
+            const loginLink = document.getElementById('login-link');
+            const logoutLink = document.getElementById('logout-link');
+            const dashboardLink = document.getElementById('dashboard-link');
+            const loginModal = document.getElementById('login-modal');
+
+            if (dadosSalvos) dadosSalvos.style.display = 'none';
+            if (loginFormContainer) loginFormContainer.style.display = 'block';
+            if (registerFormContainer) registerFormContainer.style.display = 'none';
+            if (loginLink) loginLink.style.display = 'inline';
+            if (logoutLink) logoutLink.style.display = 'none';
+            if (dashboardLink) dashboardLink.style.display = 'none';
+            if (loginModal) loginModal.style.display = 'none';
+            showLoginForm();
+            setLanguage(lang);
+        }
+
+        // Function to load user data
+        function loadUserData() {
+            const lang = localStorage.getItem('language') || 'en';
+            let userData;
+            try {
+                userData = JSON.parse(localStorage.getItem('currentUser') || '{}');
+            } catch (error) {
+                console.error('Error parsing currentUser from localStorage:', error);
+                return;
+            }
+
+            if (userData.email) {
+                const savedNome = document.getElementById('saved-nome');
+                const savedGmail = document.getElementById('saved-gmail');
+                const savedCpf = document.getElementById('saved-cpf');
+                const savedIdade = document.getElementById('saved-idade');
+                const savedCep = document.getElementById('saved-cep');
+                const welcomeMessage = document.querySelector('#dados-salvos h3');
+
+                if (savedNome) savedNome.textContent = userData.nome || 'N/A';
+                if (savedGmail) savedGmail.textContent = userData.email;
+                if (savedCpf) savedCpf.textContent = formatCpf(userData.cpf);
+                if (savedIdade) savedIdade.textContent = userData.idade || 'N/A';
+                if (savedCep) savedCep.textContent = userData.cep || 'N/A';
+                if (welcomeMessage) welcomeMessage.textContent = translations[lang].welcome_message + ', ' + (userData.nome || 'N/A') + '!';
+            }
+        }
+
+        // Function to show logged-in UI
+        function showLoggedInUI() {
+            const dadosSalvos = document.getElementById('dados-salvos');
+            const loginFormContainer = document.getElementById('login-form-container');
+            const registerFormContainer = document.getElementById('register-form-container');
+            const loginModal = document.getElementById('login-modal');
+            const loginLink = document.getElementById('login-link');
+            const logoutLink = document.getElementById('logout-link');
+            const dashboardLink = document.getElementById('dashboard-link');
+
+            if (dadosSalvos) dadosSalvos.style.display = 'block';
+            if (loginFormContainer) loginFormContainer.style.display = 'none';
+            if (registerFormContainer) registerFormContainer.style.display = 'none';
+            if (loginModal) loginModal.style.display = 'none';
+            if (loginLink) loginLink.style.display = 'none';
+            if (logoutLink) logoutLink.style.display = 'inline';
+            if (dashboardLink) dashboardLink.style.display = 'inline';
+        }
+
+        // Function to update cart count
+        function updateCartCount() {
+            let cart;
+            try {
+                cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            } catch (error) {
+                console.error('Error parsing cart from localStorage:', error);
+                cart = [];
+            }
+            const cartCountElement = document.getElementById('cart-count');
+            if (cartCountElement) {
+                cartCountElement.textContent = cart.length;
+            }
+        }
+
+        // Function to update navigation bar
+        function updateNavBar() {
+            let userData;
+            try {
+                userData = JSON.parse(localStorage.getItem('currentUser') || '{}');
+            } catch (error) {
+                console.error('Error parsing currentUser from localStorage:', error);
+                userData = {};
+            }
+
+            if (userData.email) {
+                showLoggedInUI();
+                loadUserData();
+            } else {
+                const dadosSalvos = document.getElementById('dados-salvos');
+                const loginFormContainer = document.getElementById('login-form-container');
+                const registerFormContainer = document.getElementById('register-form-container');
+                const loginLink = document.getElementById('login-link');
+                const logoutLink = document.getElementById('logout-link');
+                const dashboardLink = document.getElementById('dashboard-link');
+
+                if (dadosSalvos) dadosSalvos.style.display = 'none';
+                if (loginFormContainer) loginFormContainer.style.display = 'block';
+                if (registerFormContainer) registerFormContainer.style.display = 'none';
+                if (loginLink) loginLink.style.display = 'inline';
+                if (logoutLink) logoutLink.style.display = 'none';
+                if (dashboardLink) dashboardLink.style.display = 'none';
+            }
+        }
+
+        // Function to add item to cart
+        function addToCart(name, price) {
+            const lang = localStorage.getItem('language') || 'en';
+            if (isNaN(price) || price <= 0) {
+                console.error(translations[lang].error_invalid_price);
+                alert(translations[lang].error_invalid_price);
+                return;
+            }
+            let cart;
+            try {
+                cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            } catch (error) {
+                console.error('Error parsing cart from localStorage:', error);
+                cart = [];
+            }
+            if (cart.some(item => item.name === name)) {
+                alert(`${name}${translations[lang].item_already_in_cart}`);
+                return;
+            }
+            cart.push({ name, price });
+            try {
+                localStorage.setItem('cart', JSON.stringify(cart));
+            } catch (error) {
+                console.error('Error saving cart to localStorage:', error);
+                return;
+            }
+            alert(`${name}${translations[lang].item_added_to_cart}`);
+            updateCartCount();
+        }
+
+        // Initialize on page load
+        window.addEventListener('load', function () {
+            const storedLang = localStorage.getItem('language') || 'en';
+            setLanguage(storedLang);
+            updateNavBar();
+            updateCartCount();
+            applyCpfMask();
+
+            document.querySelectorAll('.add-to-cart').forEach(button => {
+                button.addEventListener('click', function () {
+                    const name = this.getAttribute('data-name');
+                    const price = parseFloat(this.getAttribute('data-price'));
+                    addToCart(name, price);
+                });
+            });
+
+            const loginForm = document.getElementById('login-form');
+            if (loginForm) loginForm.addEventListener('submit', loginUser);
+
+            const registerForm = document.getElementById('register-form');
+            if (registerForm) registerForm.addEventListener('submit', registerUser);
+
+            document.querySelectorAll('.lang-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const lang = option.getAttribute('data-lang');
+                    setLanguage(lang);
+                });
             });
         });
-
-        const loginForm = document.getElementById('login-form');
-        if (loginForm) loginForm.addEventListener('submit', loginUser);
-
-        const registerForm = document.getElementById('register-form');
-        if (registerForm) registerForm.addEventListener('submit', registerUser);
-    });
     </script>
 </body>
 </html>
