@@ -14,7 +14,8 @@
             <div class="logo-text">GAME WORK STUDY</div>
             <div class="language-selector">
                 <span class="lang-option" data-lang="pt-BR" data-text="lang_pt" title="Português">PT</span>
-                    <span class="lang-option" data-lang="en" data-text="lang_en" title="English">EN</span>
+                <span class="lang-option" data-lang="en" data-text="lang_en" title="English">EN</span>
+            </div>
             <nav>
                 <ul>
                     <li><a href="#home" data-text="home">Home</a></li>
@@ -125,31 +126,31 @@
             <a href="configurador.html" class="cta-button" data-text="configurator_start">Comece a Montar</a>
             <a href="componentes.html" class="cta-button" data-text="configurator_components">Ver Componentes</a>
         </div>
+    </section>
 
-        <section class="avaliacao">
-            <h3 data-text="review_title">O que achou do nosso site?</h3>
-            <div class="estrelas">
-                <span class="estrela" data-valor="1">★</span>
-                <span class="estrela" data-valor="2">★</span>
-                <span class="estrela" data-valor="3">★</span>
-                <span class="estrela" data-valor="4">★</span>
-                <span class="estrela" data-valor="5">★</span>
-            </div>
-            <input type="hidden" id="avaliacao-estrelas" value="0">
-            <textarea id="avaliacao-comentario" placeholder="Deixe sua opinião..." data-text-placeholder="review_placeholder"></textarea>
-            <button class="cta-button enviar-avaliacao" onclick="enviarAvaliacao()" data-text="review_button">Enviar</button>
-            <p id="mensagem-avaliacao" style="display: none; color: green; margin-top: 10px;" data-text="review_success">
-                GWS agradece pela sua avaliação, espero que esteja gostando do nosso site!
-            </p>
-            <p id="avaliacao-error" style="color: red; display: none; margin-top: 10px;"></p>
-        </section>
+    <section class="avaliacao">
+        <h3 data-text="review_title">O que achou do nosso site?</h3>
+        <div class="estrelas">
+            <span class="estrela" data-valor="1">★</span>
+            <span class="estrela" data-valor="2">★</span>
+            <span class="estrela" data-valor="3">★</span>
+            <span class="estrela" data-valor="4">★</span>
+            <span class="estrela" data-valor="5">★</span>
+        </div>
+        <input type="hidden" id="avaliacao-estrelas" value="0">
+        <textarea id="avaliacao-comentario" placeholder="Deixe sua opinião..." data-text-placeholder="review_placeholder"></textarea>
+        <button class="cta-button enviar-avaliacao" onclick="enviarAvaliacao()" data-text="review_button">Enviar</button>
+        <p id="mensagem-avaliacao" style="display: none; color: green; margin-top: 10px;" data-text="review_success">
+            GWS agradece pela sua avaliação, espero que esteja gostando do nosso site!
+        </p>
+        <p id="avaliacao-error" style="color: red; display: none; margin-top: 10px;"></p>
+    </section>
 
-        <section class="sobre-gws">
-            <div class="container">
-                <h2 data-text="about_title">Sobre a GWS</h2>
-                <p data-text="about_text">A Game Work Study (GWS) é uma empresa dedicada a oferecer os melhores computadores gamers do mercado, com desempenho de ponta e personalização completa. Fundada por apaixonados por games e tecnologia, nosso objetivo é entregar qualidade, performance e estilo para cada jogador.</p>
-            </div>
-        </section>
+    <section class="sobre-gws">
+        <div class="container">
+            <h2 data-text="about_title">Sobre a GWS</h2>
+            <p data-text="about_text">A Game Work Study (GWS) é uma empresa dedicada a oferecer os melhores computadores gamers do mercado, com desempenho de ponta e personalização completa. Fundada por apaixonados por games e tecnologia, nosso objetivo é entregar qualidade, performance e estilo para cada jogador.</p>
+        </div>
     </section>
 
     <footer>
@@ -176,6 +177,8 @@
     const translations = {
         'pt-BR': {
             page_title: 'Game Work Study | PC Gamer',
+            lang_pt: 'PT',
+            lang_en: 'EN',
             home: 'Home',
             pc: 'PC',
             dashboard: 'Dashboard',
@@ -232,10 +235,13 @@
             register_age_min: 'Você deve ter pelo menos 18 anos.',
             alert_registration_success: 'Registro realizado com sucesso!',
             alert_login_success: 'Login realizado com sucesso!',
-            alert_logout_success: 'Logout realizado.'
+            alert_logout_success: 'Logout realizado.',
+            alert_not_logged_in: 'Você não está logado! Será redirecionado para a página inicial.'
         },
         'en': {
             page_title: 'Game Work Study | Gaming PC',
+            lang_pt: 'PT',
+            lang_en: 'EN',
             home: 'Home',
             pc: 'PC',
             dashboard: 'Dashboard',
@@ -292,339 +298,604 @@
             register_age_min: 'You must be at least 18 years old.',
             alert_registration_success: 'Registration successful!',
             alert_login_success: 'Login successful!',
-            alert_logout_success: 'Logged out.'
+            alert_logout_success: 'Logged out.',
+            alert_not_logged_in: 'You are not logged in! You will be redirected to the homepage.'
         }
     };
 
-   // Função para definir o idioma
-function setLanguage(lang) {
-    localStorage.setItem('language', lang);
-    document.documentElement.lang = lang; // Atualiza o atributo lang na tag <html>
+    // Função para definir o idioma
+    function setLanguage(lang) {
+        localStorage.setItem('language', lang);
+        document.documentElement.lang = lang; // Atualiza o atributo lang na tag <html>
 
-    // Atualiza textos com atributo data-text
-    document.querySelectorAll('[data-text]').forEach(element => {
-        const key = element.getAttribute('data-text');
-        if (translations[lang][key]) {
-            element.textContent = translations[lang][key];
-            // Preserva ícones para elementos de login ou carrinho
-            if (element.classList.contains('login') || element.classList.contains('cart')) {
-                const icon = element.querySelector('i');
-                if (icon) {
-                    element.innerHTML = '';
-                    element.appendChild(icon);
-                    element.appendChild(document.createTextNode(` ${translations[lang][key]}`));
+        // Atualiza textos com atributo data-text
+        document.querySelectorAll('[data-text]').forEach(element => {
+            const key = element.getAttribute('data-text');
+            if (translations[lang] && translations[lang][key]) {
+                // Preserva ícones para elementos de login ou carrinho
+                if (element.classList.contains('login') || element.classList.contains('cart')) {
+                    const icon = element.querySelector('i');
+                    if (icon) {
+                        element.innerHTML = '';
+                        element.appendChild(icon);
+                        element.appendChild(document.createTextNode(` ${translations[lang][key]}`));
+                    } else {
+                        element.textContent = translations[lang][key];
+                    }
+                } else {
+                    element.textContent = translations[lang][key];
                 }
             }
-        }
-    });
-
-    // Atualiza placeholders
-    document.querySelectorAll('[data-text-placeholder]').forEach(element => {
-        const key = element.getAttribute('data-text-placeholder');
-        if (translations[lang][key]) {
-            element.placeholder = translations[lang][key];
-        }
-    });
-
-    // Atualiza tooltips
-    document.querySelectorAll('.privacy-tooltip').forEach(tooltip => {
-        const key = tooltip.getAttribute('data-text');
-        if (key && translations[lang][key]) {
-            tooltip.innerHTML = translations[lang][key];
-        }
-    });
-
-    // Atualiza o título do modal de login/registro
-    const modalTitle = document.getElementById('modal-title');
-    if (modalTitle) {
-        modalTitle.textContent = document.getElementById('show-login')?.classList.contains('active') ?
-            translations[lang].modal_title_login : translations[lang].modal_title_register;
-    }
-
-    // Atualiza descrições dos PCs
-    const zeusDesc = document.querySelector('.pc-card:nth-child(1) .pc-info p[data-text="zeus_desc"]');
-    if (zeusDesc) zeusDesc.textContent = translations[lang].zeus_desc;
-    const herculesDesc = document.querySelector('.pc-card:nth-child(2) .pc-info p[data-text="hercules_desc"]');
-    if (herculesDesc) herculesDesc.textContent = translations[lang].hercules_desc;
-    const prometheusDesc = document.querySelector('.pc-card:nth-child(3) .pc-info p[data-text="prometheus_desc"]');
-    if (prometheusDesc) prometheusDesc.textContent = translations[lang].prometheus_desc;
-
-    // Atualiza mensagem de boas-vindas com o nome do usuário
-    const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
-    const savedNome = document.getElementById('saved-nome');
-    const dadosSalvos = document.querySelector('#dados-salvos h3');
-    if (currentUser.nome && savedNome && dadosSalvos) {
-        savedNome.textContent = currentUser.nome;
-        dadosSalvos.innerHTML = ${translations[lang].welcome_message_prefix} <span id="saved-nome">${currentUser.nome}</span>!;
-    }
-
-    // Atualiza estatísticas do carrinho no dashboard
-    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-    const cartStats = document.getElementById('cart-stats');
-    if (cartStats && cart.length > 0) {
-        const totalPrice = cart.reduce((acc, item) => acc + (item.price || item.preco || 0), 0);
-        cartStats.textContent = lang === 'pt-BR' ?
-            Total de itens: ${cart.length} | Valor total: R$ ${totalPrice.toLocaleString('pt-BR', { minimumFractionDigits: 2 })} :
-            Total items: ${cart.length} | Total value: R$ ${totalPrice.toLocaleString('en-US', { minimumFractionDigits: 2 })};
-    }
-
-    // Atualiza a classe active no seletor de idioma
-    document.querySelectorAll('.lang-option').forEach(option => {
-        option.classList.remove('active');
-        if (option.getAttribute('data-lang') === lang) {
-            option.classList.add('active');
-        }
-    });
-
-    // Atualiza dados do usuário no dashboard
-    if (currentUser.email) {
-        document.getElementById('nome-user').textContent = currentUser.nome || 'N/A';
-        document.getElementById('email-user').textContent = currentUser.email || 'N/A';
-        document.getElementById('cpf-user').textContent = formatCpf(currentUser.cpf) || 'N/A';
-        document.getElementById('idade-user').textContent = currentUser.idade || 'N/A';
-        document.getElementById('cep-user').textContent = currentUser.cep || 'N/A';
-    }
-
-    console.log('Idioma alterado para:', lang, 'Opção ativa:', document.querySelector('.lang-option.active')?.getAttribute('data-lang'));
-}
-
-// Event listener para o seletor de idioma
-document.querySelectorAll('.lang-option').forEach(option => {
-    option.addEventListener('click', () => {
-        const lang = option.getAttribute('data-lang');
-        setLanguage(lang);
-    });
-});
-
-// Inicializa o idioma na carga da página
-document.addEventListener('DOMContentLoaded', () => {
-    const savedLanguage = localStorage.getItem('language') || 'pt-BR'; // Padrão para pt-BR
-    setTimeout(() => {
-        setLanguage(savedLanguage);
-        loadUserData();
-        loadDashboard();
-        applyCpfMask();
-    }, 0);
-});
-
-// Função para carregar dados do dashboard
-function loadDashboard() {
-    console.log('Iniciando loadDashboard');
-    const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
-    console.log('currentUser:', currentUser);
-
-    if (!currentUser || !currentUser.email) {
-        console.log('Nenhum usuário logado, redirecionando...');
-        const lang = localStorage.getItem('language') || 'pt-BR';
-        alert(translations[lang].alert_not_logged_in || (lang === 'pt-BR' ? 'Você não está logado! Será redirecionado para a página inicial.' : 'You are not logged in! You will be redirected to the homepage.'));
-        window.location.href = 'index.html';
-        return;
-    }
-
-    // Carrega carrinho
-    let cart = [];
-    try {
-        cart = JSON.parse(localStorage.getItem('cart') || '[]');
-    } catch (e) {
-        console.error('Erro ao parsear carrinho:', e.message);
-    }
-    console.log('Carrinho:', cart);
-    const tbodyCart = document.querySelector('#cart-table tbody');
-    tbodyCart.innerHTML = '';
-
-    const lang = localStorage.getItem('language') || 'pt-BR';
-    if (!cart || cart.length === 0) {
-        document.getElementById('no-items').style.display = 'block';
-    } else {
-        document.getElementById('no-items').style.display = 'none';
-        cart.forEach(item => {
-            const tr = document.createElement('tr');
-            const tdName = document.createElement('td');
-            tdName.textContent = item.name || item.nome || 'Item Desconhecido';
-            const tdPrice = document.createElement('td');
-            tdPrice.textContent = (item.price || item.preco || 0).toLocaleString(lang === 'pt-BR' ? 'pt-BR' : 'en-US', { minimumFractionDigits: 2 });
-            tr.appendChild(tdName);
-            tr.appendChild(tdPrice);
-            tbodyCart.appendChild(tr);
         });
-    }
 
-    // Limpa avaliações inválidas
-    limparAvaliacoesInvalidas();
-
-    // Carrega avaliação do usuário atual
-    let avaliacoes = [];
-    try {
-        avaliacoes = JSON.parse(localStorage.getItem('avaliacoes') || '[]');
-    } catch (e) {
-        console.error('Erro ao parsear avaliações:', e.message);
-        avaliacoes = [];
-    }
-    console.log('Avaliações:', avaliacoes);
-    const tbodyAvaliacoes = document.querySelector('#avaliacoes-table tbody');
-    tbodyAvaliacoes.innerHTML = '';
-
-    const userEmail = currentUser.email.toLowerCase();
-    const avaliacaoUsuario = avaliacoes.filter(avaliacao => 
-        avaliacao.email && avaliacao.email.toLowerCase() === userEmail
-    );
-    console.log('Avaliação do usuário:', avaliacaoUsuario);
-
-    if (!avaliacaoUsuario || avaliacaoUsuario.length === 0) {
-        document.getElementById('no-avaliacoes').style.display = 'block';
-        console.log('Nenhuma avaliação encontrada para', userEmail);
-    } else {
-        document.getElementById('no-avaliacoes').style.display = 'none';
-        avaliacaoUsuario.forEach(avaliacao => {
-            console.log('Renderizando:', avaliacao);
-            const tr = document.createElement('tr');
-            const tdEstrelas = document.createElement('td');
-            tdEstrelas.textContent = avaliacao.estrelas && avaliacao.estrelas !== "0" 
-                ? "★".repeat(parseInt(avaliacao.estrelas)) 
-                : "N/A";
-            const tdComentario = document.createElement('td');
-            tdComentario.textContent = avaliacao.comentario || "N/A";
-            const tdData = document.createElement('td');
-            const tdHora = document.createElement('td');
-
-            if (avaliacao.data) {
-                const [data, hora] = avaliacao.data.split(', ');
-                tdData.textContent = data || 'N/A';
-                tdHora.textContent = hora || 'N/A';
-            } else {
-                tdData.textContent = 'N/A';
-                tdHora.textContent = 'N/A';
+        // Atualiza placeholders
+        document.querySelectorAll('[data-text-placeholder]').forEach(element => {
+            const key = element.getAttribute('data-text-placeholder');
+            if (translations[lang] && translations[lang][key]) {
+                element.placeholder = translations[lang][key];
             }
-
-            tr.appendChild(tdEstrelas);
-            tr.appendChild(tdComentario);
-            tr.appendChild(tdData);
-            tr.appendChild(tdHora);
-            tbodyAvaliacoes.appendChild(tr);
         });
-    }
-}
 
-// Função para limpar avaliações inválidas
-function limparAvaliacoesInvalidas() {
-    let avaliacoes = [];
-    try {
-        avaliacoes = JSON.parse(localStorage.getItem('avaliacoes') || '[]');
-    } catch (e) {
-        console.error('Erro ao parsear avaliações:', e.message);
-    }
-    avaliacoes = avaliacoes.filter(avaliacao => 
-        avaliacao.email && 
-        avaliacao.email.endsWith('@gmail.com') && 
-        avaliacao.estrelas && 
-        avaliacao.comentario
-    );
-    localStorage.setItem('avaliacoes', JSON.stringify(avaliacoes));
-    console.log('Avaliações inválidas removidas:', avaliacoes);
-}
+        // Atualiza tooltips
+        document.querySelectorAll('.privacy-tooltip').forEach(tooltip => {
+            const key = tooltip.getAttribute('data-text');
+            if (key && translations[lang] && translations[lang][key]) {
+                tooltip.innerHTML = translations[lang][key];
+            }
+        });
 
-// Função para limpar todas as avaliações
-function limparAvaliacoes() {
-    console.log('Limpando avaliações');
-    const lang = localStorage.getItem('language') || 'pt-BR';
-    if (confirm(lang === 'pt-BR' ? 
-        'Tem certeza que deseja limpar todas as avaliações? Esta ação não pode ser desfeita.' :
-        'Are you sure you want to clear all reviews? This action cannot be undone.')) {
-        localStorage.removeItem('avaliacoes');
-        alert(lang === 'pt-BR' ? 'Todas as avaliações foram removidas.' : 'All reviews have been removed.');
-        loadDashboard();
-    }
-}
-
-// Função para logout
-function logoutUser() {
-    console.log('Fazendo logout');
-    const lang = localStorage.getItem('language') || 'pt-BR';
-    localStorage.removeItem('currentUser');
-    alert(translations[lang].alert_logout_success || (lang === 'pt-BR' ? 'Você saiu da conta.' : 'You have logged out.'));
-    window.location.href = 'index.html';
-}
-
-// Função para formatar CPF
-function formatCpf(cpf) {
-    if (!cpf || cpf.length !== 11) return cpf || 'N/A';
-    return ${cpf.slice(0, 3)}.${cpf.slice(3, 6)}.${cpf.slice(6, 9)}-${cpf.slice(9)};
-}
-
-// Função para carregar dados do usuário
-function loadUserData() {
-    const userData = JSON.parse(localStorage.getItem('currentUser') || '{}');
-    const lang = localStorage.getItem('language') || 'pt-BR';
-    if (userData.email) {
-        document.getElementById('saved-nome').textContent = userData.nome || 'N/A';
-        document.querySelector('#dados-salvos h3').innerHTML = ${translations[lang].welcome_message_prefix} <span id="saved-nome">${userData.nome || 'N/A'}</span>!;
-        document.getElementById('saved-gmail').textContent = userData.email;
-        document.getElementById('saved-cpf').textContent = formatCpf(userData.cpf);
-        document.getElementById('saved-idade').textContent = userData.idade || 'N/A';
-        document.getElementById('saved-cep').textContent = userData.cep || 'N/A';
-        document.getElementById('login-link').style.display = 'none';
-        document.getElementById('logout-link').style.display = 'inline';
-        document.getElementById('dashboard-link').style.display = 'inline';
-    }
-}
-
-// Função para aplicar máscara de CPF
-function applyCpfMask() {
-    const cpfInput = document.getElementById('register-cpf');
-    const cpfErrorElement = document.getElementById('register-cpf-error');
-    const lang = localStorage.getItem('language') || 'pt-BR';
-
-    if (!cpfInput || !cpfErrorElement) return;
-    cpfInput.addEventListener('input', (e) => {
-        let value = e.target.value.replace(/\D/g, '');
-        if (value.length > 11) value = value.slice(0, 11);
-        if (value.length > 9) {
-            value = ${value.slice(0, 3)}.${value.slice(3, 6)}.${value.slice(6, 9)}-${value.slice(9)};
-        } else if (value.length > 6) {
-            value = ${value.slice(0, 3)}.${value.slice(3, 6)}.${value.slice(6)};
-        } else if (value.length > 3) {
-            value = ${value.slice(0, 3)}.${value.slice(3)};
+        // Atualiza o título do modal de login/registro
+        const modalTitle = document.getElementById('modal-title');
+        if (modalTitle) {
+            modalTitle.textContent = document.getElementById('show-login')?.classList.contains('active') ?
+                translations[lang].modal_title_login : translations[lang].modal_title_register;
         }
-        e.target.value = value.trim();
-        if (value.length === 14) {
-            if (!validateCpf(value)) {
-                cpfErrorElement.textContent = translations[lang].register_cpf_error || (lang === 'pt-BR' ? 'CPF inválido.' : 'Invalid CPF.');
-                cpfErrorElement.style.display = 'block';
-            } else {
-                const users = JSON.parse(localStorage.getItem('users') || '[]');
-                if (users.find(user => user.cpf === value.replace(/\D/g, ''))) {
-                    cpfErrorElement.textContent = translations[lang].register_cpf_duplicate || (lang === 'pt-BR' ? 'CPF já registrado.' : 'CPF already registered.');
+
+        // Atualiza descrições dos PCs
+        const zeusDesc = document.querySelector('.pc-card:nth-child(1) .pc-info p[data-text="zeus_desc"]');
+        if (zeusDesc) zeusDesc.textContent = translations[lang].zeus_desc;
+        const herculesDesc = document.querySelector('.pc-card:nth-child(2) .pc-info p[data-text="hercules_desc"]');
+        if (herculesDesc) herculesDesc.textContent = translations[lang].hercules_desc;
+        const prometheusDesc = document.querySelector('.pc-card:nth-child(3) .pc-info p[data-text="prometheus_desc"]');
+        if (prometheusDesc) prometheusDesc.textContent = translations[lang].prometheus_desc;
+
+        // Atualiza mensagem de boas-vindas com o nome do usuário
+        const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+        const savedNome = document.getElementById('saved-nome');
+        const dadosSalvosH3 = document.querySelector('#dados-salvos h3'); // Selecionar o H3
+        if (currentUser.nome && savedNome && dadosSalvosH3) { // Verificar se o H3 existe
+            savedNome.textContent = currentUser.nome;
+            dadosSalvosH3.innerHTML = `${translations[lang].welcome_message_prefix} <span id="saved-nome">${currentUser.nome}</span>!`;
+        }
+
+        // Atualiza estatísticas do carrinho no dashboard (se estiver na página do dashboard)
+        const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+        const cartStats = document.getElementById('cart-stats');
+        if (cartStats && cart.length > 0) {
+            const totalPrice = cart.reduce((acc, item) => acc + (item.price || item.preco || 0), 0);
+            cartStats.textContent = lang === 'pt-BR' ?
+                `Total de itens: ${cart.length} | Valor total: R$ ${totalPrice.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}` :
+                `Total items: ${cart.length} | Total value: R$ ${totalPrice.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+        }
+
+        // Atualiza a classe active no seletor de idioma
+        document.querySelectorAll('.lang-option').forEach(option => {
+            option.classList.remove('active');
+            if (option.getAttribute('data-lang') === lang) {
+                option.classList.add('active');
+            }
+        });
+
+        // Atualiza dados do usuário no dashboard
+        if (currentUser.email) {
+            if (document.getElementById('nome-user')) document.getElementById('nome-user').textContent = currentUser.nome || 'N/A';
+            if (document.getElementById('email-user')) document.getElementById('email-user').textContent = currentUser.email || 'N/A';
+            if (document.getElementById('cpf-user')) document.getElementById('cpf-user').textContent = formatCpf(currentUser.cpf) || 'N/A';
+            if (document.getElementById('idade-user')) document.getElementById('idade-user').textContent = currentUser.idade || 'N/A';
+            if (document.getElementById('cep-user')) document.getElementById('cep-user').textContent = currentUser.cep || 'N/A';
+        }
+
+        console.log('Idioma alterado para:', lang, 'Opção ativa:', document.querySelector('.lang-option.active')?.getAttribute('data-lang'));
+    }
+
+    // Event listener para o seletor de idioma
+    document.querySelectorAll('.lang-option').forEach(option => {
+        option.addEventListener('click', () => {
+            const lang = option.getAttribute('data-lang');
+            setLanguage(lang);
+        });
+    });
+
+    // Inicializa o idioma na carga da página
+    document.addEventListener('DOMContentLoaded', () => {
+        const savedLanguage = localStorage.getItem('language') || 'pt-BR'; // Padrão para pt-BR
+        setTimeout(() => {
+            setLanguage(savedLanguage);
+            loadUserData();
+            // Apenas chame loadDashboard se estiver na página do dashboard
+            if (window.location.pathname.includes('dashboard.html')) {
+                loadDashboard();
+            }
+            applyCpfMask();
+        }, 0);
+    });
+
+    // Função para carregar dados do dashboard
+    function loadDashboard() {
+        console.log('Iniciando loadDashboard');
+        const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+        console.log('currentUser:', currentUser);
+
+        if (!currentUser || !currentUser.email) {
+            console.log('Nenhum usuário logado, redirecionando...');
+            const lang = localStorage.getItem('language') || 'pt-BR';
+            alert(translations[lang].alert_not_logged_in);
+            window.location.href = 'index.html';
+            return;
+        }
+
+        // Carrega carrinho
+        let cart = [];
+        try {
+            cart = JSON.parse(localStorage.getItem('cart') || '[]');
+        } catch (e) {
+            console.error('Erro ao parsear carrinho:', e.message);
+        }
+        console.log('Carrinho:', cart);
+        const tbodyCart = document.querySelector('#cart-table tbody');
+        if (tbodyCart) tbodyCart.innerHTML = ''; // Ensure tbodyCart exists before clearing
+
+        const lang = localStorage.getItem('language') || 'pt-BR';
+        const noItemsElement = document.getElementById('no-items');
+        if (!cart || cart.length === 0) {
+            if (noItemsElement) noItemsElement.style.display = 'block';
+        } else {
+            if (noItemsElement) noItemsElement.style.display = 'none';
+            if (tbodyCart) {
+                cart.forEach(item => {
+                    const tr = document.createElement('tr');
+                    const tdName = document.createElement('td');
+                    tdName.textContent = item.name || item.nome || 'Item Desconhecido';
+                    const tdPrice = document.createElement('td');
+                    tdPrice.textContent = (item.price || item.preco || 0).toLocaleString(lang === 'pt-BR' ? 'pt-BR' : 'en-US', { minimumFractionDigits: 2 });
+                    tr.appendChild(tdName);
+                    tr.appendChild(tdPrice);
+                    tbodyCart.appendChild(tr);
+                });
+            }
+        }
+
+        // Limpa avaliações inválidas
+        limparAvaliacoesInvalidas();
+
+        // Carrega avaliação do usuário atual
+        let avaliacoes = [];
+        try {
+            avaliacoes = JSON.parse(localStorage.getItem('avaliacoes') || '[]');
+        } catch (e) {
+            console.error('Erro ao parsear avaliações:', e.message);
+            avaliacoes = [];
+        }
+        console.log('Avaliações:', avaliacoes);
+        const tbodyAvaliacoes = document.querySelector('#avaliacoes-table tbody');
+        if (tbodyAvaliacoes) tbodyAvaliacoes.innerHTML = ''; // Ensure tbodyAvaliacoes exists before clearing
+
+        const userEmail = currentUser.email ? currentUser.email.toLowerCase() : '';
+        const avaliacaoUsuario = avaliacoes.filter(avaliacao =>
+            avaliacao.email && avaliacao.email.toLowerCase() === userEmail
+        );
+        console.log('Avaliação do usuário:', avaliacaoUsuario);
+
+        const noAvaliacoesElement = document.getElementById('no-avaliacoes');
+        if (!avaliacaoUsuario || avaliacaoUsuario.length === 0) {
+            if (noAvaliacoesElement) noAvaliacoesElement.style.display = 'block';
+            console.log('Nenhuma avaliação encontrada para', userEmail);
+        } else {
+            if (noAvaliacoesElement) noAvaliacoesElement.style.display = 'none';
+            if (tbodyAvaliacoes) {
+                avaliacaoUsuario.forEach(avaliacao => {
+                    console.log('Renderizando:', avaliacao);
+                    const tr = document.createElement('tr');
+                    const tdEstrelas = document.createElement('td');
+                    tdEstrelas.textContent = avaliacao.estrelas && avaliacao.estrelas !== "0"
+                        ? "★".repeat(parseInt(avaliacao.estrelas))
+                        : "N/A";
+                    const tdComentario = document.createElement('td');
+                    tdComentario.textContent = avaliacao.comentario || "N/A";
+                    const tdData = document.createElement('td');
+                    const tdHora = document.createElement('td');
+
+                    if (avaliacao.data) {
+                        const [data, hora] = avaliacao.data.split(', ');
+                        tdData.textContent = data || 'N/A';
+                        tdHora.textContent = hora || 'N/A';
+                    } else {
+                        tdData.textContent = 'N/A';
+                        tdHora.textContent = 'N/A';
+                    }
+
+                    tr.appendChild(tdEstrelas);
+                    tr.appendChild(tdComentario);
+                    tr.appendChild(tdData);
+                    tr.appendChild(tdHora);
+                    tbodyAvaliacoes.appendChild(tr);
+                });
+            }
+        }
+    }
+
+    // Função para limpar avaliações inválidas
+    function limparAvaliacoesInvalidas() {
+        let avaliacoes = [];
+        try {
+            avaliacoes = JSON.parse(localStorage.getItem('avaliacoes') || '[]');
+        } catch (e) {
+            console.error('Erro ao parsear avaliações:', e.message);
+        }
+        avaliacoes = avaliacoes.filter(avaliacao =>
+            avaliacao.email &&
+            avaliacao.email.endsWith('@gmail.com') &&
+            avaliacao.estrelas &&
+            avaliacao.comentario
+        );
+        localStorage.setItem('avaliacoes', JSON.stringify(avaliacoes));
+        console.log('Avaliações inválidas removidas:', avaliacoes);
+    }
+
+    // Função para limpar todas as avaliações
+    function limparAvaliacoes() {
+        console.log('Limpando avaliações');
+        const lang = localStorage.getItem('language') || 'pt-BR';
+        if (confirm(translations[lang].clear_reviews_confirm || (lang === 'pt-BR' ? 'Tem certeza que deseja limpar todas as avaliações? Esta ação não pode ser desfeita.' : 'Are you sure you want to clear all reviews? This action cannot be undone.'))) {
+            localStorage.removeItem('avaliacoes');
+            alert(translations[lang].clear_reviews_success || (lang === 'pt-BR' ? 'Todas as avaliações foram removidas.' : 'All reviews have been removed.'));
+            loadDashboard();
+        }
+    }
+
+    // Função para logout
+    function logoutUser() {
+        console.log('Fazendo logout');
+        const lang = localStorage.getItem('language') || 'pt-BR';
+        localStorage.removeItem('currentUser');
+        alert(translations[lang].alert_logout_success);
+        window.location.href = 'index.html';
+    }
+
+    // Função para formatar CPF
+    function formatCpf(cpf) {
+        if (!cpf) return 'N/A';
+        const cleanedCpf = cpf.replace(/\D/g, '');
+        if (cleanedCpf.length !== 11) return cpf; // Return original if not 11 digits
+        return `${cleanedCpf.slice(0, 3)}.${cleanedCpf.slice(3, 6)}.${cleanedCpf.slice(6, 9)}-${cleanedCpf.slice(9)}`;
+    }
+
+    // Função para carregar dados do usuário
+    function loadUserData() {
+        const userData = JSON.parse(localStorage.getItem('currentUser') || '{}');
+        const lang = localStorage.getItem('language') || 'pt-BR';
+        if (userData.email) {
+            document.getElementById('saved-nome').textContent = userData.nome || 'N/A';
+            const dadosSalvosH3 = document.querySelector('#dados-salvos h3');
+            if (dadosSalvosH3) {
+                dadosSalvosH3.innerHTML = `${translations[lang].welcome_message_prefix} <span id="saved-nome">${userData.nome || 'N/A'}</span>!`;
+            }
+            document.getElementById('saved-gmail').textContent = userData.email;
+            document.getElementById('saved-cpf').textContent = formatCpf(userData.cpf);
+            document.getElementById('saved-idade').textContent = userData.idade || 'N/A';
+            document.getElementById('saved-cep').textContent = userData.cep || 'N/A';
+            document.getElementById('login-link').style.display = 'none';
+            document.getElementById('logout-link').style.display = 'inline';
+            document.getElementById('dashboard-link').style.display = 'inline';
+        }
+    }
+
+    // Função para aplicar máscara de CPF
+    function applyCpfMask() {
+        const cpfInput = document.getElementById('register-cpf');
+        const cpfErrorElement = document.getElementById('register-cpf-error');
+        const lang = localStorage.getItem('language') || 'pt-BR';
+
+        if (!cpfInput || !cpfErrorElement) return;
+        cpfInput.addEventListener('input', (e) => {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 11) value = value.slice(0, 11);
+            if (value.length > 9) {
+                value = `${value.slice(0, 3)}.${value.slice(3, 6)}.${value.slice(6, 9)}-${value.slice(9)}`;
+            } else if (value.length > 6) {
+                value = `${value.slice(0, 3)}.${value.slice(3, 6)}.${value.slice(6)}`;
+            } else if (value.length > 3) {
+                value = `${value.slice(0, 3)}.${value.slice(3)}`;
+            }
+            e.target.value = value.trim();
+            if (value.length === 14) {
+                if (!validateCpf(value)) {
+                    cpfErrorElement.textContent = translations[lang].register_cpf_error;
                     cpfErrorElement.style.display = 'block';
                 } else {
-                    cpfErrorElement.style.display = 'none';
+                    const users = JSON.parse(localStorage.getItem('users') || '[]');
+                    if (users.find(user => user.cpf === value.replace(/\D/g, ''))) {
+                        cpfErrorElement.textContent = translations[lang].register_cpf_duplicate;
+                        cpfErrorElement.style.display = 'block';
+                    } else {
+                        cpfErrorElement.style.display = 'none';
+                    }
                 }
+            } else {
+                cpfErrorElement.style.display = 'none';
             }
+        });
+    }
+
+    // Função para validar CPF (adicionado para completar a função applyCpfMask)
+    function validateCpf(cpf) {
+        cpf = cpf.replace(/\D/g, '');
+        if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) {
+            return false;
+        }
+        let sum = 0;
+        let remainder;
+        for (let i = 1; i <= 9; i++) {
+            sum = sum + parseInt(cpf.substring(i - 1, i)) * (11 - i);
+        }
+        remainder = (sum * 10) % 11;
+        if ((remainder === 10) || (remainder === 11)) {
+            remainder = 0;
+        }
+        if (remainder !== parseInt(cpf.substring(9, 10))) {
+            return false;
+        }
+        sum = 0;
+        for (let i = 1; i <= 10; i++) {
+            sum = sum + parseInt(cpf.substring(i - 1, i)) * (12 - i);
+        }
+        remainder = (sum * 10) % 11;
+        if ((remainder === 10) || (remainder === 11)) {
+            remainder = 0;
+        }
+        if (remainder !== parseInt(cpf.substring(10, 11))) {
+            return false;
+        }
+        return true;
+    }
+
+    // Funções de modal (assumo que existem em outro lugar ou precisam ser adicionadas)
+    function openLoginModal() {
+        document.getElementById('login-modal').style.display = 'block';
+        showLoginForm(); // Certifica-se de que o formulário de login é exibido por padrão
+        const lang = localStorage.getItem('language') || 'pt-BR';
+        document.getElementById('modal-title').textContent = translations[lang].modal_title_login;
+    }
+
+    function closeLoginModal() {
+        document.getElementById('login-modal').style.display = 'none';
+        document.getElementById('login-error').style.display = 'none';
+        document.getElementById('register-error').style.display = 'none';
+        document.getElementById('register-cpf-error').style.display = 'none';
+    }
+
+    function showLoginForm() {
+        document.getElementById('login-form-container').style.display = 'block';
+        document.getElementById('register-form-container').style.display = 'none';
+        document.getElementById('show-login').classList.add('active');
+        document.getElementById('show-register').classList.remove('active');
+        document.getElementById('dados-salvos').style.display = 'none'; // Esconde dados salvos ao alternar
+        document.getElementById('login-error').style.display = 'none'; // Esconde erros anteriores
+        document.getElementById('register-error').style.display = 'none';
+        document.getElementById('register-cpf-error').style.display = 'none';
+        const lang = localStorage.getItem('language') || 'pt-BR';
+        document.getElementById('modal-title').textContent = translations[lang].modal_title_login;
+    }
+
+    function showRegisterForm() {
+        document.getElementById('login-form-container').style.display = 'none';
+        document.getElementById('register-form-container').style.display = 'block';
+        document.getElementById('show-login').classList.remove('active');
+        document.getElementById('show-register').classList.add('active');
+        document.getElementById('dados-salvos').style.display = 'none'; // Esconde dados salvos ao alternar
+        document.getElementById('login-error').style.display = 'none'; // Esconde erros anteriores
+        document.getElementById('register-error').style.display = 'none';
+        document.getElementById('register-cpf-error').style.display = 'none';
+        const lang = localStorage.getItem('language') || 'pt-BR';
+        document.getElementById('modal-title').textContent = translations[lang].modal_title_register;
+    }
+
+    // Funções de login e registro (básicas, sem backend)
+    document.getElementById('login-form')?.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const email = document.getElementById('login-gmail').value;
+        const password = document.getElementById('login-password').value;
+        const loginError = document.getElementById('login-error');
+        const users = JSON.parse(localStorage.getItem('users') || '[]');
+        const lang = localStorage.getItem('language') || 'pt-BR';
+
+        const user = users.find(u => u.email === email && u.password === password);
+
+        if (user) {
+            localStorage.setItem('currentUser', JSON.stringify(user));
+            loginError.style.display = 'none';
+            alert(translations[lang].alert_login_success);
+            loadUserData();
+            closeLoginModal();
+            // Redireciona para o dashboard se for um login bem-sucedido
+            window.location.href = 'dashboard.html';
         } else {
-            cpfErrorElement.style.display = 'none';
+            loginError.textContent = translations[lang].login_error;
+            loginError.style.display = 'block';
         }
     });
-    cpfInput.addEventListener('focus', () => {
-        cpfErrorElement.style.display = 'none';
-    });
-}
 
-// Função para validar CPF
-function validateCpf(cpf) {
-    cpf = cpf.replace(/\D/g, '');
-    if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) return false;
-    let sum = 0;
-    let remainder;
-    for (let i = 1; i <= 9; i++) sum += parseInt(cpf.charAt(i - 1)) * (11 - i);
-    remainder = (sum * 10) % 11;
-    if (remainder === 10 || remainder === 11) remainder = 0;
-    if (remainder !== parseInt(cpf.charAt(9))) return false;
-    sum = 0;
-    for (let i = 1; i <= 10; i++) sum += parseInt(cpf.charAt(i - 1)) * (12 - i);
-    remainder = (sum * 10) % 11;
-    if (remainder === 10 || remainder === 11) remainder = 0;
-    if (remainder !== parseInt(cpf.charAt(10))) return false;
-    return true;
-}
+    document.getElementById('register-form')?.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const nome = document.getElementById('register-nome').value.trim();
+        const email = document.getElementById('register-gmail').value.trim();
+        const password = document.getElementById('register-password').value;
+        const cpf = document.getElementById('register-cpf').value.replace(/\D/g, '');
+        const idade = document.getElementById('register-idade').value;
+        const cep = document.getElementById('register-cep').value;
+        const registerError = document.getElementById('register-error');
+        const cpfError = document.getElementById('register-cpf-error');
+        const lang = localStorage.getItem('language') || 'pt-BR';
+
+        registerError.style.display = 'none';
+        cpfError.style.display = 'none';
+
+        if (!nome || !email || !password || !cpf || !idade || !cep) {
+            registerError.textContent = translations[lang].register_fields_missing;
+            registerError.style.display = 'block';
+            return;
+        }
+
+        if (!email.endsWith('@gmail.com')) {
+            registerError.textContent = translations[lang].register_gmail_only;
+            registerError.style.display = 'block';
+            return;
+        }
+
+        if (parseInt(idade) < 18) {
+            registerError.textContent = translations[lang].register_age_min;
+            registerError.style.display = 'block';
+            return;
+        }
+
+        if (!validateCpf(cpf)) {
+            cpfError.textContent = translations[lang].register_cpf_error;
+            cpfError.style.display = 'block';
+            return;
+        }
+
+        let users = JSON.parse(localStorage.getItem('users') || '[]');
+
+        if (users.find(u => u.cpf === cpf)) {
+            cpfError.textContent = translations[lang].register_cpf_duplicate;
+            cpfError.style.display = 'block';
+            return;
+        }
+
+        if (users.find(u => u.email === email)) {
+            registerError.textContent = translations[lang].register_email_duplicate;
+            registerError.style.display = 'block';
+            return;
+        }
+
+        const newUser = { nome, email, password, cpf, idade, cep };
+        users.push(newUser);
+        localStorage.setItem('users', JSON.stringify(users));
+        localStorage.setItem('currentUser', JSON.stringify(newUser));
+
+        alert(translations[lang].alert_registration_success);
+        loadUserData();
+        closeLoginModal();
+        // Redireciona para o dashboard após o registro bem-sucedido
+        window.location.href = 'dashboard.html';
+    });
+
+    // Função para enviar avaliação (simulada)
+    function enviarAvaliacao() {
+        const estrelas = document.getElementById('avaliacao-estrelas').value;
+        const comentario = document.getElementById('avaliacao-comentario').value.trim();
+        const mensagemAvaliacao = document.getElementById('mensagem-avaliacao');
+        const avaliacaoError = document.getElementById('avaliacao-error');
+        const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+        const lang = localStorage.getItem('language') || 'pt-BR';
+
+        if (!currentUser || !currentUser.email) {
+            avaliacaoError.textContent = translations[lang].alert_not_logged_in;
+            avaliacaoError.style.color = 'red';
+            avaliacaoError.style.display = 'block';
+            mensagemAvaliacao.style.display = 'none';
+            return;
+        }
+
+        if (estrelas === "0" || !comentario) {
+            avaliacaoError.textContent = lang === 'pt-BR' ? 'Por favor, selecione as estrelas e escreva um comentário.' : 'Please select stars and write a comment.';
+            avaliacaoError.style.color = 'red';
+            avaliacaoError.style.display = 'block';
+            mensagemAvaliacao.style.display = 'none';
+            return;
+        }
+
+        let avaliacoes = JSON.parse(localStorage.getItem('avaliacoes') || '[]');
+        const dataAtual = new Date().toLocaleString(lang === 'pt-BR' ? 'pt-BR' : 'en-US');
+
+        // Remover avaliação antiga do usuário, se houver
+        avaliacoes = avaliacoes.filter(avaliacao => avaliacao.email !== currentUser.email);
+
+        avaliacoes.push({
+            email: currentUser.email,
+            estrelas: estrelas,
+            comentario: comentario,
+            data: dataAtual
+        });
+        localStorage.setItem('avaliacoes', JSON.stringify(avaliacoes));
+
+        mensagemAvaliacao.textContent = translations[lang].review_success;
+        mensagemAvaliacao.style.color = 'green';
+        mensagemAvaliacao.style.display = 'block';
+        avaliacaoError.style.display = 'none';
+
+        // Limpar o formulário após o envio
+        document.getElementById('avaliacao-estrelas').value = "0";
+        document.getElementById('avaliacao-comentario').value = "";
+        document.querySelectorAll('.estrela').forEach(star => {
+            star.classList.remove('active');
+        });
+        
+        // Atualiza o dashboard se estivermos na página do dashboard
+        if (window.location.pathname.includes('dashboard.html')) {
+            loadDashboard();
+        }
+    }
+
+    // Adiciona event listeners para as estrelas
+    document.querySelectorAll('.estrela').forEach(estrela => {
+        estrela.addEventListener('click', () => {
+            const valor = estrela.getAttribute('data-valor');
+            document.getElementById('avaliacao-estrelas').value = valor;
+            document.querySelectorAll('.estrela').forEach(s => {
+                if (parseInt(s.getAttribute('data-valor')) <= parseInt(valor)) {
+                    s.classList.add('active');
+                } else {
+                    s.classList.remove('active');
+                }
+            });
+        });
+    });
+
+    // Funcionalidade de adicionar ao carrinho
+    document.querySelectorAll('.add-to-cart').forEach(button => {
+        button.addEventListener('click', (event) => {
+            const name = event.target.getAttribute('data-name');
+            const price = parseFloat(event.target.getAttribute('data-price'));
+            let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            cart.push({ name, price });
+            localStorage.setItem('cart', JSON.stringify(cart));
+            const lang = localStorage.getItem('language') || 'pt-BR';
+            alert(`${name} ${lang === 'pt-BR' ? 'adicionado ao carrinho!' : 'added to cart!'}`);
+        });
+    });
+
+    // Limpa o carrinho
+    function clearCart() {
+        const lang = localStorage.getItem('language') || 'pt-BR';
+        if (confirm(lang === 'pt-BR' ? 'Tem certeza que deseja limpar o carrinho?' : 'Are you sure you want to clear the cart?')) {
+            localStorage.removeItem('cart');
+            alert(lang === 'pt-BR' ? 'Carrinho limpo!' : 'Cart cleared!');
+            if (window.location.pathname.includes('dashboard.html')) {
+                loadDashboard(); // Atualiza o dashboard após limpar o carrinho
+            }
+        }
+    }
+
+    // Adiciona a função clearCart ao window para ser acessível globalmente
+    window.clearCart = clearCart;
+    window.enviarAvaliacao = enviarAvaliacao;
+    window.logoutUser = logoutUser;
+    window.openLoginModal = openLoginModal;
+    window.closeLoginModal = closeLoginModal;
+    window.showLoginForm = showLoginForm;
+    window.showRegisterForm = showRegisterForm;
+
     </script>
 </body>
 </html>
