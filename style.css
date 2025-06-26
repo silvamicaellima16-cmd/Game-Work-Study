@@ -203,7 +203,7 @@ nav ul li.cart i {
 }
 
 .card-button:hover {
-    background: linear-gradient(135deg, #e5e7eb, #9ca3af);
+    background: linear-gradient(135deg, #e5e7eb, #ffffff);
 }
 
 /* Configurator Section */
@@ -447,13 +447,13 @@ footer ul li.privacy:hover .privacy-tooltip {
 .contato-hover:hover .contato-info {
     display: block;
 }
-  .avaliacao {
+.avaliacao {
     text-align: center;
     padding: 40px 24px;
     background-color: #1e293b;
-  }
-  
-  .avaliacao textarea {
+}
+
+.avaliacao textarea {
     width: 100%;
     max-width: 600px;
     height: 120px;
@@ -464,23 +464,23 @@ footer ul li.privacy:hover .privacy-tooltip {
     font-size: 16px;
     resize: vertical;
     margin-bottom: 16px;
-  }
-  .enviar-avaliacao {
+}
+.enviar-avaliacao {
     padding: 12px 24px; /* Reduzido em relação ao cta-button padrão */
     font-size: 16px; /* Tamanho de fonte menor */
 }
-  .sobre-gws {
+.sobre-gws {
     padding: 60px 24px;
     background-color: #0f172a;
     color: #e2e8f0;
     text-align: center;
-  }
-  
-  .sobre-gws h2 {
+}
+
+.sobre-gws h2 {
     font-size: 32px;
     margin-bottom: 24px;
-  }
-  .add-to-cart {
+}
+.add-to-cart {
     background: linear-gradient(135deg, #60a5fa, #3b82f6);
     color: #fff;
     padding: 12px 24px;
@@ -847,15 +847,14 @@ footer ul li.privacy:hover .privacy-tooltip {
     margin-top: 10px;
     display: block;
     border-radius: 4px;
-    
 }
 #pix-info {
     display: flex;
     flex-direction: column;
-    align-items: center; 
-    justify-content: center; 
-    text-align: center; 
-    padding: 20px; 
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
 }
 #configurador
 .component-grid {
@@ -994,4 +993,40 @@ footer ul li.privacy:hover .privacy-tooltip {
 
 #mensagem-avaliacao {
     font-size: 16px;
+}
+.language-selector {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    margin-left: 20px;
+    flex-wrap: nowrap;
+}
+
+.lang-option {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #2d3748;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 700;
+    transition: background-color 0.3s, border-color 0.3s, transform 0.2s;
+    border: 2px solid #4b5563;
+}
+
+.lang-option.active {
+    background-color: #1e40af; /* Azul mais vibrante para destacar */
+    border-color: #1e3a8a; /* Borda azul escura */
+    box-shadow: 0 0 8px rgba(30, 64, 175, 0.5); /* Sombra para destaque */
+    transform: scale(1.1); /* Leve aumento de escala */
+}
+
+.lang-option:hover:not(.active) {
+    background-color: #4b5563;
+    border-color: #6b7280;
 }
