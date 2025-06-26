@@ -85,63 +85,180 @@
     .clear-button:hover {
       background-color: #2d3748;
     }
+    /* Estilo para o seletor de idioma */
+    .language-selector {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 8px;
+      margin-left: 20px;
+      flex-wrap: nowrap;
+    }
+    .lang-option {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: #2d3748;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 700;
+      transition: background-color 0.3s, border-color 0.3s;
+      border: 2px solid #4b5563;
+    }
+    .lang-option.active {
+      background-color: #062d47;
+      border-color: #0a4b78;
+    }
+    .lang-option:hover {
+      background-color: #4b5563;
+      border-color: #6b7280;
+    }
   </style>
 </head>
 <body>
 
 <header>
-  <h1>Dashboard - Game Work Study</h1>
-  <button onclick="logoutUser()">Sair</button>
+  <h1 data-text="dashboard_title">Dashboard - Game Work Study</h1>
+  <div class="language-selector">
+    <span class="lang-option active" data-lang="pt-BR" title="Português">PT</span>
+    <span class="lang-option" data-lang="en" title="English">EN</span>
+  </div>
+  <button data-text="logout" onclick="logoutUser()">Sair</button>
 </header>
 
 <main>
   <section id="user-info">
-    <h2>Seus Dados</h2>
-    <p><strong>Nome:</strong> <span id="nome-user">Carregando...</span></p>
-    <p><strong>Email:</strong> <span id="email-user">Carregando...</span></p>
-    <p><strong>CPF:</strong> <span id="cpf-user">Carregando...</span></p>
-    <p><strong>Idade:</strong> <span id="idade-user">Carregando...</span></p>
-    <p><strong>CEP:</strong> <span id="cep-user">Carregando...</span></p>
+    <h2 data-text="user_info_title">Seus Dados</h2>
+    <p><strong data-text="name_label">Nome:</strong> <span id="nome-user">Carregando...</span></p>
+    <p><strong data-text="email_label">Email:</strong> <span id="email-user">Carregando...</span></p>
+    <p><strong data-text="cpf_label">CPF:</strong> <span id="cpf-user">Carregando...</span></p>
+    <p><strong data-text="age_label">Idade:</strong> <span id="idade-user">Carregando...</span></p>
+    <p><strong data-text="zip_label">CEP:</strong> <span id="cep-user">Carregando...</span></p>
   </section>
 
   <section id="cart-info">
-    <h2>Itens no Carrinho</h2>
+    <h2 data-text="cart_title">Itens no Carrinho</h2>
     <table id="cart-table">
       <thead>
         <tr>
-          <th>PC</th>
-          <th>Preço (R$)</th>
+          <th data-text="cart_pc">PC</th>
+          <th data-text="cart_price">Preço (R$)</th>
         </tr>
       </thead>
       <tbody>
         <!-- Linhas vão ser inseridas via JS -->
       </tbody>
     </table>
-    <p class="no-data" id="no-items" style="display:none;">Nenhum item no carrinho.</p>
+    <p class="no-data" id="no-items" style="display:none;" data-text="no_items">Nenhum item no carrinho.</p>
     <p class="stats" id="cart-stats"></p>
   </section>
 
   <section id="avaliacoes-info">
-    <h2>Sua Avaliação</h2>
+    <h2 data-text="review_title">Sua Avaliação</h2>
     <table id="avaliacoes-table">
       <thead>
         <tr>
-          <th>Estrelas</th>
-          <th>Comentário</th>
-          <th>Data</th>
-          <th>Hora</th>
+          <th data-text="review_stars">Estrelas</th>
+          <th data-text="review_comment">Comentário</th>
+          <th data-text="review_date">Data</th>
+          <th data-text="review_time">Hora</th>
         </tr>
       </thead>
       <tbody>
         <!-- Linhas vão ser inseridas via JS -->
       </tbody>
     </table>
-    <p class="no-data" id="no-avaliacoes" style="display:none;">Nenhuma avaliação registrada</p>
-    <button class="clear-button" onclick="limparAvaliacoes()">Limpar Avaliações</button>
+    <p class="no-data" id="no-avaliacoes" style="display:none;" data-text="no_reviews">Nenhuma avaliação registrada</p>
+    <button class="clear-button" data-text="clear_reviews" onclick="limparAvaliacoes()">Limpar Avaliações</button>
   </section>
 </main>
 
 <script>
+  // Objeto de tradução
+  const translations = {
+    'pt-BR': {
+      dashboard_title: 'Dashboard - Game Work Study',
+      logout: 'Sair',
+      user_info_title: 'Seus Dados',
+      name_label: 'Nome',
+      email_label: 'Email',
+      cpf_label: 'CPF',
+      age_label: 'Idade',
+      zip_label: 'CEP',
+      cart_title: 'Itens no Carrinho',
+      cart_pc: 'PC',
+      cart_price: 'Preço (R$)',
+      no_items: 'Nenhum item no carrinho.',
+      review_title: 'Sua Avaliação',
+      review_stars: 'Estrelas',
+      review_comment: 'Comentário',
+      review_date: 'Data',
+      review_time: 'Hora',
+      no_reviews: 'Nenhuma avaliação registrada',
+      clear_reviews: 'Limpar Avaliações'
+    },
+    'en': {
+      dashboard_title: 'Dashboard - Game Work Study',
+      logout: 'Log out',
+      user_info_title: 'Your Information',
+      name_label: 'Name',
+      email_label: 'Email',
+      cpf_label: 'CPF',
+      age_label: 'Age',
+      zip_label: 'ZIP Code',
+      cart_title: 'Cart Items',
+      cart_pc: 'PC',
+      cart_price: 'Price (R$)',
+      no_items: 'No items in the cart.',
+      review_title: 'Your Review',
+      review_stars: 'Stars',
+      review_comment: 'Comment',
+      review_date: 'Date',
+      review_time: 'Time',
+      no_reviews: 'No reviews submitted',
+      clear_reviews: 'Clear Reviews'
+    }
+  };
+
+  // Função para definir o idioma
+  function setLanguage(lang) {
+    localStorage.setItem('language', lang);
+    document.querySelectorAll('[data-text]').forEach(element => {
+      const key = element.getAttribute('data-text');
+      if (translations[lang][key]) {
+        element.textContent = translations[lang][key];
+      }
+    });
+    // Atualiza o texto dinâmico do carrinho
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    if (cart.length > 0) {
+      const totalPrice = cart.reduce((acc, item) => acc + (item.price || item.preco || 0), 0);
+      document.getElementById('cart-stats').textContent = lang === 'pt-BR' ?
+        `Total de itens: ${cart.length} | Valor total: R$ ${totalPrice.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}` :
+        `Total items: ${cart.length} | Total value: R$ ${totalPrice.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+    }
+    // Atualiza a classe active no seletor de idioma
+    document.querySelectorAll('.lang-option').forEach(option => {
+      option.classList.remove('active');
+      if (option.getAttribute('data-lang') === lang) {
+        option.classList.add('active');
+      }
+    });
+    console.log('Idioma alterado para:', lang);
+  }
+
+  // Evento para o seletor de idioma
+  document.querySelectorAll('.lang-option').forEach(option => {
+    option.addEventListener('click', () => {
+      const lang = option.getAttribute('data-lang');
+      setLanguage(lang);
+    });
+  });
+
   // Função para limpar avaliações inválidas
   function limparAvaliacoesInvalidas() {
     let avaliacoes = [];
@@ -191,9 +308,9 @@
     const tbodyCart = document.querySelector('#cart-table tbody');
     tbodyCart.innerHTML = '';
 
+    const lang = localStorage.getItem('language') || 'pt-BR';
     if (!cart || cart.length === 0) {
       document.getElementById('no-items').style.display = 'block';
-      document.getElementById('cart-stats').textContent = '';
     } else {
       document.getElementById('no-items').style.display = 'none';
       cart.forEach(item => {
@@ -201,13 +318,15 @@
         const tdName = document.createElement('td');
         tdName.textContent = item.name || item.nome || 'Item Desconhecido';
         const tdPrice = document.createElement('td');
-        tdPrice.textContent = (item.price || item.preco || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+        tdPrice.textContent = (item.price || item.preco || 0).toLocaleString(lang === 'pt-BR' ? 'pt-BR' : 'en-US', { minimumFractionDigits: 2 });
         tr.appendChild(tdName);
         tr.appendChild(tdPrice);
         tbodyCart.appendChild(tr);
       });
       const totalPrice = cart.reduce((acc, item) => acc + (item.price || item.preco || 0), 0);
-      document.getElementById('cart-stats').textContent = `Total de itens: ${cart.length} | Valor total: R$ ${totalPrice.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+      document.getElementById('cart-stats').textContent = lang === 'pt-BR' ?
+        `Total de itens: ${cart.length} | Valor total: R$ ${totalPrice.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}` :
+        `Total items: ${cart.length} | Total value: R$ ${totalPrice.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
     }
 
     // Limpa avaliações inválidas
@@ -271,9 +390,12 @@
   // Função para limpar todas as avaliações
   function limparAvaliacoes() {
     console.log('Limpando avaliações');
-    if (confirm('Tem certeza que deseja limpar todas as avaliações? Esta ação não pode ser desfeita.')) {
+    const lang = localStorage.getItem('language') || 'pt-BR';
+    if (confirm(lang === 'pt-BR' ? 
+      'Tem certeza que deseja limpar todas as avaliações? Esta ação não pode ser desfeita.' :
+      'Are you sure you want to clear all reviews? This action cannot be undone.')) {
       localStorage.removeItem('avaliacoes');
-      alert('Todas as avaliações foram removidas.');
+      alert(lang === 'pt-BR' ? 'Todas as avaliações foram removidas.' : 'All reviews have been removed.');
       loadDashboard();
     }
   }
@@ -281,13 +403,18 @@
   // Função logout
   function logoutUser() {
     console.log('Fazendo logout');
+    const lang = localStorage.getItem('language') || 'pt-BR';
     localStorage.removeItem('currentUser');
-    alert('Você saiu da conta.');
+    alert(lang === 'pt-BR' ? 'Você saiu da conta.' : 'You have logged out.');
     window.location.href = 'index.html';
   }
 
   // Executa ao carregar a página
-  window.onload = loadDashboard;
+  window.onload = function() {
+    const savedLanguage = localStorage.getItem('language') || 'pt-BR';
+    setLanguage(savedLanguage);
+    loadDashboard();
+  };
 </script>
 
 </body>
