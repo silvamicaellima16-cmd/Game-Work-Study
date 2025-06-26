@@ -63,6 +63,500 @@
                 alert(`${name} foi adicionado ao carrinho!`);
             });
         });
+          // Function to set the language
+        function setLanguage(lang) {
+            try {
+                // Validate language
+                if (!translations[lang]) {
+                    console.error('Unsupported language:', lang);
+                    lang = 'en'; // Default to English
+                }
+
+                // Update HTML lang attribute
+                document.documentElement.lang = lang;
+
+                // Update page title
+                const titleElement = document.querySelector('title');
+                if (titleElement) {
+                    titleElement.textContent = translations[lang].page_title;
+                }
+
+                // Update text for elements with data-text attribute
+                document.querySelectorAll('[data-text]').forEach(element => {
+                    const key = element.getAttribute('data-text');
+                    if (translations[lang][key]) {
+                        if (element.classList.contains('login') || element.classList.contains('cart')) {
+                            const icon = element.querySelector('i');
+                            if (icon) {
+                                element.innerHTML = '';
+                                element.appendChild(icon);
+                                element.appendChild(document.createTextNode(` ${translations[lang][key]}`));
+                            }
+                        } else {
+                            element.textContent = translations[lang][key];
+                        }
+                    }
+                });
+
+                // Update placeholders
+                document.querySelectorAll('[data-text-placeholder]').forEach(input => {
+                    const key = input.getAttribute('data-text-placeholder');
+                    if (translations[lang][key]) {
+                        input.placeholder = translations[lang][key];
+                    }
+                });
+
+                // Update modal title based on active form
+                const modalTitle = document.getElementById('modal-title');
+                if (modalTitle) {
+                    modalTitle.textContent = document.getElementById('show-login').classList.contains('active')
+                        ? translations[lang].modal_title_login
+                        : translations[lang].modal_title_register;
+                }
+
+                // Update price formatting
+                document.querySelectorAll('.price').forEach(priceElement => {
+                    const price = parseFloat(priceElement.getAttribute('data-price'));
+                    if (!isNaN(price)) {
+                        priceElement.textContent = lang === 'pt-BR'
+                            ? `R$${price.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`
+                            : `$${price.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+                    }
+                });
+
+                // Update language selector active state
+                document.querySelectorAll('.lang-option').forEach(option => {
+                    option.classList.toggle('active', option.getAttribute('data-lang') === lang);
+                });
+
+                // Save selected language to localStorage
+                localStorage.setItem('language', lang);
+            } catch (error) {
+                console.error('Error setting language:', error);
+            }
+        }
+
+        // Modal functions
+        function openLoginModal() {
+            const modal = document.getElementById('login-modal');
+            if (modal) modal.style.display = 'block';
+            const showLoginButton = document.getElementById('show-login');
+            if (showLoginButton) showLoginButton.click();
+        }
+
+        function closeLoginModal() {
+            const modal = document.getElementById('login-modal');
+            if (modal) modal.style.display = 'none';
+            const loginError = document.getElementById('login-error');
+            const registerError = document.getElementById('register-error');
+            const cpfError = document.getElementById('register-cpf-error');
+            if (loginError) loginError.style.display = 'none';
+            if (registerError) registerError.style.display = 'none';
+            if (cpfError) cpfError.style.display = 'none';
+        }
+
+        function showLoginForm() {
+            const lang = localStorage.getItem('language') || 'en';
+            const loginFormContainer = document.getElementById('login-form-container');
+            const registerFormContainer = document.getElementById('register-form-container');
+            const dadosSalvos = document.getElementById('dados-salvos');
+            const showLoginButton = document.getElementById('show-login');
+            const showRegisterButton = document.getElementById('show-register');
+            const modalTitle = document.getElementById('modal-title');
+
+            if (loginFormContainer) loginFormContainer.style.display = 'block';
+            if (registerFormContainer) registerFormContainer.style.display = 'none';
+            if (dadosSalvos) dadosSalvos.style.display = 'none';
+            if (showLoginButton) showLoginButton.classList.add('active');
+            if (showRegisterButton) showRegisterButton.classList.remove('active');
+            if (modalTitle) modalTitle.textContent = translations[lang].modal_title_login;
+        }
+
+        function showRegisterForm() {
+            const lang = localStorage.getItem('language') || 'en';
+            const loginFormContainer = document.getElementById('login-form-container');
+            const registerFormContainer = document.getElementById('register-form-container');
+            const dadosSalvos = document.getElementById('dados-salvos');
+            const showLoginButton = document.getElementById('show-login');
+            const showRegisterButton = document.getElementById('show-register');
+            const modalTitle = document.getElementById('modal-title');
+
+            if (loginFormContainer) loginFormContainer.style.display = 'none';
+            if (registerFormContainer) registerFormContainer.style.display = 'block';
+            if (dadosSalvos) dadosSalvos.style.display = 'none';
+            if (showLoginButton) showLoginButton.classList.remove('active');
+            if (showRegisterButton) showRegisterButton.classList.add('active');
+            if (modalTitle) modalTitle.textContent = translations[lang].modal_title_register;
+        }
+
+        // Function to apply CPF mask
+        function applyCpfMask() {
+            const cpfInput = document.getElementById('register-cpf');
+            const cpfErrorElement = document.getElementById('register-cpf-error');
+            if (!cpfInput || !cpfErrorElement) return;
+
+            cpfInput.addEventListener('input', (e) => {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length > 11) value = value.slice(0, 11);
+                if (value.length > 9) {
+                    value = `${value.slice(0, 3)}.${value.slice(3, 6)}.${value.slice(6, 9)}-${value.slice(9)}`;
+                } else if (value.length > 6) {
+                    value = `${value.slice(0, 3)}.${value.slice(3, 6)}.${value.slice(6)}`;
+                } else if (value.length > 3) {
+                    value = `${value.slice(0, 3)}.${value.slice(3)}`;
+                }
+                e.target.value = value.trim();
+
+                const lang = localStorage.getItem('language') || 'en';
+                if (value.replace(/\D/g, '').length === 11) {
+                    if (!validateCpf(value.replace(/\D/g, ''))) {
+                        cpfErrorElement.textContent = translations[lang].invalid_cpf;
+                        cpfErrorElement.style.display = 'block';
+                    } else {
+                        const users = JSON.parse(localStorage.getItem('users') || '[]');
+                        if (users.find(user => user.cpf === value.replace(/\D/g, ''))) {
+                            cpfErrorElement.textContent = translations[lang].cpf_already_registered;
+                            cpfErrorElement.style.display = 'block';
+                        } else {
+                            cpfErrorElement.style.display = 'none';
+                        }
+                    }
+                } else {
+                    cpfErrorElement.style.display = 'none';
+                }
+            });
+            cpfInput.addEventListener('focus', () => {
+                cpfErrorElement.style.display = 'none';
+            });
+        }
+
+        // Function to validate CPF
+        function validateCpf(cpf) {
+            cpf = cpf.replace(/\D/g, '');
+            if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) return false;
+            let sum = 0;
+            let remainder;
+            for (let i = 1; i <= 9; i++) sum += parseInt(cpf.charAt(i - 1)) * (11 - i);
+            remainder = (sum * 10) % 11;
+            if (remainder === 10 || remainder === 11) remainder = 0;
+            if (remainder !== parseInt(cpf.charAt(9))) return false;
+            sum = 0;
+            for (let i = 1; i <= 10; i++) sum += parseInt(cpf.charAt(i - 1)) * (12 - i);
+            remainder = (sum * 10) % 11;
+            if (remainder === 10 || remainder === 11) remainder = 0;
+            if (remainder !== parseInt(cpf.charAt(10))) return false;
+            return true;
+        }
+
+        // Function to format CPF
+        function formatCpf(cpf) {
+            if (!cpf || cpf.length !== 11) return cpf || 'N/A';
+            return `${cpf.slice(0, 3)}.${cpf.slice(3, 6)}.${cpf.slice(6, 9)}-${cpf.slice(9)}`;
+        }
+
+        // Function to register user
+        function registerUser(event) {
+            event.preventDefault();
+            const lang = localStorage.getItem('language') || 'en';
+            const nome = document.getElementById('register-nome')?.value.trim();
+            const email = document.getElementById('register-gmail')?.value.trim().toLowerCase();
+            const password = document.getElementById('register-password')?.value.trim();
+            const cpf = document.getElementById('register-cpf')?.value.trim();
+            const idade = parseInt(document.getElementById('register-idade')?.value.trim());
+            const cep = document.getElementById('register-cep')?.value.trim();
+            const errorElement = document.getElementById('register-error');
+            const cpfErrorElement = document.getElementById('register-cpf-error');
+
+            if (!errorElement || !cpfErrorElement) return;
+
+            errorElement.style.display = 'none';
+            cpfErrorElement.style.display = 'none';
+
+            if (!nome || !email || !password || !cpf || isNaN(idade) || !cep) {
+                errorElement.textContent = translations[lang].error_fill_all_fields;
+                errorElement.style.display = 'block';
+                return;
+            }
+
+            if (!email.endsWith('@gmail.com')) {
+                errorElement.textContent = translations[lang].use_gmail_email;
+                errorElement.style.display = 'block';
+                return;
+            }
+
+            if (idade < 18) {
+                errorElement.textContent = translations[lang].must_be_18;
+                errorElement.style.display = 'block';
+                return;
+            }
+
+            if (!validateCpf(cpf.replace(/\D/g, ''))) {
+                cpfErrorElement.textContent = translations[lang].invalid_cpf;
+                cpfErrorElement.style.display = 'block';
+                return;
+            }
+
+            let users;
+            try {
+                users = JSON.parse(localStorage.getItem('users') || '[]');
+            } catch (error) {
+                console.error('Error parsing users from localStorage:', error);
+                users = [];
+            }
+
+            if (users.find(user => user.email === email)) {
+                errorElement.textContent = translations[lang].error_email_already_registered;
+                errorElement.style.display = 'block';
+                return;
+            }
+
+            if (users.find(user => user.cpf === cpf.replace(/\D/g, ''))) {
+                cpfErrorElement.textContent = translations[lang].cpf_already_registered;
+                cpfErrorElement.style.display = 'block';
+                return;
+            }
+
+            const user = { nome, email, password, cpf: cpf.replace(/\D/g, ''), idade, cep };
+            users.push(user);
+            try {
+                localStorage.setItem('users', JSON.stringify(users));
+                localStorage.setItem('currentUser', JSON.stringify(user));
+            } catch (error) {
+                console.error('Error saving to localStorage:', error);
+                return;
+            }
+
+            alert(translations[lang].welcome_message + '!');
+            loadUserData();
+            showLoggedInUI();
+        }
+
+        // Function to login user
+        function loginUser(event) {
+            event.preventDefault();
+            const lang = localStorage.getItem('language') || 'en';
+            const email = document.getElementById('login-gmail')?.value.trim().toLowerCase();
+            const password = document.getElementById('login-password')?.value.trim();
+            const errorElement = document.getElementById('login-error');
+
+            if (!errorElement) return;
+
+            errorElement.style.display = 'none';
+
+            if (!email.endsWith('@gmail.com')) {
+                errorElement.textContent = translations[lang].use_gmail_email;
+                errorElement.style.display = 'block';
+                return;
+            }
+
+            let users;
+            try {
+                users = JSON.parse(localStorage.getItem('users') || '[]');
+            } catch (error) {
+                console.error('Error parsing users from localStorage:', error);
+                users = [];
+            }
+
+            const userData = users.find(user => user.email === email && user.password === password);
+
+            if (!userData) {
+                errorElement.textContent = translations[lang].error_invalid_email_or_password;
+                errorElement.style.display = 'block';
+                return;
+            }
+
+            try {
+                localStorage.setItem('currentUser', JSON.stringify(userData));
+            } catch (error) {
+                console.error('Error saving currentUser to localStorage:', error);
+                return;
+            }
+
+            alert(translations[lang].welcome_message + '!');
+            loadUserData();
+            showLoggedInUI();
+        }
+
+        // Function to logout user
+        function logoutUser() {
+            const lang = localStorage.getItem('language') || 'en';
+            try {
+                localStorage.removeItem('currentUser');
+            } catch (error) {
+                console.error('Error removing currentUser from localStorage:', error);
+            }
+
+            alert(translations[lang].logout + ' ' + translations[lang].welcome_message.toLowerCase() + '.');
+            const dadosSalvos = document.getElementById('dados-salvos');
+            const loginFormContainer = document.getElementById('login-form-container');
+            const registerFormContainer = document.getElementById('register-form-container');
+            const loginLink = document.getElementById('login-link');
+            const logoutLink = document.getElementById('logout-link');
+            const dashboardLink = document.getElementById('dashboard-link');
+            const loginModal = document.getElementById('login-modal');
+
+            if (dadosSalvos) dadosSalvos.style.display = 'none';
+            if (loginFormContainer) loginFormContainer.style.display = 'block';
+            if (registerFormContainer) registerFormContainer.style.display = 'none';
+            if (loginLink) loginLink.style.display = 'inline';
+            if (logoutLink) logoutLink.style.display = 'none';
+            if (dashboardLink) dashboardLink.style.display = 'none';
+            if (loginModal) loginModal.style.display = 'none';
+            showLoginForm();
+            setLanguage(lang);
+        }
+
+        // Function to load user data
+        function loadUserData() {
+            const lang = localStorage.getItem('language') || 'en';
+            let userData;
+            try {
+                userData = JSON.parse(localStorage.getItem('currentUser') || '{}');
+            } catch (error) {
+                console.error('Error parsing currentUser from localStorage:', error);
+                return;
+            }
+
+            if (userData.email) {
+                const savedNome = document.getElementById('saved-nome');
+                const savedGmail = document.getElementById('saved-gmail');
+                const savedCpf = document.getElementById('saved-cpf');
+                const savedIdade = document.getElementById('saved-idade');
+                const savedCep = document.getElementById('saved-cep');
+                const welcomeMessage = document.querySelector('#dados-salvos h3');
+
+                if (savedNome) savedNome.textContent = userData.nome || 'N/A';
+                if (savedGmail) savedGmail.textContent = userData.email;
+                if (savedCpf) savedCpf.textContent = formatCpf(userData.cpf);
+                if (savedIdade) savedIdade.textContent = userData.idade || 'N/A';
+                if (savedCep) savedCep.textContent = userData.cep || 'N/A';
+                if (welcomeMessage) welcomeMessage.textContent = translations[lang].welcome_message + ', ' + (userData.nome || 'N/A') + '!';
+            }
+        }
+
+        // Function to show logged-in UI
+        function showLoggedInUI() {
+            const dadosSalvos = document.getElementById('dados-salvos');
+            const loginFormContainer = document.getElementById('login-form-container');
+            const registerFormContainer = document.getElementById('register-form-container');
+            const loginModal = document.getElementById('login-modal');
+            const loginLink = document.getElementById('login-link');
+            const logoutLink = document.getElementById('logout-link');
+            const dashboardLink = document.getElementById('dashboard-link');
+
+            if (dadosSalvos) dadosSalvos.style.display = 'block';
+            if (loginFormContainer) loginFormContainer.style.display = 'none';
+            if (registerFormContainer) registerFormContainer.style.display = 'none';
+            if (loginModal) loginModal.style.display = 'none';
+            if (loginLink) loginLink.style.display = 'none';
+            if (logoutLink) logoutLink.style.display = 'inline';
+            if (dashboardLink) dashboardLink.style.display = 'inline';
+        }
+
+        // Function to update cart count
+        function updateCartCount() {
+            let cart;
+            try {
+                cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            } catch (error) {
+                console.error('Error parsing cart from localStorage:', error);
+                cart = [];
+            }
+            const cartCountElement = document.getElementById('cart-count');
+            if (cartCountElement) {
+                cartCountElement.textContent = cart.length;
+            }
+        }
+
+        // Function to update navigation bar
+        function updateNavBar() {
+            let userData;
+            try {
+                userData = JSON.parse(localStorage.getItem('currentUser') || '{}');
+            } catch (error) {
+                console.error('Error parsing currentUser from localStorage:', error);
+                userData = {};
+            }
+
+            if (userData.email) {
+                showLoggedInUI();
+                loadUserData();
+            } else {
+                const dadosSalvos = document.getElementById('dados-salvos');
+                const loginFormContainer = document.getElementById('login-form-container');
+                const registerFormContainer = document.getElementById('register-form-container');
+                const loginLink = document.getElementById('login-link');
+                const logoutLink = document.getElementById('logout-link');
+                const dashboardLink = document.getElementById('dashboard-link');
+
+                if (dadosSalvos) dadosSalvos.style.display = 'none';
+                if (loginFormContainer) loginFormContainer.style.display = 'block';
+                if (registerFormContainer) registerFormContainer.style.display = 'none';
+                if (loginLink) loginLink.style.display = 'inline';
+                if (logoutLink) logoutLink.style.display = 'none';
+                if (dashboardLink) dashboardLink.style.display = 'none';
+            }
+        }
+
+        // Function to add item to cart
+        function addToCart(name, price) {
+            const lang = localStorage.getItem('language') || 'en';
+            if (isNaN(price) || price <= 0) {
+                console.error(translations[lang].error_invalid_price);
+                alert(translations[lang].error_invalid_price);
+                return;
+            }
+            let cart;
+            try {
+                cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            } catch (error) {
+                console.error('Error parsing cart from localStorage:', error);
+                cart = [];
+            }
+            if (cart.some(item => item.name === name)) {
+                alert(`${name}${translations[lang].item_already_in_cart}`);
+                return;
+            }
+            cart.push({ name, price });
+            try {
+                localStorage.setItem('cart', JSON.stringify(cart));
+            } catch (error) {
+                console.error('Error saving cart to localStorage:', error);
+                return;
+            }
+            alert(`${name}${translations[lang].item_added_to_cart}`);
+            updateCartCount();
+        }
+
+        // Initialize on page load
+        window.addEventListener('load', function () {
+            const storedLang = localStorage.getItem('language') || 'en';
+            setLanguage(storedLang);
+            updateNavBar();
+            updateCartCount();
+            applyCpfMask();
+
+            document.querySelectorAll('.add-to-cart').forEach(button => {
+                button.addEventListener('click', function () {
+                    const name = this.getAttribute('data-name');
+                    const price = parseFloat(this.getAttribute('data-price'));
+                    addToCart(name, price);
+                });
+            });
+
+            const loginForm = document.getElementById('login-form');
+            if (loginForm) loginForm.addEventListener('submit', loginUser);
+
+            const registerForm = document.getElementById('register-form');
+            if (registerForm) registerForm.addEventListener('submit', registerUser);
+
+            document.querySelectorAll('.lang-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const lang = option.getAttribute('data-lang');
+                    setLanguage(lang);
+                });
+            });
+        });
     </script>
 </body>
 </html>
