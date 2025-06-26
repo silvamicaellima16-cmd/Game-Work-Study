@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Checkout - GWS</title>
+  <title data-text="page_title">Checkout - GWS</title>
   <link rel="stylesheet" href="style.css" />
   <style>
     .pix-image {
@@ -90,91 +90,306 @@
       border-bottom: 1px solid #ffffff;
       padding: 10px 0;
     }
+    .language-selector {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 8px;
+      margin-left: 20px;
+      flex-wrap: nowrap;
+      z-index: 1000;
+    }
+    .lang-option {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: #2d3748;
+      background-color: ;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 700;
+      transition: background-color 0.3s, border-color 0.3s, transform 0.1s;
+      border: 2px solid #4b5563;
+      z-index: 1000;
+      pointer-events: auto;
+    }
+    .lang-option.active {
+      background-color: #062d47;
+      border-color: #0a4b78;
+    }
+    .lang-option:hover {
+      background-color: #4b5563;
+      border-color: #6b7280;
+    }
+    .lang-option:active {
+      transform: scale(0.95);
+      background-color: #0a4b78;
+    }
   </style>
 </head>
 <body>
   <nav>
-    <div class="logo">Game Work Study</div>
+    <div class="logo" data-text="site_name">Game Work Study</div>
     <ul class="menu">
-      <li><a href="index.html">Início</a></li>
-      <li><a href="dashboard.html" id="dashboard-link" style="display: none;">Dashboard</a></li>
-      <li><a href="#" id="logout-btn" style="display: none;">Logout</a></li>
+      <li><a href="index.html" data-text="home">Home</a></li>
+      <li><a href="dashboard.html" id="dashboard-link" style="display: none;" data-text="dashboard">Dashboard</a></li>
+      <li><a href="#" id="logout-btn" style="display: none;" data-text="logout">Log out</a></li>
     </ul>
+    <div class="language-selector">
+      <span class="lang-option" data-lang="pt-BR" data-text="lang_pt">PT</span>
+      <span class="lang-option active" data-lang="en" data-text="lang_en">EN</span>
+    </div>
   </nav>
 
   <main class="checkout">
-    <h1>Finalizar Pedido</h1>
+    <h1 data-text="checkout_title">Checkout</h1>
 
     <section id="cart-items"></section>
 
     <section>
-      <h2>Informações de Pagamento</h2>
+      <h2 data-text="payment_info_title">Payment Information</h2>
       <div class="form-group">
-        <label for="forma-pagamento">Forma de Pagamento:</label>
+        <label for="forma-pagamento" data-text="payment_method_label">Payment Method:</label>
         <select id="forma-pagamento" required>
-          <option value="">Selecione</option>
+          <option value="" data-text="select_option">Select</option>
           <option value="pix">PIX</option>
-          <option value="cartao">Cartão de Crédito</option>
-          <option value="boleto">Boleto Bancário</option>
+          <option value="cartao" data-text="credit_card">Credit Card</option>
+          <option value="boleto" data-text="bank_slip">Bank Slip</option>
         </select>
       </div>
 
       <div id="pix-info" class="pagamento-info" style="display: none;">
-        <p>Escaneie o QR Code ou copie a chave PIX:</p>
-        <img src="pix.png" alt="QR Code PIX" class="">
-        <p>Chave: gws@pagamentos.com</p>
+        <p data-text="pix_instructions">Scan the QR Code or copy the PIX key:</p>
+        <img src="pix.png" alt="PIX QR Code" class="pix-image">
+        <p data-text="pix_key">Key: gws@payments.com</p>
       </div>
 
       <div id="cartao-info" class="pagamento-info" style="display: none;">
         <div class="form-group">
-          <label for="cartao-nome">Nome no Cartão:</label>
-          <input type="text" id="cartao-nome" required>
-          <p id="cartao-nome-error" class="error-message">Por favor, insira o nome no cartão.</p>
+          <label for="cartao-nome" data-text="card_name_label">Name on Card:</label>
+          <input type="text" id="cartao-nome" required data-text-placeholder="card_name_placeholder">
+          <p id="cartao-nome-error" class="error-message" data-text="error_card_name">Please enter the name on the card.</p>
         </div>
         <div class="form-group">
-          <label for="cartao-numero">Número do Cartão:</label>
-          <input type="text" id="cartao-numero" maxlength="19" required>
-          <p id="cartao-numero-error" class="error-message">Número do cartão deve ter 16 dígitos.</p>
+          <label for="cartao-numero" data-text="card_number_label">Card Number:</label>
+          <input type="text" id="cartao-numero" maxlength="19" required data-text-placeholder="card_number_placeholder">
+          <p id="cartao-numero-error" class="error-message" data-text="error_card_number">Card number must have 16 digits.</p>
         </div>
         <div class="form-group">
-          <label for="cartao-validade">Validade (MM/AA):</label>
-          <input type="text" id="cartao-validade" maxlength="5" required>
-          <p id="cartao-validade-error" class="error-message">Validade deve ser no formato MM/AA e uma data futura.</p>
+          <label for="cartao-validade" data-text="card_expiry_label">Expiry (MM/YY):</label>
+          <input type="text" id="cartao-validade" maxlength="5" required data-text-placeholder="card_expiry_placeholder">
+          <p id="cartao-validade-error" class="error-message" data-text="error_card_expiry">Expiry must be in MM/YY format and a future date.</p>
         </div>
         <div class="form-group">
-          <label for="cartao-cvv">CVV:</label>
-          <input type="text" id="cartao-cvv" maxlength="4" required>
-          <p id="cartao-cvv-error" class="error-message">CVV deve ter 3 ou 4 dígitos.</p>
+          <label for="cartao-cvv" data-text="card_cvv_label">CVV:</label>
+          <input type="text" id="cartao-cvv" maxlength="4" required data-text-placeholder="card_cvv_placeholder">
+          <p id="cartao-cvv-error" class="error-message" data-text="error_card_cvv">CVV must have 3 or 4 digits.</p>
         </div>
       </div>
 
       <div id="boleto-info" class="pagamento-info" style="display: none;">
-        <p>O boleto será gerado após a finalização do pedido.</p>
+        <p data-text="bank_slip_info">The bank slip will be generated after order completion.</p>
       </div>
     </section>
 
     <section>
-      <h2>Informações de Contato</h2>
+      <h2 data-text="contact_info_title">Contact Information</h2>
       <div class="form-group">
-        <label for="telefone">Telefone:</label>
-        <input type="text" id="telefone" maxlength="15" required>
-        <p id="telefone-error" class="error-message">Número deve ter 11 dígitos (ex.: (11) 91234-5678).</p>
+        <label for="telefone" data-text="phone_label">Phone:</label>
+        <input type="text" id="telefone" maxlength="15" required data-text-placeholder="phone_placeholder">
+        <p id="telefone-error" class="error-message" data-text="error_phone">Number must have 11 digits (ex.: (11) 91234-5678).</p>
       </div>
     </section>
 
     <div id="confirmation-message">
-      <p id="confirmation-text"></p>
-      <button onclick="fecharMensagem()">Fechar</button>
-      <button onclick="voltarParaInicio()">Voltar para a Página Inicial</button>
+      <p id="confirmation-text" data-text="confirmation_message"></p>
+      <button onclick="fecharMensagem()" data-text="close_button">Close</button>
+      <button onclick="voltarParaInicio()" data-text="back_to_home">Back to Home</button>
     </div>
 
-    <button class="cta-button" onclick="finalizarPedido()">Finalizar Pedido</button>
+    <button class="cta-button" onclick="finalizarPedido()" data-text="complete_order">Complete Order</button>
   </main>
 
   <script>
+    // Translations object
+    const translations = {
+      'pt-BR': {
+        page_title: 'Finalizar Pedido - GWS',
+        site_name: 'Game Work Study',
+        home: 'Início',
+        dashboard: 'Dashboard',
+        logout: 'Logout',
+        lang_pt: 'PT',
+        lang_en: 'EN',
+        checkout_title: 'Finalizar Pedido',
+        payment_info_title: 'Informações de Pagamento',
+        payment_method_label: 'Forma de Pagamento:',
+        select_option: 'Selecione',
+        credit_card: 'Cartão de Crédito',
+        bank_slip: 'Boleto Bancário',
+        pix_instructions: 'Escaneie o QR Code ou copie a chave PIX:',
+        pix_key: 'Chave: gws@pagamentos.com',
+        card_name_label: 'Nome no Cartão:',
+        card_name_placeholder: 'Nome no Cartão',
+        card_number_label: 'Número do Cartão:',
+        card_number_placeholder: 'Número do Cartão',
+        card_expiry_label: 'Validade (MM/AA):',
+        card_expiry_placeholder: 'MM/AA',
+        card_cvv_label: 'CVV:',
+        card_cvv_placeholder: 'CVV',
+        bank_slip_info: 'O boleto será gerado após a finalização do pedido.',
+        contact_info_title: 'Informações de Contato',
+        phone_label: 'Telefone:',
+        phone_placeholder: 'Telefone (ex.: (11) 91234-5678)',
+        close_button: 'Fechar',
+        back_to_home: 'Voltar para a Página Inicial',
+        complete_order: 'Finalizar Pedido',
+        error_card_name: 'Por favor, insira o nome no cartão.',
+        error_card_number: 'Número do cartão deve ter 16 dígitos.',
+        error_card_expiry: 'Validade deve ser no formato MM/AA e uma data futura.',
+        error_card_cvv: 'CVV deve ter 3 ou 4 dígitos.',
+        error_phone: 'Número deve ter 11 dígitos (ex.: (11) 91234-5678).',
+        error_empty_cart: 'Seu carrinho está vazio! Adicione itens antes de finalizar o pedido.',
+        error_payment_method: 'Por favor, selecione uma forma de pagamento.',
+        error_invalid_phone: 'Por favor, insira um número de telefone válido (ex.: (11) 91234-5678).',
+        error_invalid_card: 'Por favor, corrija os campos do cartão.',
+        error_invalid_payment: 'Forma de pagamento inválida. Tente novamente.',
+        error_processing: 'Ocorreu um erro ao processar seu pedido. Tente novamente.',
+        confirmation_message: 'Seu pagamento foi processado com sucesso. Você receberá o documento e o recibo pelo email {email} e entraremos em contato pelo número {phone}. Obrigado pela sua compra!',
+        cart_empty: 'Seu carrinho está vazio.',
+        cart_error: 'Erro ao carregar o carrinho. Tente novamente.',
+        cart_item_added: '{name} foi adicionado ao carrinho!',
+        cart_item_error: 'Erro ao adicionar produto ao carrinho. Tente novamente.',
+        total_label: 'Total',
+        price_label: 'Preço'
+      },
+      'en': {
+        page_title: 'Checkout - GWS',
+        site_name: 'Game Work Study',
+        home: 'Home',
+        dashboard: 'Dashboard',
+        logout: 'Log out',
+        lang_pt: 'PT',
+        lang_en: 'EN',
+        checkout_title: 'Checkout',
+        payment_info_title: 'Payment Information',
+        payment_method_label: 'Payment Method:',
+        select_option: 'Select',
+        credit_card: 'Credit Card',
+        bank_slip: 'Bank Slip',
+        pix_instructions: 'Scan the QR Code or copy the PIX key:',
+        pix_key: 'Key: gws@payments.com',
+        card_name_label: 'Name on Card:',
+        card_name_placeholder: 'Name on Card',
+        card_number_label: 'Card Number:',
+        card_number_placeholder: 'Card Number',
+        card_expiry_label: 'Expiry (MM/YY):',
+        card_expiry_placeholder: 'MM/YY',
+        card_cvv_label: 'CVV:',
+        card_cvv_placeholder: 'CVV',
+        bank_slip_info: 'The bank slip will be generated after order completion.',
+        contact_info_title: 'Contact Information',
+        phone_label: 'Phone:',
+        phone_placeholder: 'Phone (ex.: (11) 91234-5678)',
+        close_button: 'Close',
+        back_to_home: 'Back to Home',
+        complete_order: 'Complete Order',
+        error_card_name: 'Please enter the name on the card.',
+        error_card_number: 'Card number must have 16 digits.',
+        error_card_expiry: 'Expiry must be in MM/YY format and a future date.',
+        error_card_cvv: 'CVV must have 3 or 4 digits.',
+        error_phone: 'Number must have 11 digits (ex.: (11) 91234-5678).',
+        error_empty_cart: 'Your cart is empty! Add items before completing the order.',
+        error_payment_method: 'Please select a payment method.',
+        error_invalid_phone: 'Please enter a valid phone number (ex.: (11) 91234-5678).',
+        error_invalid_card: 'Please correct the card fields.',
+        error_invalid_payment: 'Invalid payment method. Try again.',
+        error_processing: 'An error occurred while processing your order. Try again.',
+        confirmation_message: 'Your payment was processed successfully. You will receive the document and receipt via email {email}, and we will contact you at {phone}. Thank you for your purchase!',
+        cart_empty: 'Your cart is empty.',
+        cart_error: 'Error loading the cart. Try again.',
+        cart_item_added: '{name} was added to the cart!',
+        cart_item_error: 'Error adding product to the cart. Try again.',
+        total_label: 'Total',
+        price_label: 'Price'
+      }
+    };
+
+    // Function to set the language
+    function setLanguage(lang) {
+      try {
+        if (!translations[lang]) {
+          console.error('Unsupported language:', lang);
+          lang = 'en';
+        }
+
+        document.documentElement.lang = lang;
+
+        // Update page title
+        const titleElement = document.querySelector('title');
+        if (titleElement) {
+          titleElement.textContent = translations[lang].page_title;
+        }
+
+        // Update text for elements with data-text
+        document.querySelectorAll('[data-text]').forEach(element => {
+          const key = element.getAttribute('data-text');
+          if (translations[lang][key]) {
+            element.textContent = translations[lang][key];
+          }
+        });
+
+        // Update placeholders
+        document.querySelectorAll('[data-text-placeholder]').forEach(input => {
+          const key = input.getAttribute('data-text-placeholder');
+          if (translations[lang][key]) {
+            input.placeholder = translations[lang][key];
+          }
+        });
+
+        // Update language selector active state
+        document.querySelectorAll('.lang-option').forEach(option => {
+          const langKey = option.getAttribute('data-lang');
+          const textKey = option.getAttribute('data-text');
+          option.classList.toggle('active', langKey === lang);
+          if (translations[lang][textKey]) {
+            option.textContent = translations[lang][textKey];
+          }
+        });
+
+        // Reload cart to update price formatting
+        loadCart();
+
+        // Update confirmation message if visible
+        const confirmationMessage = document.getElementById('confirmation-message');
+        if (confirmationMessage && confirmationMessage.style.display === 'block') {
+          const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+          const email = currentUser.email || 'generic email';
+          const telefone = document.getElementById('telefone')?.value || '';
+          const mensagem = translations[lang].confirmation_message
+            .replace('{email}', email)
+            .replace('{phone}', telefone);
+          const confirmationText = document.getElementById('confirmation-text');
+          if (confirmationText) {
+            confirmationText.textContent = mensagem;
+          }
+        }
+
+        localStorage.setItem('language', lang);
+      } catch (error) {
+        console.error('Error setting language:', error);
+      }
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
-      console.group('Inicialização');
-      console.log('DOM carregado em', new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' }));
+      console.group('Initialization');
+      console.log('DOM loaded at', new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' }));
+      const storedLang = localStorage.getItem('language') || 'en';
+      setLanguage(storedLang);
       if (!checkLogin()) {
         console.groupEnd();
         return;
@@ -184,125 +399,114 @@
       applyMasks();
       applyPhoneMask();
       setupPaymentToggle();
+
+      // Add language selector event listeners
+      document.querySelectorAll('.lang-option').forEach(option => {
+        option.addEventListener('click', () => {
+          const lang = option.getAttribute('data-lang');
+          setLanguage(lang);
+        });
+      });
+
       console.groupEnd();
     });
 
     function checkLogin() {
-      console.log('Verificando login');
+      console.log('Checking login');
       try {
-        const usuarioLogado = JSON.parse(
-          localStorage.getItem('usuarioLogado') ||
-          localStorage.getItem('currentUser') ||
-          localStorage.getItem('user') ||
-          '{}'
-        );
-        console.log('Conteúdo do localStorage (login):', {
-          usuarioLogado: localStorage.getItem('usuarioLogado'),
-          currentUser: localStorage.getItem('currentUser'),
-          user: localStorage.getItem('user')
-        });
-        console.log('Usuario parsed:', usuarioLogado);
-        if (!usuarioLogado || (!usuarioLogado.email && !usuarioLogado.id) || 
-            (usuarioLogado.email && typeof usuarioLogado.email === 'string' && usuarioLogado.email.trim() === '')) {
-          console.log('Usuário não logado, redirecionando para index.html');
+        const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+        console.log('Current user:', currentUser);
+        if (!currentUser || !currentUser.email || currentUser.email.trim() === '') {
+          console.log('User not logged in, redirecting to index.html');
           window.location.href = 'index.html';
           return false;
         }
-        console.log('Usuário logado com:', usuarioLogado.email || usuarioLogado.id);
+        console.log('User logged in with:', currentUser.email);
         return true;
       } catch (e) {
-        console.error('Erro ao verificar login:', e.message);
+        console.error('Error checking login:', e.message);
         window.location.href = 'index.html';
         return false;
       }
     }
 
     function updateNavBar() {
-      console.log('Atualizando barra de navegação');
+      console.log('Updating navigation bar');
       try {
-        const usuarioLogado = JSON.parse(
-          localStorage.getItem('usuarioLogado') ||
-          localStorage.getItem('currentUser') ||
-          localStorage.getItem('user') ||
-          '{}'
-        );
-        if (usuarioLogado.email || usuarioLogado.id) {
+        const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+        if (currentUser.email) {
           const dashboardLink = document.getElementById('dashboard-link');
           const logoutBtn = document.getElementById('logout-btn');
           if (dashboardLink) dashboardLink.style.display = 'inline-block';
           if (logoutBtn) {
             logoutBtn.style.display = 'inline-block';
             logoutBtn.addEventListener('click', () => {
-              console.log('Processando logout');
-              localStorage.removeItem('usuarioLogado');
+              console.log('Processing logout');
               localStorage.removeItem('currentUser');
-              localStorage.removeItem('user');
               window.location.href = 'index.html';
             });
           }
         }
       } catch (e) {
-        console.error('Erro ao atualizar navbar:', e.message);
+        console.error('Error updating navbar:', e.message);
       }
     }
 
     let carrinho = [];
     function loadCart() {
-      console.group('Carregando carrinho');
+      console.group('Loading cart');
+      const lang = localStorage.getItem('language') || 'en';
       try {
-        // Verificar chaves alternativas
-        const carrinhoRaw = localStorage.getItem('carrinho') || 
-                           localStorage.getItem('cart') || 
-                           localStorage.getItem('shoppingCart');
-        console.log('Carrinho bruto do localStorage:', carrinhoRaw);
-        carrinho = carrinhoRaw ? JSON.parse(carrinhoRaw) : [];
-        console.log('Carrinho parsed:', carrinho);
+        const cartRaw = localStorage.getItem('cart');
+        console.log('Raw cart from localStorage:', cartRaw);
+        carrinho = cartRaw ? JSON.parse(cartRaw) : [];
+        console.log('Parsed cart:', carrinho);
         const cartItemsDiv = document.getElementById('cart-items');
         if (!cartItemsDiv) {
-          console.error('Elemento #cart-items não encontrado');
+          console.error('Element #cart-items not found');
           return;
         }
         cartItemsDiv.innerHTML = '';
         let total = 0;
 
         if (!carrinho || !Array.isArray(carrinho) || carrinho.length === 0) {
-          cartItemsDiv.innerHTML = '<p>Seu carrinho está vazio.</p>';
-          console.log('Carrinho vazio ou inválido');
+          cartItemsDiv.innerHTML = `<p data-text="cart_empty">${translations[lang].cart_empty}</p>`;
+          console.log('Cart is empty or invalid');
         } else {
           carrinho.forEach((item, index) => {
-            console.log(`Processando item ${index}:`, item);
-            const preco = Number(item.preco || item.price || item.cost || item.value || 0);
-            const nome = item.nome || item.name || item.title || item.product || `Produto ${index + 1}`;
-            if (!isNaN(preco) && preco > 0 && typeof nome === 'string' && nome.trim() !== '') {
-              total += preco;
+            console.log(`Processing item ${index}:`, item);
+            const price = Number(item.price || 0);
+            const name = item.name || `Product ${index + 1}`;
+            if (!isNaN(price) && price > 0 && typeof name === 'string' && name.trim() !== '') {
+              total += price;
               cartItemsDiv.innerHTML += `
                 <div class="cart-item">
-                  <h3>${nome}</h3>
-                  <p>Preço: R$ ${preco.toFixed(2)}</p>
+                  <h3>${name}</h3>
+                  <p data-text="price_label">${translations[lang].price_label}: ${lang === 'pt-BR' ? `R$${price.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}` : `$${price.toLocaleString('en-US', { minimumFractionDigits: 2 })}`}</p>
                 </div>
               `;
             } else {
-              console.warn('Item inválido encontrado no carrinho:', item);
+              console.warn('Invalid item found in cart:', item);
             }
           });
           if (total === 0) {
-            cartItemsDiv.innerHTML = '<p>Seu carrinho está vazio ou contém itens inválidos.</p>';
+            cartItemsDiv.innerHTML = `<p data-text="cart_empty">${translations[lang].cart_empty}</p>`;
           } else {
-            cartItemsDiv.innerHTML += `<h3>Total: R$ ${total.toFixed(2)}</h3>`;
+            cartItemsDiv.innerHTML += `<h3 data-text="total_label">${translations[lang].total_label}: ${lang === 'pt-BR' ? `R$${total.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}` : `$${total.toLocaleString('en-US', { minimumFractionDigits: 2 })}`}</h3>`;
           }
         }
       } catch (e) {
-        console.error('Erro ao carregar carrinho:', e.message);
+        console.error('Error loading cart:', e.message);
         const cartItemsDiv = document.getElementById('cart-items');
         if (cartItemsDiv) {
-          cartItemsDiv.innerHTML = '<p>Erro ao carregar o carrinho. Tente novamente.</p>';
+          cartItemsDiv.innerHTML = `<p data-text="cart_error">${translations[lang].cart_error}</p>`;
         }
       }
       console.groupEnd();
     }
 
     function applyMasks() {
-      console.log('Aplicando máscaras para cartão');
+      console.log('Applying masks for card fields');
       const cartaoNumero = document.getElementById('cartao-numero');
       const cartaoValidade = document.getElementById('cartao-validade');
       const cartaoCvv = document.getElementById('cartao-cvv');
@@ -333,7 +537,7 @@
     }
 
     function applyPhoneMask() {
-      console.log('Aplicando máscara para telefone');
+      console.log('Applying mask for phone number');
       const telefone = document.getElementById('telefone');
       if (telefone) {
         telefone.addEventListener('input', e => {
@@ -352,7 +556,8 @@
     }
 
     function validateCardFields() {
-      console.log('Validando campos do cartão');
+      console.log('Validating card fields');
+      const lang = localStorage.getItem('language') || 'en';
       const numero = document.getElementById('cartao-numero')?.value.replace(/\D/g, '') || '';
       const validade = document.getElementById('cartao-validade')?.value || '';
       const cvv = document.getElementById('cartao-cvv')?.value.replace(/\D/g, '') || '';
@@ -410,7 +615,8 @@
     }
 
     function validatePhoneNumber() {
-      console.log('Validando número de telefone');
+      console.log('Validating phone number');
+      const lang = localStorage.getItem('language') || 'en';
       const telefone = document.getElementById('telefone')?.value.replace(/\D/g, '') || '';
       const error = document.getElementById('telefone-error');
       if (telefone.length !== 11) {
@@ -422,11 +628,11 @@
     }
 
     function setupPaymentToggle() {
-      console.log('Configurando toggle de pagamento');
+      console.log('Setting up payment toggle');
       const pagamentoSelect = document.getElementById('forma-pagamento');
       if (pagamentoSelect) {
         pagamentoSelect.addEventListener('change', function () {
-          console.log('Forma de pagamento selecionada:', this.value);
+          console.log('Selected payment method:', this.value);
           document.querySelectorAll('.pagamento-info').forEach(el => el.style.display = 'none');
           const valor = this.value;
           if (valor) {
@@ -435,141 +641,131 @@
           }
         });
       } else {
-        console.error('Elemento #forma-pagamento não encontrado');
+        console.error('Element #forma-pagamento not found');
       }
     }
 
     function showConfirmationMessage(mensagem) {
-      console.log('Tentando exibir mensagem:', mensagem);
+      console.log('Attempting to display message:', mensagem);
+      const lang = localStorage.getItem('language') || 'en';
       try {
         const confirmationMessage = document.getElementById('confirmation-message');
         const confirmationText = document.getElementById('confirmation-text');
         if (confirmationMessage && confirmationText) {
           confirmationText.textContent = mensagem;
           confirmationMessage.style.display = 'block';
-          confirmationMessage.style.opacity = '1';
-          confirmationMessage.style.visibility = 'visible';
-          confirmationMessage.style.zIndex = '1000';
-          console.log('Mensagem de confirmação exibida com sucesso');
+          console.log('Confirmation message displayed successfully');
           return true;
         } else {
-          console.error('Elementos #confirmation-message ou #confirmation-text não encontrados');
-          alert(mensagem);
+          console.error('Elements #confirmation-message or #confirmation-text not found');
+          alert(translations[lang].error_processing);
           return false;
         }
       } catch (e) {
-        console.error('Erro ao exibir mensagem:', e.message);
-        alert(mensagem);
+        console.error('Error displaying message:', e.message);
+        alert(translations[lang].error_processing);
         return false;
       }
     }
 
     function resetFormulario() {
-      console.log('Resetando formulário e carrinho');
+      console.log('Resetting form and cart');
+      const lang = localStorage.getItem('language') || 'en';
       carrinho = [];
-      localStorage.removeItem('carrinho');
       localStorage.removeItem('cart');
-      localStorage.removeItem('shoppingCart');
       loadCart();
-      document.getElementById('forma-pagamento').value = '';
-      document.getElementById('telefone').value = '';
+      const formaPagamento = document.getElementById('forma-pagamento');
+      const telefone = document.getElementById('telefone');
+      if (formaPagamento) formaPagamento.value = '';
+      if (telefone) telefone.value = '';
       document.querySelectorAll('.pagamento-info').forEach(info => info.style.display = 'none');
-      document.getElementById('confirmation-message').style.display = 'none';
+      const confirmationMessage = document.getElementById('confirmation-message');
+      if (confirmationMessage) confirmationMessage.style.display = 'none';
     }
 
     function fecharMensagem() {
-      console.log('Fechando mensagem de confirmação');
+      console.log('Closing confirmation message');
       resetFormulario();
     }
 
     function voltarParaInicio() {
-      console.log('Voltando para a página inicial');
+      console.log('Returning to home page');
       resetFormulario();
       window.location.href = 'index.html';
     }
 
     function finalizarPedido() {
-      console.log('Botão Finalizar Pedido clicado em', new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' }));
-
+      console.log('Complete Order button clicked at', new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' }));
+      const lang = localStorage.getItem('language') || 'en';
       const formaPagamento = document.getElementById('forma-pagamento')?.value;
-      console.log('Forma de pagamento selecionada:', formaPagamento);
+
       if (!formaPagamento) {
-        console.warn('Nenhuma forma de pagamento selecionada');
-        alert('Por favor, selecione uma forma de pagamento.');
+        console.warn('No payment method selected');
+        alert(translations[lang].error_payment_method);
         return;
       }
 
       if (!carrinho || carrinho.length === 0) {
-        console.warn('Carrinho vazio');
-        alert('Seu carrinho está vazio! Adicione itens antes de finalizar o pedido.');
+        console.warn('Cart is empty');
+        alert(translations[lang].error_empty_cart);
         return;
       }
 
-      // Validar número de telefone
       if (!validatePhoneNumber()) {
-        console.warn('Número de telefone inválido');
-        alert('Por favor, insira um número de telefone válido (ex.: (11) 91234-5678).');
+        console.warn('Invalid phone number');
+        alert(translations[lang].error_invalid_phone);
         return;
       }
 
-      // Validações específicas por forma de pagamento
       if (formaPagamento === 'cartao') {
         if (!validateCardFields()) {
-          console.warn('Campos do cartão inválidos');
-          alert('Por favor, corrija os campos do cartão.');
+          console.warn('Invalid card fields');
+          alert(translations[lang].error_invalid_card);
           return;
         }
-        console.log('Cartão validado com sucesso');
+        console.log('Card validated successfully');
       } else if (formaPagamento === 'pix') {
-        console.log('Processando pagamento via Pix');
+        console.log('Processing payment via Pix');
       } else if (formaPagamento === 'boleto') {
-        console.log('Processando pagamento via Boleto');
+        console.log('Processing payment via Bank Slip');
       } else {
-        console.error('Forma de pagamento inválida:', formaPagamento);
-        alert('Forma de pagamento inválida. Tente novamente.');
+        console.error('Invalid payment method:', formaPagamento);
+        alert(translations[lang].error_invalid_payment);
         return;
       }
 
       try {
-        const usuarioLogado = JSON.parse(
-          localStorage.getItem('usuarioLogado') ||
-          localStorage.getItem('currentUser') ||
-          localStorage.getItem('user') ||
-          '{}'
-        );
-        const email = usuarioLogado.email || 'email genérico';
+        const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+        const email = currentUser.email || 'generic email';
         const telefone = document.getElementById('telefone').value;
-        const mensagem = `Seu pagamento foi processado com sucesso. Você vai receber o documento e o recibo pelo email ${email} e entraremos em contato pelo número ${telefone}. Obrigado pela sua compra!`;
+        const mensagem = translations[lang].confirmation_message
+          .replace('{email}', email)
+          .replace('{phone}', telefone);
 
-        // Exibir a mensagem de confirmação
         showConfirmationMessage(mensagem);
       } catch (error) {
-        console.error('Erro ao processar confirmação:', error.message);
-        alert('Ocorreu um erro ao processar seu pedido. Tente novamente.');
+        console.error('Error processing confirmation:', error.message);
+        alert(translations[lang].error_processing);
       }
     }
 
-    // Função de exemplo para adicionar produtos (adapte ao index.html)
-    function adicionarAoCarrinho(nome, preco) {
-      console.log('Adicionando ao carrinho:', { nome, preco });
+    function addToCart(name, price) {
+      console.log('Adding to cart:', { name, price });
+      const lang = localStorage.getItem('language') || 'en';
       try {
-        let carrinho = JSON.parse(
-          localStorage.getItem('carrinho') || 
-          localStorage.getItem('cart') || 
-          localStorage.getItem('shoppingCart') || 
-          '[]'
-        );
-        if (!Array.isArray(carrinho)) {
-          console.warn('Carrinho inválido encontrado, inicializando novo:', carrinho);
-          carrinho = [];
+        let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+        if (!Array.isArray(cart)) {
+          console.warn('Invalid cart found, initializing new:', cart);
+          cart = [];
         }
-        carrinho.push({ nome, preco });
-        localStorage.setItem('carrinho', JSON.stringify(carrinho));
-        console.log('Item adicionado, carrinho atual:', carrinho);
-        alert(`${nome} foi adicionado ao carrinho!`);
+        cart.push({ name, price });
+        localStorage.setItem('cart', JSON.stringify(cart));
+        console.log('Item added, current cart:', cart);
+        alert(translations[lang].cart_item_added.replace('{name}', name));
+        loadCart();
       } catch (e) {
-        console.error('Erro ao adicionar ao carrinho:', e.message);
-        alert('Erro ao adicionar produto ao carrinho. Tente novamente.');
+        console.error('Error adding to cart:', e.message);
+        alert(translations[lang].cart_item_error);
       }
     }
   </script>
