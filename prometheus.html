@@ -1,68 +1,227 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Work Study | PC Prometheus</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-text="page_title">Game Work Study | PC Prometheus</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    .language-selector {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 8px;
+      margin-left: 20px;
+    }
+    .lang-option {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: #2d3748;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 700;
+      border: 2px solid #4b5563;
+    }
+    .lang-option.active {
+      background-color: #062d47;
+      border-color: #0a4b78;
+    }
+    .lang-option:hover {
+      background-color: #4b5563;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div class="logo-text">GAME WORK STUDY</div>
-            <nav>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="index.html#pcs">PC</a></li>
-                    <li><a href="index.html#configurador">Configurador</a></li>
-                    <li class="contato-hover">
-                        <a href="index.html#contato">Contato</a>
-                        <div class="contato-info">
-                            <p><strong>Telefone:</strong> (11) 1234-5678</p>
-                            <p><strong>Email:</strong> suporte@gameworkstudy.com</p>
-                        </div>
-                    </li>
-                    <li><a href="login.html" class="login"><i class="fas fa-user"></i> Login</a></li>
-                    <li><a href="carrinho.html" class="cart"><i class="fas fa-shopping-cart"></i> Carrinho</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <section class="pc-details" style="margin-top: 80px; padding: 40px 24px;">
-        <div class="container">
-            <h2>PC Gamer Prometheus</h2>
-            <div class="pc-details-content">
-                <img src="imagens/Prometheus.webp" alt="PC Gamer Prometheus" class="pc-details-image">
-                <div class="pc-details-info">
-                    <h3>Especificações Técnicas</h3>
-                    <ul>
-                        <li><strong>Processador:</strong> Intel Core i5 14ª Geração - Bom desempenho para jogos leves e médios.</li>
-                        <li><strong>Placa de Vídeo:</strong> GeForce RTX 4060 - Gráficos de qualidade para 1080p e 1440p.</li>
-                        <li><strong>Memória RAM:</strong> 16GB DDR4 - Suficiente para a maioria dos jogos atuais.</li>
-                        <li><strong>Armazenamento:</strong> SSD 512GB - Carregamento rápido de jogos.</li>
-                        <li><strong>Resfriamento:</strong> Cooler de ar padrão - Resfriamento eficiente para uso diário.</li>
-                        <li><strong>Fonte:</strong> 650W 80 Plus Bronze - Energia confiável para o sistema.</li>
-                    </ul>
-                    <p class="price">Preço: R$10.000</p>
-                    <button class="add-to-cart" data-name="Prometheus" data-price="10000">Adicionar ao Carrinho</button>
-                </div>
+  <header>
+    <div class="container">
+      <div class="logo-text" data-text="site_name">Game Work Study</div>
+      <nav>
+        <ul>
+          <li><a href="index.html" data-text="home">Home</a></li>
+          <li><a href="index.html#pcs" data-text="pc">PC</a></li>
+          <li><a href="index.html#configurador" data-text="configurator">Configurador</a></li>
+          <li class="contato-hover">
+            <a href="index.html#contato" data-text="contact">Contato</a>
+            <div class="contato-info">
+              <p><strong data-text="phone_label">Telefone:</strong> <span data-text="phone_value">(11) 1234-5678</span></p>
+              <p><strong data-text="email_label">Email:</strong> <span data-text="email_value">suporte@gameworkstudy.com</span></p>
             </div>
+          </li>
+          <li><a href="login.html" class="login"><i class="fas fa-user"></i> <span data-text="login">Login</span></a></li>
+          <li><a href="carrinho.html" class="cart"><i class="fas fa-shopping-cart"></i> <span data-text="cart">Carrinho</span></a></li>
+        </ul>
+        <div class="language-selector">
+          <span class="lang-option" data-lang="pt-BR" data-text="lang_pt">PT</span>
+          <span class="lang-option active" data-lang="en" data-text="lang_en">EN</span>
         </div>
-    </section>
+      </nav>
+    </div>
+  </header>
 
-    <script>
-        document.querySelectorAll('.add-to-cart').forEach(button => {
-            button.addEventListener('click', function() {
-                const name = this.getAttribute('data-name');
-                const price = parseFloat(this.getAttribute('data-price'));
-                let cart = JSON.parse(localStorage.getItem('cart')) || [];
-                cart.push({ name, price });
-                localStorage.setItem('cart', JSON.stringify(cart));
-                alert(`${name} foi adicionado ao carrinho!`);
-            });
+  <section class="pc-details" style="margin-top: 80px; padding: 40px 24px;">
+    <div class="container">
+      <h2 data-text="pc_title">PC Gamer Prometheus</h2>
+      <div class="pc-details-content">
+        <img src="imagens/Prometheus.webp" alt="PC Gamer Prometheus" class="pc-details-image">
+        <div class="pc-details-info">
+          <h3 data-text="specifications">Especificações Técnicas</h3>
+          <ul>
+            <li><strong data-text="processor_label">Processador:</strong> <span data-text="processor_value">Intel Core i5 14ª Geração - Bom desempenho para jogos leves e médios.</span></li>
+            <li><strong data-text="graphics_card_label">Placa de Vídeo:</strong> <span data-text="graphics_card_value">GeForce RTX 4060 - Gráficos de qualidade para 1080p e 1440p.</span></li>
+            <li><strong data-text="ram_label">Memória RAM:</strong> <span data-text="ram_value">16GB DDR4 - Suficiente para a maioria dos jogos atuais.</span></li>
+            <li><strong data-text="storage_label">Armazenamento:</strong> <span data-text="storage_value">SSD 512GB - Carregamento rápido de jogos.</span></li>
+            <li><strong data-text="cooling_label">Resfriamento:</strong> <span data-text="cooling_value">Cooler de ar padrão - Resfriamento eficiente para uso diário.</span></li>
+            <li><strong data-text="power_supply_label">Fonte:</strong> <span data-text="power_supply_value">650W 80 Plus Bronze - Energia confiável para o sistema.</span></li>
+          </ul>
+          <p class="price" data-price="10000">R$10.000,00</p>
+          <button class="add-to-cart" data-name="Prometheus" data-price="10000" data-text="add_to_cart">Adicionar ao Carrinho</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const translations = {
+      'pt-BR': {
+        page_title: 'Game Work Study | PC Prometheus',
+        site_name: 'Game Work Study',
+        home: 'Início',
+        pc: 'PC',
+        configurator: 'Configurador',
+        contact: 'Contato',
+        login: 'Login',
+        cart: 'Carrinho',
+        lang_pt: 'PT',
+        lang_en: 'EN',
+        phone_label: 'Telefone:',
+        phone_value: '(11) 1234-5678',
+        email_label: 'Email:',
+        email_value: 'suporte@gameworkstudy.com',
+        pc_title: 'PC Gamer Prometheus',
+        specifications: 'Especificações Técnicas',
+        processor_label: 'Processador:',
+        processor_value: 'Intel Core i5 14ª Geração - Bom desempenho para jogos leves e médios.',
+        graphics_card_label: 'Placa de Vídeo:',
+        graphics_card_value: 'GeForce RTX 4060 - Gráficos de qualidade para 1080p e 1440p.',
+        ram_label: 'Memória RAM:',
+        ram_value: '16GB DDR4 - Suficiente para a maioria dos jogos atuais.',
+        storage_label: 'Armazenamento:',
+        storage_value: 'SSD 512GB - Carregamento rápido de jogos.',
+        cooling_label: 'Resfriamento:',
+        cooling_value: 'Cooler de ar padrão - Resfriamento eficiente para uso diário.',
+        power_supply_label: 'Fonte:',
+        power_supply_value: '650W 80 Plus Bronze - Energia confiável para o sistema.',
+        add_to_cart: 'Adicionar ao Carrinho',
+        cart_item_added: '{name} foi adicionado ao carrinho!',
+        cart_item_exists: '{name} já está no carrinho!'
+      },
+      'en': {
+        page_title: 'Game Work Study | PC Prometheus',
+        site_name: 'Game Work Study',
+        home: 'Home',
+        pc: 'PC',
+        configurator: 'Configurator',
+        contact: 'Contact',
+        login: 'Login',
+        cart: 'Cart',
+        lang_pt: 'PT',
+        lang_en: 'EN',
+        phone_label: 'Phone:',
+        phone_value: '(11) 1234-5678',
+        email_label: 'Email:',
+        email_value: 'support@gameworkstudy.com',
+        pc_title: 'PC Gamer Prometheus',
+        specifications: 'Technical Specifications',
+        processor_label: 'Processor:',
+        processor_value: 'Intel Core i5 14th Gen - Good performance for light and medium games.',
+        graphics_card_label: 'Graphics Card:',
+        graphics_card_value: 'GeForce RTX 4060 - Quality graphics for 1080p and 1440p.',
+        ram_label: 'RAM:',
+        ram_value: '16GB DDR4 - Enough for most modern games.',
+        storage_label: 'Storage:',
+        storage_value: '512GB SSD - Fast loading for games.',
+        cooling_label: 'Cooling:',
+        cooling_value: 'Standard air cooler - Efficient for daily use.',
+        power_supply_label: 'Power Supply:',
+        power_supply_value: '650W 80 Plus Bronze - Reliable power.',
+        add_to_cart: 'Add to Cart',
+        cart_item_added: '{name} was added to the cart!',
+        cart_item_exists: '{name} is already in the cart!'
+      }
+    };
+
+    function setLanguage(lang) {
+      if (!translations[lang]) lang = 'en';
+      document.documentElement.lang = lang;
+
+      const title = document.querySelector('title');
+      if (title) title.textContent = translations[lang].page_title;
+
+      document.querySelectorAll('[data-text]').forEach(el => {
+        const key = el.getAttribute('data-text');
+        if (translations[lang][key]) {
+          el.textContent = translations[lang][key];
+        }
+      });
+
+      document.querySelectorAll('.price').forEach(el => {
+        const price = parseFloat(el.getAttribute('data-price'));
+        if (!isNaN(price)) {
+          el.textContent = lang === 'pt-BR'
+            ? `R$${price.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`
+            : `$${price.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+        }
+      });
+
+      document.querySelectorAll('.lang-option').forEach(option => {
+        const langKey = option.getAttribute('data-lang');
+        const textKey = option.getAttribute('data-text');
+        option.classList.toggle('active', langKey === lang);
+        if (translations[lang][textKey]) {
+          option.textContent = translations[lang][textKey];
+        }
+      });
+
+      localStorage.setItem('language', lang);
+    }
+
+    window.addEventListener('load', () => {
+      const lang = localStorage.getItem('language') || 'en';
+      setLanguage(lang);
+
+      document.querySelectorAll('.lang-option').forEach(option => {
+        option.addEventListener('click', () => {
+          const lang = option.getAttribute('data-lang');
+          setLanguage(lang);
         });
-    </script>
+      });
+
+      document.querySelectorAll('.add-to-cart').forEach(button => {
+        button.addEventListener('click', function () {
+          const lang = localStorage.getItem('language') || 'en';
+          const name = this.getAttribute('data-name');
+          const price = parseFloat(this.getAttribute('data-price'));
+          let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+
+          const itemExists = cart.some(item => item.name === name);
+          if (itemExists) {
+            alert(translations[lang].cart_item_exists.replace('{name}', name));
+            return;
+          }
+
+          cart.push({ name, price });
+          localStorage.setItem('cart', JSON.stringify(cart));
+          alert(translations[lang].cart_item_added.replace('{name}', name));
+        });
+      });
+    });
+  </script>
 </body>
 </html>
