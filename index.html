@@ -1,70 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-text="page_title">Game Work Study | PC Gamer</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <header>
         <div class="container">
             <div class="logo-text">GAME WORK STUDY</div>
-            <div class="language-selector">
-                <span class="lang-option" data-lang="pt-BR" data-text="lang_pt" title="Português">PT</span>
-                    <span class="lang-option" data-lang="en" data-text="lang_en" title="English">EN</span>
             <nav>
                 <ul>
-                    <li><a href="#home" data-text="home">Home</a></li>
-                    <li><a href="#pcs" data-text="pc">PC</a></li>
-                    <li id="dashboard-link" style="display: none;"><a href="dashboard.html" data-text="dashboard">Dashboard</a></li>
-                    <li id="login-link"><a href="#" class="login" data-text="login" onclick="openLoginModal()"><i class="fas fa-user"></i> Login</a></li>
-                    <li id="logout-link" style="display: none;"><a href="#" class="login" data-text="logout" onclick="logoutUser()"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
-                    <li><a href="carrinho.html" class="cart" data-text="cart"><i class="fas fa-shopping-cart"></i> Carrinho</a></li>
+                    <li><a href="#home" data-text="nav_home">Home</a></li>
+                    <li><a href="#pcs" data-text="nav_pcs">PC</a></li>
+                    <li id="dashboard-link" style="display: none;"><a href="dashboard.html" data-text="nav_dashboard">Dashboard</a></li>
+                    <li id="login-link"><a href="#" class="login" onclick="openLoginModal()"><i class="fas fa-user"></i> <span data-text="nav_login">Login</span></a></li>
+                    <li id="logout-link" style="display: none;"><a href="#" class="login" onclick="logoutUser()"><i class="fas fa-sign-out-alt"></i> <span data-text="nav_logout">Logout</span></a></li>
+                    <li><a href="carrinho.html" class="cart"><i class="fas fa-shopping-cart"></i> <span data-text="nav_cart">Carrinho</span></a></li>
                 </ul>
             </nav>
+            <div class="language-selector">
+                <span class="lang-option active" data-lang="pt-BR" title="Português">PT</span>
+                <span class="lang-option" data-lang="en" title="English">EN</span>
+            </div>
         </div>
     </header>
 
     <div id="login-modal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeLoginModal()">×</span>
-            <h2 id="modal-title" data-text="modal_title_login">Faça seu Login</h2>
+            <h2 id="modal-title" data-text="modal_login_title">Faça seu Login</h2>
             <div id="form-toggle">
-                <button id="show-login" class="toggle-button active" onclick="showLoginForm()" data-text="login_button">Entrar</button>
-                <button id="show-register" class="toggle-button" onclick="showRegisterForm()" data-text="register_button">Cadastrar</button>
+                <button id="show-login" class="toggle-button active" onclick="showLoginForm()" data-text="modal_enter_button">Entrar</button>
+                <button id="show-register" class="toggle-button" onclick="showRegisterForm()" data-text="modal_register_button">Cadastrar</button>
             </div>
             <div id="login-form-container">
                 <form id="login-form">
-                    <input type="email" id="login-gmail" placeholder="Email (Gmail)" required data-text-placeholder="login_form_email">
-                    <input type="password" id="login-password" placeholder="Senha" required data-text-placeholder="login_form_password">
-                    <button type="submit" class="modal-button" data-text="login_button">Entrar</button>
+                    <input type="email" id="login-gmail" placeholder="Email (Gmail)" required data-text-placeholder="placeholder_email_gmail">
+                    <input type="password" id="login-password" placeholder="Senha" required data-text-placeholder="placeholder_password">
+                    <button type="submit" class="modal-button" data-text="modal_enter_button">Entrar</button>
                 </form>
-                <p id="login-error" style="color: red; display: none; margin-top: 10px;" data-text="login_error">Email ou senha inválidos.</p>
+                <p id="login-error" style="color: red; display: none; margin-top: 10px;" data-text="login_invalid_credentials">Email ou senha inválidos.</p>
             </div>
             <div id="register-form-container" style="display: none;">
                 <form id="register-form">
-                    <input type="text" id="register-nome" placeholder="Nome" required data-text-placeholder="register_form_name">
-                    <input type="email" id="register-gmail" placeholder="Email (Gmail)" required data-text-placeholder="register_form_email">
-                    <input type="password" id="register-password" placeholder="Senha" required data-text-placeholder="register_form_password">
-                    <input type="text" id="register-cpf" placeholder="CPF (ex.: 123.456.789-00)" maxlength="14" required data-text-placeholder="register_form_cpf">
-                    <p id="register-cpf-error" style="color: red; display: none; margin-top: 5px;" data-text="register_cpf_error">Por favor, insira um CPF válido.</p>
-                    <input type="number" id="register-idade" placeholder="Idade" min="18" required data-text-placeholder="register_form_age">
-                    <input type="text" id="register-cep" placeholder="CEP" required data-text-placeholder="register_form_zip">
-                    <button type="submit" class="modal-button" data-text="register_button">Cadastrar</button>
+                    <input type="text" id="register-nome" placeholder="Nome" required data-text-placeholder="placeholder_name">
+                    <input type="email" id="register-gmail" placeholder="Email (Gmail)" required data-text-placeholder="placeholder_email_gmail">
+                    <input type="password" id="register-password" placeholder="Senha" required data-text-placeholder="placeholder_password">
+                    <input type="text" id="register-cpf" placeholder="CPF" required data-text-placeholder="placeholder_cpf">
+                    <input type="number" id="register-idade" placeholder="Idade" min="18" required data-text-placeholder="placeholder_age">
+                    <input type="text" id="register-cep" placeholder="CEP" required data-text-placeholder="placeholder_zip">
+                    <button type="submit" class="modal-button" data-text="modal_register_button">Cadastrar</button>
                 </form>
                 <p id="register-error" style="color: red; display: none; margin-top: 10px;" data-text="register_error">Erro no cadastro.</p>
             </div>
             <div id="dados-salvos" style="display: none; margin-top: 20px;">
-                <h3 data-text="welcome_message_prefix">Bem-vindo(a), <span id="saved-nome"></span>!</h3>
-                <p><strong data-text="email_label">Email:</strong> <span id="saved-gmail"></span></p>
-                <p><strong data-text="cpf_label">CPF:</strong> <span id="saved-cpf"></span></p>
-                <p><strong data-text="age_label">Idade:</strong> <span id="saved-idade"></span></p>
-                <p><strong data-text="zip_label">CEP:</strong> <span id="saved-cep"></span></p>
+                <h3 data-text="welcome_message">Bem-vindo(a), <span id="saved-nome"></span>!</h3>
+                <p><strong data-text="label_email">Email:</strong> <span id="saved-gmail"></span></p>
+                <p><strong data-text="label_cpf">CPF:</strong> <span id="saved-cpf"></span></p>
+                <p><strong data-text="label_age">Idade:</strong> <span id="saved-idade"></span></p>
+                <p><strong data-text="label_zip">CEP:</strong> <span id="saved-cep"></span></p>
                 <a href="dashboard.html" class="modal-button" data-text="go_to_dashboard">Ir para o Dashboard</a>
-                <button onclick="logoutUser()" class="modal-button" style="margin-top: 10px; background-color: #e74c3c;" data-text="logout_button_modal">Sair</button>
+                <button onclick="logoutUser()" class="modal-button" style="margin-top: 10px; background-color: #e74c3c;" data-text="button_logout">Sair</button>
             </div>
         </div>
     </div>
@@ -84,8 +84,8 @@
                     </div>
                     <div class="pc-info">
                         <h3>Zeus</h3>
-                        <p data-text="zeus_desc">Intel Core i9 14ª Geração, GeForce RTX 4090, 32GB DDR5, SSD NVMe 1TB. Ideal para jogos 4K.</p>
-                        <p class="price">R$ 35.000,00</p>
+                        <p data-text="zeus_description">Intel Core i9 14ª Geração, GeForce RTX 4090, 32GB DDR5, SSD NVMe 1TB. Ideal para jogos 4K.</p>
+                        <p class="price" data-text="price_from">A partir de R$ 35.000,00</p>
                         <a href="zeus.html" class="card-button" data-text="configure_now">Configurar Agora</a>
                         <button class="add-to-cart" data-name="Zeus" data-price="35000.00" data-text="add_to_cart">Adicionar ao Carrinho</button>
                     </div>
@@ -96,8 +96,8 @@
                     </div>
                     <div class="pc-info">
                         <h3>Hércules</h3>
-                        <p data-text="hercules_desc">Intel Core i7 14ª Geração, GeForce RTX 4070, 16GB DDR5, SSD NVMe 512GB. Perfeito para streaming.</p>
-                        <p class="price">R$ 20.000,00</p>
+                        <p data-text="hercules_description">Intel Core i7 14ª Geração, GeForce RTX 4070, 16GB DDR5, SSD NVMe 512GB. Perfeito para streaming.</p>
+                        <p class="price" data-text="price_from">A partir de R$ 20.000,00</p>
                         <a href="hercules.html" class="card-button" data-text="configure_now">Configurar Agora</a>
                         <button class="add-to-cart" data-name="Hércules" data-price="20000.00" data-text="add_to_cart">Adicionar ao Carrinho</button>
                     </div>
@@ -108,8 +108,8 @@
                     </div>
                     <div class="pc-info">
                         <h3>Prometheus</h3>
-                        <p data-text="prometheus_desc">Intel Core i5 14ª Geração, GeForce RTX 4060, 16GB DDR4, SSD 512GB. Ótimo custo-benefício.</p>
-                        <p class="price">R$ 10.000,00</p>
+                        <p data-text="prometheus_description">Intel Core i5 14ª Geração, GeForce RTX 4060, 16GB DDR4, SSD 512GB. Ótimo custo-benefício.</p>
+                        <p class="price" data-text="price_from">A partir de R$ 10.000,00</p>
                         <a href="prometheus.html" class="card-button" data-text="configure_now">Configurar Agora</a>
                         <button class="add-to-cart" data-name="Prometheus" data-price="10000.00" data-text="add_to_cart">Adicionar ao Carrinho</button>
                     </div>
@@ -121,13 +121,13 @@
     <section id="configurador" class="configurator">
         <div class="container">
             <h2 data-text="configurator_title">Monte o PC dos Seus Sonhos</h2>
-            <p data-text="configurator_text">Personalize cada componente com compatibilidade garantida e entrega rápida.</p>
-            <a href="configurador.html" class="cta-button" data-text="configurator_start">Comece a Montar</a>
-            <a href="componentes.html" class="cta-button" data-text="configurator_components">Ver Componentes</a>
+            <p data-text="configurator_description">Personalize cada componente com compatibilidade garantida e entrega rápida.</p>
+            <a href="configurador.html" class="cta-button" data-text="start_building">Comece a Montar</a>
+            <a href="componentes.html" class="cta-button" data-text="view_components">Ver Componentes</a>
         </div>
 
         <section class="avaliacao">
-            <h3 data-text="review_title">O que achou do nosso site?</h3>
+            <h3 data-text="review_question">O que achou do nosso site?</h3>
             <div class="estrelas">
                 <span class="estrela" data-valor="1">★</span>
                 <span class="estrela" data-valor="2">★</span>
@@ -136,9 +136,9 @@
                 <span class="estrela" data-valor="5">★</span>
             </div>
             <input type="hidden" id="avaliacao-estrelas" value="0">
-            <textarea id="avaliacao-comentario" placeholder="Deixe sua opinião..." data-text-placeholder="review_placeholder"></textarea>
-            <button class="cta-button enviar-avaliacao" onclick="enviarAvaliacao()" data-text="review_button">Enviar</button>
-            <p id="mensagem-avaliacao" style="display: none; color: green; margin-top: 10px;" data-text="review_success">
+            <textarea id="avaliacao-comentario" placeholder="Deixe sua opinião..." data-text-placeholder="placeholder_review_comment"></textarea>
+            <button class="cta-button enviar-avaliacao" onclick="enviarAvaliacao()" data-text="send_review">Enviar</button>
+            <p id="mensagem-avaliacao" style="display: none; color: green; margin-top: 10px;" data-text="review_success_message">
                 GWS agradece pela sua avaliação, espero que esteja gostando do nosso site!
             </p>
             <p id="avaliacao-error" style="color: red; display: none; margin-top: 10px;"></p>
@@ -146,485 +146,506 @@
 
         <section class="sobre-gws">
             <div class="container">
-                <h2 data-text="about_title">Sobre a GWS</h2>
-                <p data-text="about_text">A Game Work Study (GWS) é uma empresa dedicada a oferecer os melhores computadores gamers do mercado, com desempenho de ponta e personalização completa. Fundada por apaixonados por games e tecnologia, nosso objetivo é entregar qualidade, performance e estilo para cada jogador.</p>
+                <h2 data-text="about_gws_title">Sobre a GWS</h2>
+                <p data-text="about_gws_description">A Game Work Study (GWS) é uma empresa dedicada a oferecer os melhores computadores gamers do mercado, com desempenho de ponta e personalização completa. Fundada por apaixonados por games e tecnologia, nosso objetivo é entregar qualidade, performance e estilo para cada jogador.</p>
             </div>
         </section>
     </section>
 
     <footer>
         <div class="container">
-            <p data-text="footer_text">© 2025 Game Work Study. Todos os direitos reservados.</p>
+            <p data-text="footer_copyright">© 2025 Game Work Study. Todos os direitos reservados.</p>
             <ul>
                 <li class="privacy">
-                    <a href="#" class="privacy-link" data-text="privacy_policy">Política de Privacidade</a>
-                    <span class="privacy-tooltip" data-text="privacy_tooltip">Nós respeitamos sua privacidade e protegemos seus dados conforme a LGPD.</span>
+                    <a href="#" class="privacy-link" data-text="footer_privacy_policy">Política de Privacidade</a>
+                    <span class="privacy-tooltip" data-text="footer_privacy_tooltip">Nós respeitamos sua privacidade e protegemos seus dados conforme a LGPD.</span>
                 </li>
-                <li><a href="mailto:suporte@gameworkstudy.com" data-text="support">Suporte</a></li>
+                <li><a href="mailto:suporte@gameworkstudy.com" data-text="footer_support">Suporte</a></li>
                 <li class="privacy">
-                    <a href="#" class="privacy-link" data-text="contact">Contato</a>
-                    <span class="privacy-tooltip" data-text="contact_tooltip">Telefone<p>(61) 98154-2743</p><br>Gmail<p>suporte@gameworkstudy.com</p></span>
+                    <a href="#" class="privacy-link" data-text="footer_contact">Contato</a>
+                    <span class="privacy-tooltip" data-text="footer_contact_tooltip">Telefone<p>(61) 98154-2743</p><br>Gmail<p>suporte@gameworkstudy.com</p></span>
                 </li>
-                <li><a href="https://instagram.com/gameworkstudy">Instagram</a></li>
-                <li><a href="https://twitter.com/gameworkstudy">Twitter</a></li>
+                <li><a href="https://instagram.com/gameworkstudy" data-text="footer_instagram">Instagram</a></li>
+                <li><a href="https://twitter.com/gameworkstudy" data-text="footer_twitter">Twitter</a></li>
             </ul>
         </div>
     </footer>
 
     <script>
-    // Objeto de tradução
-    const translations = {
-        'pt-BR': {
-            page_title: 'Game Work Study | PC Gamer',
-            home: 'Home',
-            pc: 'PC',
-            dashboard: 'Dashboard',
-            login: 'Login',
-            logout: 'Logout',
-            cart: 'Carrinho',
-            modal_title_login: 'Faça seu Login',
-            modal_title_register: 'Faça seu Cadastro',
-            login_button: 'Entrar',
-            register_button: 'Cadastrar',
-            login_form_email: 'Email (Gmail)',
-            login_form_password: 'Senha',
-            register_form_name: 'Nome',
-            register_form_email: 'Email (Gmail)',
-            register_form_password: 'Senha',
-            register_form_cpf: 'CPF (ex.: 123.456.789-00)',
-            register_form_age: 'Idade',
-            register_form_zip: 'CEP',
-            welcome_message_prefix: 'Bem-vindo(a),',
-            email_label: 'Email:',
-            cpf_label: 'CPF:',
-            age_label: 'Idade:',
-            zip_label: 'CEP:',
-            go_to_dashboard: 'Ir para o Dashboard',
-            logout_button_modal: 'Sair',
-            configurator_title: 'Monte o PC dos Seus Sonhos',
-            configurator_text: 'Personalize cada componente com compatibilidade garantida e entrega rápida.',
-            configurator_start: 'Comece a Montar',
-            configurator_components: 'Ver Componentes',
-            review_title: 'O que achou do nosso site?',
-            review_placeholder: 'Deixe sua opinião...',
-            review_button: 'Enviar',
-            review_success: 'GWS agradece pela sua avaliação, espero que esteja gostando do nosso site!',
-            about_title: 'Sobre a GWS',
-            about_text: 'A Game Work Study (GWS) é uma empresa dedicada a oferecer os melhores computadores gamers do mercado, com desempenho de ponta e personalização completa. Fundada por apaixonados por games e tecnologia, nosso objetivo é entregar qualidade, performance e estilo para cada jogador.',
-            footer_text: '© 2025 Game Work Study. Todos os direitos reservados.',
-            privacy_policy: 'Política de Privacidade',
-            support: 'Suporte',
-            contact: 'Contato',
-            privacy_tooltip: 'Nós respeitamos sua privacidade e protegemos seus dados conforme a LGPD.',
-            contact_tooltip: 'Telefone<p>(61) 98154-2743</p><br>Gmail<p>suporte@gameworkstudy.com</p>',
-            zeus_desc: 'Intel Core i9 14ª Geração, GeForce RTX 4090, 32GB DDR5, SSD NVMe 1TB. Ideal para jogos 4K.',
-            hercules_desc: 'Intel Core i7 14ª Geração, GeForce RTX 4070, 16GB DDR5, SSD NVMe 512GB. Perfeito para streaming.',
-            prometheus_desc: 'Intel Core i5 14ª Geração, GeForce RTX 4060, 16GB DDR4, SSD 512GB. Ótimo custo-benefício.',
-            configure_now: 'Configurar Agora',
-            add_to_cart: 'Adicionar ao Carrinho',
-            login_error: 'Email ou senha inválidos.',
-            register_error: 'Erro no cadastro.',
-            register_cpf_error: 'Por favor, insira um CPF válido.',
-            register_cpf_duplicate: 'CPF já cadastrado.',
-            register_email_duplicate: 'Email já cadastrado.',
-            register_fields_missing: 'Digite todos os campos.',
-            register_gmail_only: 'Use um email Gmail.',
-            register_age_min: 'Você deve ter pelo menos 18 anos.',
-            alert_registration_success: 'Registro realizado com sucesso!',
-            alert_login_success: 'Login realizado com sucesso!',
-            alert_logout_success: 'Logout realizado.'
-        },
-        'en': {
-            page_title: 'Game Work Study | Gaming PC',
-            home: 'Home',
-            pc: 'PC',
-            dashboard: 'Dashboard',
-            login: 'Log in',
-            logout: 'Log out',
-            cart: 'Cart',
-            modal_title_login: 'Log In',
-            modal_title_register: 'Register',
-            login_button: 'Log In',
-            register_button: 'Register',
-            login_form_email: 'Email (Gmail)',
-            login_form_password: 'Password',
-            register_form_name: 'Name',
-            register_form_email: 'Email (Gmail)',
-            register_form_password: 'Password',
-            register_form_cpf: 'CPF (e.g., 123.456.789-00)',
-            register_form_age: 'Age',
-            register_form_zip: 'ZIP Code',
-            welcome_message_prefix: 'Welcome,',
-            email_label: 'Email:',
-            cpf_label: 'CPF:',
-            age_label: 'Age:',
-            zip_label: 'ZIP Code:',
-            go_to_dashboard: 'Go to Dashboard',
-            logout_button_modal: 'Log Out',
-            configurator_title: 'Build Your Dream PC',
-            configurator_text: 'Customize each component with guaranteed compatibility and fast delivery.',
-            configurator_start: 'Start Building',
-            configurator_components: 'View Components',
-            review_title: 'What did you think of our site?',
-            review_placeholder: 'Leave your feedback...',
-            review_button: 'Submit',
-            review_success: 'GWS thanks you for your feedback! We hope you’re loving our site!',
-            about_title: 'About GWS',
-            about_text: 'Game Work Study (GWS) is a company dedicated to providing top-tier gaming PCs with cutting-edge performance and full customization. Founded by gaming and tech enthusiasts, our goal is to deliver quality, performance, and style to every gamer.',
-            footer_text: '© 2025 Game Work Study. All rights reserved.',
-            privacy_policy: 'Privacy Policy',
-            support: 'Support',
-            contact: 'Contact',
-            privacy_tooltip: 'We respect your privacy and protect your data according to LGPD.',
-            contact_tooltip: 'Phone<p>(61) 98154-2743</p><br>Gmail<p>support@gameworkstudy.com</p>',
-            zeus_desc: 'Intel Core i9 14th Gen, GeForce RTX 4090, 32GB DDR5, 1TB NVMe SSD. Ideal for 4K gaming.',
-            hercules_desc: 'Intel Core i7 14th Gen, GeForce RTX 4070, 16GB DDR5, 512GB NVMe SSD. Perfect for streaming.',
-            prometheus_desc: 'Intel Core i5 14th Gen, GeForce RTX 4060, 16GB DDR4, 512GB SSD. Great value for money.',
-            configure_now: 'Configure Now',
-            add_to_cart: 'Add to Cart',
-            login_error: 'Invalid email or password.',
-            register_error: 'Registration error.',
-            register_cpf_error: 'Please enter a valid CPF.',
-            register_cpf_duplicate: 'CPF already registered.',
-            register_email_duplicate: 'Email already registered.',
-            register_fields_missing: 'Please fill in all fields.',
-            register_gmail_only: 'Please use a Gmail account.',
-            register_age_min: 'You must be at least 18 years old.',
-            alert_registration_success: 'Registration successful!',
-            alert_login_success: 'Login successful!',
-            alert_logout_success: 'Logged out.'
-        }
-    };
+        // Objeto de tradução
+        const translations = {
+            'pt-BR': {
+                page_title: 'Game Work Study | PC Gamer',
+                nav_home: 'Home',
+                nav_pcs: 'PC',
+                nav_dashboard: 'Dashboard',
+                nav_login: 'Login',
+                nav_logout: 'Logout',
+                nav_cart: 'Carrinho',
+                modal_login_title: 'Faça seu Login',
+                modal_enter_button: 'Entrar',
+                modal_register_button: 'Cadastrar',
+                placeholder_email_gmail: 'Email (Gmail)',
+                placeholder_password: 'Senha',
+                login_invalid_credentials: 'Email ou senha inválidos.',
+                placeholder_name: 'Nome',
+                placeholder_cpf: 'CPF',
+                placeholder_age: 'Idade',
+                placeholder_zip: 'CEP',
+                register_error: 'Erro no cadastro.',
+                welcome_message: 'Bem-vindo(a), ',
+                label_email: 'Email',
+                label_cpf: 'CPF',
+                label_age: 'Idade',
+                label_zip: 'CEP',
+                go_to_dashboard: 'Ir para o Dashboard',
+                button_logout: 'Sair',
+                zeus_description: 'Intel Core i9 14ª Geração, GeForce RTX 4090, 32GB DDR5, SSD NVMe 1TB. Ideal para jogos 4K.',
+                hercules_description: 'Intel Core i7 14ª Geração, GeForce RTX 4070, 16GB DDR5, SSD NVMe 512GB. Perfeito para streaming.',
+                prometheus_description: 'Intel Core i5 14ª Geração, GeForce RTX 4060, 16GB DDR4, SSD 512GB. Ótimo custo-benefício.',
+                price_from: 'A partir de R$',
+                configure_now: 'Configurar Agora',
+                add_to_cart: 'Adicionar ao Carrinho',
+                configurator_title: 'Monte o PC dos Seus Sonhos',
+                configurator_description: 'Personalize cada componente com compatibilidade garantida e entrega rápida.',
+                start_building: 'Comece a Montar',
+                view_components: 'Ver Componentes',
+                review_question: 'O que achou do nosso site?',
+                placeholder_review_comment: 'Deixe sua opinião...',
+                send_review: 'Enviar',
+                review_success_message: 'GWS agradece pela sua avaliação, espero que esteja gostando do nosso site!',
+                review_login_required: 'Você precisa estar logado para enviar uma avaliação.',
+                review_gmail_required: 'Apenas emails Gmail podem enviar avaliações.',
+                review_incomplete_fields: 'Selecione uma nota e escreva um comentário.',
+                review_duplicate: 'Você já enviou uma avaliação.',
+                about_gws_title: 'Sobre a GWS',
+                about_gws_description: 'A Game Work Study (GWS) é uma empresa dedicada a oferecer os melhores computadores gamers do mercado, com desempenho de ponta e personalização completa. Fundada por apaixonados por games e tecnologia, nosso objetivo é entregar qualidade, performance e estilo para cada jogador.',
+                footer_copyright: '© 2025 Game Work Study. Todos os direitos reservados.',
+                footer_privacy_policy: 'Política de Privacidade',
+                footer_privacy_tooltip: 'Nós respeitamos sua privacidade e protegemos seus dados conforme a LGPD.',
+                footer_support: 'Suporte',
+                footer_contact: 'Contato',
+                footer_contact_tooltip: 'Telefone<p>(61) 98154-2743</p><br>Gmail<p>suporte@gameworkstudy.com</p>',
+                footer_instagram: 'Instagram',
+                footer_twitter: 'Twitter',
+                alert_registration_success: 'Registro realizado com sucesso!',
+                alert_login_success: 'Login realizado com sucesso!',
+                alert_logout_success: 'Logout realizado.',
+                alert_invalid_price: 'Erro: Preço inválido!',
+                alert_item_already_in_cart: ' já está no carrinho!',
+                alert_item_added_to_cart: ' foi adicionado ao carrinho!',
+                alert_fill_all_fields: 'Digite todos os campos.',
+                alert_use_gmail: 'Use um email Gmail.',
+                alert_age_restriction: 'Você deve ter pelo menos 18 anos.',
+                alert_email_already_registered: 'Email já cadastrado.'
+            },
+            'en': {
+                page_title: 'Game Work Study | PC Gamer',
+                nav_home: 'Home',
+                nav_pcs: 'PCs',
+                nav_dashboard: 'Dashboard',
+                nav_login: 'Login',
+                nav_logout: 'Logout',
+                nav_cart: 'Cart',
+                modal_login_title: 'Log In',
+                modal_enter_button: 'Enter',
+                modal_register_button: 'Register',
+                placeholder_email_gmail: 'Email (Gmail)',
+                placeholder_password: 'Password',
+                login_invalid_credentials: 'Invalid email or password.',
+                placeholder_name: 'Name',
+                placeholder_cpf: 'CPF',
+                placeholder_age: 'Age',
+                placeholder_zip: 'ZIP Code',
+                register_error: 'Registration error.',
+                welcome_message: 'Welcome, ',
+                label_email: 'Email',
+                label_cpf: 'CPF',
+                label_age: 'Age',
+                label_zip: 'ZIP Code',
+                go_to_dashboard: 'Go to Dashboard',
+                button_logout: 'Log Out',
+                zeus_description: 'Intel Core i9 14th Gen, GeForce RTX 4090, 32GB DDR5, 1TB NVMe SSD. Ideal for 4K gaming.',
+                hercules_description: 'Intel Core i7 14th Gen, GeForce RTX 4070, 16GB DDR5, 512GB NVMe SSD. Perfect for streaming.',
+                prometheus_description: 'Intel Core i5 14th Gen, GeForce RTX 4060, 16GB DDR4, 512GB SSD. Great cost-benefit.',
+                price_from: 'Starting from R$',
+                configure_now: 'Configure Now',
+                add_to_cart: 'Add to Cart',
+                configurator_title: 'Build Your Dream PC',
+                configurator_description: 'Customize every component with guaranteed compatibility and fast delivery.',
+                start_building: 'Start Building',
+                view_components: 'View Components',
+                review_question: 'What did you think of our website?',
+                placeholder_review_comment: 'Leave your opinion...',
+                send_review: 'Send',
+                review_success_message: 'GWS thanks you for your review, we hope you are enjoying our website!',
+                review_login_required: 'You need to be logged in to submit a review.',
+                review_gmail_required: 'Only Gmail accounts can submit reviews.',
+                review_incomplete_fields: 'Select a rating and write a comment.',
+                review_duplicate: 'You have already submitted a review.',
+                about_gws_title: 'About GWS',
+                about_gws_description: 'Game Work Study (GWS) is a company dedicated to offering the best gaming computers on the market, with cutting-edge performance and full customization. Founded by gaming and technology enthusiasts, our goal is to deliver quality, performance, and style to every gamer.',
+                footer_copyright: '© 2025 Game Work Study. All rights reserved.',
+                footer_privacy_policy: 'Privacy Policy',
+                footer_privacy_tooltip: 'We respect your privacy and protect your data according to LGPD.',
+                footer_support: 'Support',
+                footer_contact: 'Contact',
+                footer_contact_tooltip: 'Phone<p>(61) 98154-2743</p><br>Gmail<p>support@gameworkstudy.com</p>',
+                footer_instagram: 'Instagram',
+                footer_twitter: 'Twitter',
+                alert_registration_success: 'Registration successful!',
+                alert_login_success: 'Login successful!',
+                alert_logout_success: 'Logged out.',
+                alert_invalid_price: 'Error: Invalid price!',
+                alert_item_already_in_cart: ' is already in the cart!',
+                alert_item_added_to_cart: ' has been added to the cart!',
+                alert_fill_all_fields: 'Please fill in all fields.',
+                alert_use_gmail: 'Please use a Gmail account.',
+                alert_age_restriction: 'You must be at least 18 years old.',
+                alert_email_already_registered: 'Email already registered.'
+            }
+        };
 
-   // Função para definir o idioma
-function setLanguage(lang) {
-    localStorage.setItem('language', lang);
-    document.documentElement.lang = lang; // Atualiza o atributo lang na tag <html>
-
-    // Atualiza textos com atributo data-text
-    document.querySelectorAll('[data-text]').forEach(element => {
-        const key = element.getAttribute('data-text');
-        if (translations[lang][key]) {
-            element.textContent = translations[lang][key];
-            // Preserva ícones para elementos de login ou carrinho
-            if (element.classList.contains('login') || element.classList.contains('cart')) {
-                const icon = element.querySelector('i');
-                if (icon) {
-                    element.innerHTML = '';
-                    element.appendChild(icon);
-                    element.appendChild(document.createTextNode(` ${translations[lang][key]}`));
+        // Função para definir o idioma
+        function setLanguage(lang) {
+            localStorage.setItem('language', lang);
+            document.querySelectorAll('[data-text]').forEach(element => {
+                const key = element.getAttribute('data-text');
+                if (translations[lang][key]) {
+                    element.textContent = translations[lang][key];
                 }
-            }
-        }
-    });
-
-    // Atualiza placeholders
-    document.querySelectorAll('[data-text-placeholder]').forEach(element => {
-        const key = element.getAttribute('data-text-placeholder');
-        if (translations[lang][key]) {
-            element.placeholder = translations[lang][key];
-        }
-    });
-
-    // Atualiza tooltips
-    document.querySelectorAll('.privacy-tooltip').forEach(tooltip => {
-        const key = tooltip.getAttribute('data-text');
-        if (key && translations[lang][key]) {
-            tooltip.innerHTML = translations[lang][key];
-        }
-    });
-
-    // Atualiza o título do modal de login/registro
-    const modalTitle = document.getElementById('modal-title');
-    if (modalTitle) {
-        modalTitle.textContent = document.getElementById('show-login')?.classList.contains('active') ?
-            translations[lang].modal_title_login : translations[lang].modal_title_register;
-    }
-
-    // Atualiza descrições dos PCs
-    const zeusDesc = document.querySelector('.pc-card:nth-child(1) .pc-info p[data-text="zeus_desc"]');
-    if (zeusDesc) zeusDesc.textContent = translations[lang].zeus_desc;
-    const herculesDesc = document.querySelector('.pc-card:nth-child(2) .pc-info p[data-text="hercules_desc"]');
-    if (herculesDesc) herculesDesc.textContent = translations[lang].hercules_desc;
-    const prometheusDesc = document.querySelector('.pc-card:nth-child(3) .pc-info p[data-text="prometheus_desc"]');
-    if (prometheusDesc) prometheusDesc.textContent = translations[lang].prometheus_desc;
-
-    // Atualiza mensagem de boas-vindas com o nome do usuário
-    const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
-    const savedNome = document.getElementById('saved-nome');
-    const dadosSalvos = document.querySelector('#dados-salvos h3');
-    if (currentUser.nome && savedNome && dadosSalvos) {
-        savedNome.textContent = currentUser.nome;
-        dadosSalvos.innerHTML = ${translations[lang].welcome_message_prefix} <span id="saved-nome">${currentUser.nome}</span>!;
-    }
-
-    // Atualiza estatísticas do carrinho no dashboard
-    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-    const cartStats = document.getElementById('cart-stats');
-    if (cartStats && cart.length > 0) {
-        const totalPrice = cart.reduce((acc, item) => acc + (item.price || item.preco || 0), 0);
-        cartStats.textContent = lang === 'pt-BR' ?
-            Total de itens: ${cart.length} | Valor total: R$ ${totalPrice.toLocaleString('pt-BR', { minimumFractionDigits: 2 })} :
-            Total items: ${cart.length} | Total value: R$ ${totalPrice.toLocaleString('en-US', { minimumFractionDigits: 2 })};
-    }
-
-    // Atualiza a classe active no seletor de idioma
-    document.querySelectorAll('.lang-option').forEach(option => {
-        option.classList.remove('active');
-        if (option.getAttribute('data-lang') === lang) {
-            option.classList.add('active');
-        }
-    });
-
-    // Atualiza dados do usuário no dashboard
-    if (currentUser.email) {
-        document.getElementById('nome-user').textContent = currentUser.nome || 'N/A';
-        document.getElementById('email-user').textContent = currentUser.email || 'N/A';
-        document.getElementById('cpf-user').textContent = formatCpf(currentUser.cpf) || 'N/A';
-        document.getElementById('idade-user').textContent = currentUser.idade || 'N/A';
-        document.getElementById('cep-user').textContent = currentUser.cep || 'N/A';
-    }
-
-    console.log('Idioma alterado para:', lang, 'Opção ativa:', document.querySelector('.lang-option.active')?.getAttribute('data-lang'));
-}
-
-// Event listener para o seletor de idioma
-document.querySelectorAll('.lang-option').forEach(option => {
-    option.addEventListener('click', () => {
-        const lang = option.getAttribute('data-lang');
-        setLanguage(lang);
-    });
-});
-
-// Inicializa o idioma na carga da página
-document.addEventListener('DOMContentLoaded', () => {
-    const savedLanguage = localStorage.getItem('language') || 'pt-BR'; // Padrão para pt-BR
-    setTimeout(() => {
-        setLanguage(savedLanguage);
-        loadUserData();
-        loadDashboard();
-        applyCpfMask();
-    }, 0);
-});
-
-// Função para carregar dados do dashboard
-function loadDashboard() {
-    console.log('Iniciando loadDashboard');
-    const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
-    console.log('currentUser:', currentUser);
-
-    if (!currentUser || !currentUser.email) {
-        console.log('Nenhum usuário logado, redirecionando...');
-        const lang = localStorage.getItem('language') || 'pt-BR';
-        alert(translations[lang].alert_not_logged_in || (lang === 'pt-BR' ? 'Você não está logado! Será redirecionado para a página inicial.' : 'You are not logged in! You will be redirected to the homepage.'));
-        window.location.href = 'index.html';
-        return;
-    }
-
-    // Carrega carrinho
-    let cart = [];
-    try {
-        cart = JSON.parse(localStorage.getItem('cart') || '[]');
-    } catch (e) {
-        console.error('Erro ao parsear carrinho:', e.message);
-    }
-    console.log('Carrinho:', cart);
-    const tbodyCart = document.querySelector('#cart-table tbody');
-    tbodyCart.innerHTML = '';
-
-    const lang = localStorage.getItem('language') || 'pt-BR';
-    if (!cart || cart.length === 0) {
-        document.getElementById('no-items').style.display = 'block';
-    } else {
-        document.getElementById('no-items').style.display = 'none';
-        cart.forEach(item => {
-            const tr = document.createElement('tr');
-            const tdName = document.createElement('td');
-            tdName.textContent = item.name || item.nome || 'Item Desconhecido';
-            const tdPrice = document.createElement('td');
-            tdPrice.textContent = (item.price || item.preco || 0).toLocaleString(lang === 'pt-BR' ? 'pt-BR' : 'en-US', { minimumFractionDigits: 2 });
-            tr.appendChild(tdName);
-            tr.appendChild(tdPrice);
-            tbodyCart.appendChild(tr);
-        });
-    }
-
-    // Limpa avaliações inválidas
-    limparAvaliacoesInvalidas();
-
-    // Carrega avaliação do usuário atual
-    let avaliacoes = [];
-    try {
-        avaliacoes = JSON.parse(localStorage.getItem('avaliacoes') || '[]');
-    } catch (e) {
-        console.error('Erro ao parsear avaliações:', e.message);
-        avaliacoes = [];
-    }
-    console.log('Avaliações:', avaliacoes);
-    const tbodyAvaliacoes = document.querySelector('#avaliacoes-table tbody');
-    tbodyAvaliacoes.innerHTML = '';
-
-    const userEmail = currentUser.email.toLowerCase();
-    const avaliacaoUsuario = avaliacoes.filter(avaliacao => 
-        avaliacao.email && avaliacao.email.toLowerCase() === userEmail
-    );
-    console.log('Avaliação do usuário:', avaliacaoUsuario);
-
-    if (!avaliacaoUsuario || avaliacaoUsuario.length === 0) {
-        document.getElementById('no-avaliacoes').style.display = 'block';
-        console.log('Nenhuma avaliação encontrada para', userEmail);
-    } else {
-        document.getElementById('no-avaliacoes').style.display = 'none';
-        avaliacaoUsuario.forEach(avaliacao => {
-            console.log('Renderizando:', avaliacao);
-            const tr = document.createElement('tr');
-            const tdEstrelas = document.createElement('td');
-            tdEstrelas.textContent = avaliacao.estrelas && avaliacao.estrelas !== "0" 
-                ? "★".repeat(parseInt(avaliacao.estrelas)) 
-                : "N/A";
-            const tdComentario = document.createElement('td');
-            tdComentario.textContent = avaliacao.comentario || "N/A";
-            const tdData = document.createElement('td');
-            const tdHora = document.createElement('td');
-
-            if (avaliacao.data) {
-                const [data, hora] = avaliacao.data.split(', ');
-                tdData.textContent = data || 'N/A';
-                tdHora.textContent = hora || 'N/A';
-            } else {
-                tdData.textContent = 'N/A';
-                tdHora.textContent = 'N/A';
-            }
-
-            tr.appendChild(tdEstrelas);
-            tr.appendChild(tdComentario);
-            tr.appendChild(tdData);
-            tr.appendChild(tdHora);
-            tbodyAvaliacoes.appendChild(tr);
-        });
-    }
-}
-
-// Função para limpar avaliações inválidas
-function limparAvaliacoesInvalidas() {
-    let avaliacoes = [];
-    try {
-        avaliacoes = JSON.parse(localStorage.getItem('avaliacoes') || '[]');
-    } catch (e) {
-        console.error('Erro ao parsear avaliações:', e.message);
-    }
-    avaliacoes = avaliacoes.filter(avaliacao => 
-        avaliacao.email && 
-        avaliacao.email.endsWith('@gmail.com') && 
-        avaliacao.estrelas && 
-        avaliacao.comentario
-    );
-    localStorage.setItem('avaliacoes', JSON.stringify(avaliacoes));
-    console.log('Avaliações inválidas removidas:', avaliacoes);
-}
-
-// Função para limpar todas as avaliações
-function limparAvaliacoes() {
-    console.log('Limpando avaliações');
-    const lang = localStorage.getItem('language') || 'pt-BR';
-    if (confirm(lang === 'pt-BR' ? 
-        'Tem certeza que deseja limpar todas as avaliações? Esta ação não pode ser desfeita.' :
-        'Are you sure you want to clear all reviews? This action cannot be undone.')) {
-        localStorage.removeItem('avaliacoes');
-        alert(lang === 'pt-BR' ? 'Todas as avaliações foram removidas.' : 'All reviews have been removed.');
-        loadDashboard();
-    }
-}
-
-// Função para logout
-function logoutUser() {
-    console.log('Fazendo logout');
-    const lang = localStorage.getItem('language') || 'pt-BR';
-    localStorage.removeItem('currentUser');
-    alert(translations[lang].alert_logout_success || (lang === 'pt-BR' ? 'Você saiu da conta.' : 'You have logged out.'));
-    window.location.href = 'index.html';
-}
-
-// Função para formatar CPF
-function formatCpf(cpf) {
-    if (!cpf || cpf.length !== 11) return cpf || 'N/A';
-    return ${cpf.slice(0, 3)}.${cpf.slice(3, 6)}.${cpf.slice(6, 9)}-${cpf.slice(9)};
-}
-
-// Função para carregar dados do usuário
-function loadUserData() {
-    const userData = JSON.parse(localStorage.getItem('currentUser') || '{}');
-    const lang = localStorage.getItem('language') || 'pt-BR';
-    if (userData.email) {
-        document.getElementById('saved-nome').textContent = userData.nome || 'N/A';
-        document.querySelector('#dados-salvos h3').innerHTML = ${translations[lang].welcome_message_prefix} <span id="saved-nome">${userData.nome || 'N/A'}</span>!;
-        document.getElementById('saved-gmail').textContent = userData.email;
-        document.getElementById('saved-cpf').textContent = formatCpf(userData.cpf);
-        document.getElementById('saved-idade').textContent = userData.idade || 'N/A';
-        document.getElementById('saved-cep').textContent = userData.cep || 'N/A';
-        document.getElementById('login-link').style.display = 'none';
-        document.getElementById('logout-link').style.display = 'inline';
-        document.getElementById('dashboard-link').style.display = 'inline';
-    }
-}
-
-// Função para aplicar máscara de CPF
-function applyCpfMask() {
-    const cpfInput = document.getElementById('register-cpf');
-    const cpfErrorElement = document.getElementById('register-cpf-error');
-    const lang = localStorage.getItem('language') || 'pt-BR';
-
-    if (!cpfInput || !cpfErrorElement) return;
-    cpfInput.addEventListener('input', (e) => {
-        let value = e.target.value.replace(/\D/g, '');
-        if (value.length > 11) value = value.slice(0, 11);
-        if (value.length > 9) {
-            value = ${value.slice(0, 3)}.${value.slice(3, 6)}.${value.slice(6, 9)}-${value.slice(9)};
-        } else if (value.length > 6) {
-            value = ${value.slice(0, 3)}.${value.slice(3, 6)}.${value.slice(6)};
-        } else if (value.length > 3) {
-            value = ${value.slice(0, 3)}.${value.slice(3)};
-        }
-        e.target.value = value.trim();
-        if (value.length === 14) {
-            if (!validateCpf(value)) {
-                cpfErrorElement.textContent = translations[lang].register_cpf_error || (lang === 'pt-BR' ? 'CPF inválido.' : 'Invalid CPF.');
-                cpfErrorElement.style.display = 'block';
-            } else {
-                const users = JSON.parse(localStorage.getItem('users') || '[]');
-                if (users.find(user => user.cpf === value.replace(/\D/g, ''))) {
-                    cpfErrorElement.textContent = translations[lang].register_cpf_duplicate || (lang === 'pt-BR' ? 'CPF já registrado.' : 'CPF already registered.');
-                    cpfErrorElement.style.display = 'block';
-                } else {
-                    cpfErrorElement.style.display = 'none';
+            });
+            document.querySelectorAll('[data-text-placeholder]').forEach(element => {
+                const key = element.getAttribute('data-text-placeholder');
+                if (translations[lang][key]) {
+                    element.placeholder = translations[lang][key];
                 }
-            }
-        } else {
-            cpfErrorElement.style.display = 'none';
-        }
-    });
-    cpfInput.addEventListener('focus', () => {
-        cpfErrorElement.style.display = 'none';
-    });
-}
+            });
 
-// Função para validar CPF
-function validateCpf(cpf) {
-    cpf = cpf.replace(/\D/g, '');
-    if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) return false;
-    let sum = 0;
-    let remainder;
-    for (let i = 1; i <= 9; i++) sum += parseInt(cpf.charAt(i - 1)) * (11 - i);
-    remainder = (sum * 10) % 11;
-    if (remainder === 10 || remainder === 11) remainder = 0;
-    if (remainder !== parseInt(cpf.charAt(9))) return false;
-    sum = 0;
-    for (let i = 1; i <= 10; i++) sum += parseInt(cpf.charAt(i - 1)) * (12 - i);
-    remainder = (sum * 10) % 11;
-    if (remainder === 10 || remainder === 11) remainder = 0;
-    if (remainder !== parseInt(cpf.charAt(10))) return false;
-    return true;
-}
+            // Update specific dynamic texts
+            const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+            const welcomeMessageElement = document.querySelector('#dados-salvos h3');
+            if (currentUser.nome && welcomeMessageElement) { // Verifica se o elemento existe
+                welcomeMessageElement.innerHTML = ${translations[lang]['welcome_message']}<span id="saved-nome">${currentUser.nome}</span>!;
+            }
+
+
+            // Atualiza a classe active no seletor de idioma
+            document.querySelectorAll('.lang-option').forEach(option => {
+                option.classList.remove('active');
+                if (option.getAttribute('data-lang') === lang) {
+                    option.classList.add('active');
+                }
+            });
+            console.log('Idioma alterado para:', lang);
+        }
+
+        // Evento para o seletor de idioma
+        document.querySelectorAll('.language-selector .lang-option').forEach(option => {
+            option.addEventListener('click', () => {
+                const lang = option.getAttribute('data-lang');
+                setLanguage(lang);
+            });
+        });
+
+        // Funções para o modal de login/cadastro
+        function openLoginModal() {
+            document.getElementById('login-modal').style.display = 'block';
+            const userData = JSON.parse(localStorage.getItem('currentUser') || '{}');
+            if (userData.email) {
+                // Se já estiver logado, mostra os dados do usuário ao abrir o modal
+                loadUserData();
+                document.getElementById('login-form-container').style.display = 'none';
+                document.getElementById('register-form-container').style.display = 'none';
+                document.getElementById('dados-salvos').style.display = 'block';
+            } else {
+                showLoginForm(); // Caso contrário, mostra o formulário de login
+            }
+        }
+
+        function closeLoginModal() {
+            document.getElementById('login-modal').style.display = 'none';
+            document.getElementById('login-error').style.display = 'none';
+            document.getElementById('register-error').style.display = 'none';
+            document.getElementById('avaliacao-error').style.display = 'none';
+        }
+
+        function showLoginForm() {
+            const lang = localStorage.getItem('language') || 'pt-BR';
+            document.getElementById('login-form-container').style.display = 'block';
+            document.getElementById('register-form-container').style.display = 'none';
+            document.getElementById('dados-salvos').style.display = 'none';
+            document.getElementById('show-login').classList.add('active');
+            document.getElementById('show-register').classList.remove('active');
+            document.getElementById('modal-title').textContent = translations[lang]['modal_login_title'];
+        }
+
+        function showRegisterForm() {
+            const lang = localStorage.getItem('language') || 'pt-BR';
+            document.getElementById('login-form-container').style.display = 'none';
+            document.getElementById('register-form-container').style.display = 'block';
+            document.getElementById('dados-salvos').style.display = 'none';
+            document.getElementById('show-login').classList.remove('active');
+            document.getElementById('show-register').classList.add('active');
+            document.getElementById('modal-title').textContent = translations[lang]['modal_register_button'];
+        }
+
+        // Função para registrar usuário
+        document.getElementById('register-form').addEventListener('submit', registerUser);
+
+        function registerUser(event) {
+            event.preventDefault();
+            const lang = localStorage.getItem('language') || 'pt-BR';
+            const nome = document.getElementById('register-nome').value.trim();
+            const email = document.getElementById('register-gmail').value.trim().toLowerCase();
+            const password = document.getElementById('register-password').value.trim();
+            const cpf = document.getElementById('register-cpf').value.trim();
+            const idade = parseInt(document.getElementById('register-idade').value.trim());
+            const cep = document.getElementById('register-cep').value.trim();
+            const errorElement = document.getElementById('register-error');
+
+            errorElement.style.display = 'none';
+
+            if (!nome || !email || !password || !cpf || !idade || !cep) {
+                errorElement.textContent = translations[lang]['alert_fill_all_fields'];
+                errorElement.style.display = 'block';
+                return;
+            }
+
+            if (!email.endsWith('@gmail.com')) {
+                errorElement.textContent = translations[lang]['alert_use_gmail'];
+                errorElement.style.display = 'block';
+                return;
+            }
+
+            if (idade < 18) {
+                errorElement.textContent = translations[lang]['alert_age_restriction'];
+                errorElement.style.display = 'block';
+                return;
+            }
+
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            if (users.find(user => user.email === email)) {
+                errorElement.textContent = translations[lang]['alert_email_already_registered'];
+                errorElement.style.display = 'block';
+                return;
+            }
+
+            const user = { nome, email, password, cpf, idade, cep };
+            users.push(user);
+            localStorage.setItem('users', JSON.stringify(users));
+            localStorage.setItem('currentUser', JSON.stringify(user));
+
+            alert(translations[lang]['alert_registration_success']);
+            loadUserData(); // Carrega os dados do usuário no modal
+            updateNavBar(); // Atualiza a barra de navegação
+            closeLoginModal(); // Fecha o modal após o registro
+        }
+
+        // Função para login do usuário
+        document.getElementById('login-form').addEventListener('submit', loginUser);
+
+        function loginUser(event) {
+            event.preventDefault();
+            const lang = localStorage.getItem('language') || 'pt-BR';
+            const email = document.getElementById('login-gmail').value.trim().toLowerCase();
+            const password = document.getElementById('login-password').value.trim();
+            const errorElement = document.getElementById('login-error');
+
+            errorElement.style.display = 'none';
+
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            const userData = users.find(user => user.email === email && user.password === password);
+
+            if (!userData) {
+                errorElement.textContent = translations[lang]['login_invalid_credentials'];
+                errorElement.style.display = 'block';
+                return;
+            }
+
+            // A validação de email Gmail aqui é redundante se o registro já força isso,
+            // mas mantida para consistência se houver outras formas de registro.
+            if (!email.endsWith('@gmail.com')) {
+                errorElement.textContent = translations[lang]['alert_use_gmail'];
+                errorElement.style.display = 'block';
+                return;
+            }
+
+            localStorage.setItem('currentUser', JSON.stringify(userData));
+            alert(translations[lang]['alert_login_success']);
+            loadUserData(); // Carrega os dados do usuário no modal
+            updateNavBar(); // Atualiza a barra de navegação
+            closeLoginModal(); // Fecha o modal após o login
+        }
+
+        // Função para logout do usuário
+        function logoutUser() {
+            const lang = localStorage.getItem('language') || 'pt-BR';
+            localStorage.removeItem('currentUser');
+            alert(translations[lang]['alert_logout_success']);
+            updateNavBar(); // Atualiza a barra de navegação
+            closeLoginModal(); // Fecha o modal (se estiver aberto)
+        }
+
+        // Função para carregar dados do usuário logado no modal
+        function loadUserData() {
+            const userData = JSON.parse(localStorage.getItem('currentUser') || '{}');
+            const lang = localStorage.getItem('language') || 'pt-BR';
+
+            if (userData.email) {
+                document.getElementById('saved-nome').textContent = userData.nome || 'N/A';
+                document.getElementById('saved-gmail').textContent = userData.email;
+                document.getElementById('saved-cpf').textContent = userData.cpf || 'N/A';
+                document.getElementById('saved-idade').textContent = userData.idade || 'N/A';
+                document.getElementById('saved-cep').textContent = userData.cep || 'N/A';
+
+                // Atualiza a mensagem de boas-vindas dinamicamente
+                const welcomeMessageElement = document.querySelector('#dados-salvos h3');
+                if (welcomeMessageElement) {
+                    welcomeMessageElement.innerHTML = ${translations[lang]['welcome_message']}<span id="saved-nome">${userData.nome}</span>!;
+                }
+
+                // Exibe a seção de dados salvos no modal
+                document.getElementById('dados-salvos').style.display = 'block';
+                document.getElementById('login-form-container').style.display = 'none';
+                document.getElementById('register-form-container').style.display = 'none';
+            } else {
+                document.getElementById('dados-salvos').style.display = 'none';
+                // Garante que o formulário de login esteja visível se o usuário não estiver logado
+                showLoginForm();
+            }
+        }
+
+
+        // Atualiza a navbar conforme estado de login
+        function updateNavBar() {
+            const userData = JSON.parse(localStorage.getItem('currentUser') || '{}');
+            if (userData.email) {
+                // Usuário logado
+                document.getElementById('login-link').style.display = 'none';
+                document.getElementById('logout-link').style.display = 'inline';
+                document.getElementById('dashboard-link').style.display = 'inline';
+            } else {
+                // Usuário não logado
+                document.getElementById('login-link').style.display = 'inline';
+                document.getElementById('logout-link').style.display = 'none';
+                document.getElementById('dashboard-link').style.display = 'none';
+            }
+        }
+
+        // Atualiza o contador de itens no carrinho (não modificada)
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            const cartCountElement = document.getElementById('cart-count');
+            if (cartCountElement) {
+                cartCountElement.textContent = cart.length;
+            }
+        }
+
+        // Função para adicionar produto ao carrinho (não modificada)
+        function addToCart(name, price) {
+            const lang = localStorage.getItem('language') || 'pt-BR';
+            if (isNaN(price) || price <= 0) {
+                console.error('Preço inválido:', price);
+                alert(translations[lang]['alert_invalid_price']);
+                return;
+            }
+            let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            if (cart.some(item => item.name === name)) {
+                alert(${name} + translations[lang]['alert_item_already_in_cart']);
+                return;
+            }
+            cart.push({ name, price });
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert(${name} + translations[lang]['alert_item_added_to_cart']);
+            updateCartCount(); // Atualiza o contador do carrinho após adicionar um item
+        }
+
+        // Adiciona event listeners aos botões "Adicionar ao Carrinho"
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', () => {
+                const name = button.dataset.name;
+                const price = parseFloat(button.dataset.price);
+                addToCart(name, price);
+            });
+        });
+
+
+        // --- Funções de Avaliação (manter a lógica original, só garantir que o login seja checado) ---
+        // (Copie e cole suas funções de avaliação aqui se elas estiverem em um arquivo separado ou omitidas na sua amostra)
+        // Por exemplo:
+        let avaliacaoEnviada = false;
+        function enviarAvaliacao() {
+            const lang = localStorage.getItem('language') || 'pt-BR';
+            const user = JSON.parse(localStorage.getItem('currentUser') || '{}');
+            const avaliacaoEstrelas = document.getElementById('avaliacao-estrelas').value;
+            const avaliacaoComentario = document.getElementById('avaliacao-comentario').value.trim();
+            const mensagemAvaliacao = document.getElementById('mensagem-avaliacao');
+            const avaliacaoError = document.getElementById('avaliacao-error');
+
+            mensagemAvaliacao.style.display = 'none';
+            avaliacaoError.style.display = 'none';
+
+            if (!user.email) {
+                avaliacaoError.textContent = translations[lang]['review_login_required'];
+                avaliacaoError.style.display = 'block';
+                return;
+            }
+
+            if (!user.email.endsWith('@gmail.com')) {
+                avaliacaoError.textContent = translations[lang]['review_gmail_required'];
+                avaliacaoError.style.display = 'block';
+                return;
+            }
+
+            if (avaliacaoEstrelas === '0' || avaliacaoComentario === '') {
+                avaliacaoError.textContent = translations[lang]['review_incomplete_fields'];
+                avaliacaoError.style.display = 'block';
+                return;
+            }
+
+            if (avaliacaoEnviada) {
+                avaliacaoError.textContent = translations[lang]['review_duplicate'];
+                avaliacaoError.style.display = 'block';
+                return;
+            }
+
+            // Simular envio de avaliação
+            console.log("Avaliação enviada:", {
+                usuario: user.email,
+                estrelas: avaliacaoEstrelas,
+                comentario: avaliacaoComentario
+            });
+
+            mensagemAvaliacao.style.display = 'block';
+            avaliacaoEnviada = true; // Impede que o usuário envie múltiplas avaliações
+            document.getElementById('avaliacao-comentario').value = '';
+            document.getElementById('avaliacao-estrelas').value = '0';
+            document.querySelectorAll('.estrela').forEach(star => star.classList.remove('selected'));
+        }
+
+        document.querySelectorAll('.estrela').forEach(estrela => {
+            estrela.addEventListener('click', function() {
+                const valor = parseInt(this.dataset.valor);
+                document.getElementById('avaliacao-estrelas').value = valor;
+                document.querySelectorAll('.estrela').forEach(s => {
+                    s.classList.remove('selected');
+                });
+                for (let i = 1; i <= valor; i++) {
+                    document.querySelector(.estrela[data-valor="${i}"]).classList.add('selected');
+                }
+            });
+        });
+
+
+        // --- Inicialização da página ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('language') || 'pt-BR';
+            setLanguage(savedLang);
+            updateNavBar(); // Garante que a navbar esteja correta ao carregar a página
+            loadUserData(); // Carrega os dados do usuário se ele estiver logado
+            updateCartCount(); // Atualiza o contador do carrinho
+        });
     </script>
 </body>
 </html>
